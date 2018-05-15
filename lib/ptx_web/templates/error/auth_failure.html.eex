@@ -1,0 +1,9 @@
+<center>
+  <h2><%= gettext "Authentication error" %></h2>
+
+  <p>
+    <%= gettext "Just sign in with Google to start using PostTrack." %>
+  </p>
+
+  <a href="/auth/google"><%= gettext "Sign in with Google" %></a>
+</center>

@@ -1,7 +1,7 @@
 defmodule PtxWeb.PageController do
   use PtxWeb, :controller
 
-  def index(conn, _params) do
-    render conn, "index.html"
+  def pricing(conn, _params) do
+    render conn, "pricing.html"
   end
 end

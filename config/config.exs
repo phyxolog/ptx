@@ -32,6 +32,15 @@ config :ecto, :json_library, Jason
 config :phoenix,
   format_encoders: [json: Jason]
 
+config :ueberauth, Ueberauth,
+  providers: [
+    google: {Ueberauth.Strategy.Google, [default_scope: "email profile https://mail.google.com/"]}
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: "457128893119-as5ctpvf6r1e116eni0o6erij3viq3oh.apps.googleusercontent.com",
+  client_secret: "5VeMRO5rTdFxDZh4Ak_LmOtB"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

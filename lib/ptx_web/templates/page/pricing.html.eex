@@ -1,0 +1,3 @@
+<a href="/auth/google?state=pay_trial">Trial</a>
+<a href="/auth/google?state=pay_basic">Basic</a>
+<a href="/auth/google?state=pay_pro">Pro</a>
