@@ -9,7 +9,6 @@ defmodule PtxWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Ueberauth
   end
 
   pipeline :locale do
@@ -42,7 +41,7 @@ defmodule PtxWeb.Router do
     get "/google/callback", AuthController, :callback
   end
 
-  scope "/api", PtxWeb do
+  scope "/api" do
     pipe_through :api
   end
 end

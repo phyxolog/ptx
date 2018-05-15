@@ -67,7 +67,7 @@ defmodule Ptx.Mixfile do
       {:ok, "~> 1.10.0"},
 
       ## Google OAuth2
-      {:ueberauth_google, "~> 0.7"}
+      {:ueberauth_google, "~> 0.7"},
     ]
   end
 

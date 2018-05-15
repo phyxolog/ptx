@@ -4,6 +4,7 @@ defmodule PtxWeb.AuthController do
   """
 
   use PtxWeb, :controller
+  plug Ueberauth
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do
     conn
