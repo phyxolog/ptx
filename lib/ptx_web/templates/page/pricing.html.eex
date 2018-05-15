@@ -1,3 +1,5 @@
-<a href="/auth/google?state=pay_trial">Trial</a>
-<a href="/auth/google?state=pay_basic">Basic</a>
-<a href="/auth/google?state=pay_pro">Pro</a>
+<%= for plan <- Application.get_env(:ptx, :plans) do %>
+  <a href="/auth/google?state=pay_<%= plan %>">
+    <%= String.capitalize(Gettext.gettext(PtxWeb.Gettext, plan)) %>
+  </a>
+<% end %>

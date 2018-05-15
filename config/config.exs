@@ -7,6 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :ptx,
+  plans: ~w(trial basic pro),
   ecto_repos: [Ptx.Repo]
 
 config :ptx, PtxWeb.Gettext,
@@ -34,12 +35,26 @@ config :phoenix,
 
 config :ueberauth, Ueberauth,
   providers: [
-    google: {Ueberauth.Strategy.Google, [default_scope: "email profile https://mail.google.com/"]}
+    google: {Ueberauth.Strategy.Google, [
+      default_scope: "email profile https://mail.google.com/",
+      access_type: "offline",
+      prompt: "consent"
+    ]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_id: "457128893119-as5ctpvf6r1e116eni0o6erij3viq3oh.apps.googleusercontent.com",
   client_secret: "5VeMRO5rTdFxDZh4Ak_LmOtB"
+
+config :ptx, Ptx.Guardian,
+  allowed_algos: ["HS256"],
+  issuer: "ptx",
+  secret_key: "MZr8o2ruAEM/eFVAp7NcAjWJF8ufbFMIsFw4ekRU2i6DWH0CQYHiwbMquM06/wHz"
+
+config :guardian, Guardian.DB,
+  repo: Ptx.Repo,
+  schema_name: "guardian_tokens",
+  sweep_interval: 60
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

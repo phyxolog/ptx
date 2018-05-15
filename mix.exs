@@ -68,6 +68,8 @@ defmodule Ptx.Mixfile do
 
       ## Google OAuth2
       {:ueberauth_google, "~> 0.7"},
+      {:guardian, "~> 1.0"},
+      {:guardian_db, github: "ueberauth/guardian_db"},
     ]
   end
 
