@@ -19,7 +19,7 @@ defmodule PtxWeb.AuthController do
   end
 
   @doc """
-  Handler for requests from pricing page
+  Handler for requests from pricing page.
   """
   def callback(conn, %{"state" => state}, _user) do
     do_callback(conn)
@@ -64,9 +64,12 @@ defmodule PtxWeb.AuthController do
 
   ## Revoke current user token.
   defp revoke_current_token(conn) do
-    token = conn.req_cookies["guardian_default_token"]
+    token = conn.req_cookies["token"]
     Ptx.Guardian.revoke(token)
+
     conn
+    |> delete_resp_cookie("token")
+    |> Ptx.Guardian.Plug.sign_out()
   end
 
   ## Get user attributes from auth data.

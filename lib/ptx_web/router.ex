@@ -67,3 +67,28 @@ defmodule PtxWeb.Router do
     match :*, "/liqpay/callback", LiqPayController, :callback
   end
 end
+
+# get "/lt", PtWeb.LinkTrackerController, :index
+# get "/lt/:url", PtWeb.LinkTrackerController, :url
+
+# scope path: "/api/v1", as: :api_v1, alias: PtWeb do
+#   pipe_through :api
+
+#   get "/translations", TranslationController, :index
+#   get "/timestamp", ApiController, :timestamp
+#   get "/identity", ApiController, :identity
+#   get "/timezones", ApiController, :timezones
+#   get "/stats", ApiController, :stats
+#   post "/unsubscribe", ApiController, :unsubscribe
+
+#   get "/lt", EmailLinkController, :index
+
+#   resources "/emails", EmailController, only: [:create]
+#   resources "/users", UserController, only: [:update]
+#   resources "/faq", FaqController, only: [:index]
+#   resources "/terms", TermsController, only: [:show]
+
+#   get "/trace/mail/:id", EmailController, :trace
+
+#   post "/email_checker", EmailController, :email_checker
+# end

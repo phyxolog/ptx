@@ -9,6 +9,39 @@ defmodule Ptx.Accounts do
 
   alias Ptx.Accounts.User
 
+  @trial_period Application.get_env(:ptx, :trial_period, 14)
+
+  @doc """
+  Activate user trial period (if available)
+  """
+  def activate_user_trial(user) do
+    case trial_available?(user) do
+      true ->
+        update_user(user, %{
+          plan: "trial",
+          frozen: false,
+          valid_until: Timex.shift(Timex.now(), days: @trial_period)
+        })
+
+        {:ok, :activated}
+      false ->
+        {:error, :unavailable}
+    end
+  end
+
+  @doc """
+  Check valid user by `valid_until` field.
+  If now() > `valid_until` return false.
+  """
+  def valid_now?(user), do: Timex.before?(user.valid_until, Timex.now())
+
+  @doc """
+  Check available for trial plan.
+  """
+  def trial_available?(%{inserted_at: inserted_at, plan: plan, previous_plan: previous_plan}) do
+    plan == nil && previous_plan == nil && Timex.diff(Timex.now(), inserted_at, :days) < @trial_period
+  end
+
   @doc """
   Find or create user with given params.
   """
@@ -68,5 +101,74 @@ defmodule Ptx.Accounts do
     user
     |> User.changeset(attrs)
     |> Repo.update()
+  end
+
+  alias Ptx.Accounts.Transaction
+
+  @doc """
+  Fetch transaction with given filters.
+  """
+  def fetch_transaction(opts \\ []) do
+    Transaction
+    |> where(^opts)
+    |> limit(1)
+    |> Repo.one()
+    |> OK.required(:not_found)
+  end
+
+  @doc """
+  Creates a transaction.
+
+  ## Examples
+
+      iex> create_transaction(%{field: value})
+      {:ok, %Transaction{}}
+
+      iex> create_transaction(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_transaction(attrs \\ %{}) do
+    %Transaction{}
+    |> Transaction.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a transaction.
+
+  ## Examples
+
+      iex> update_transaction(transaction, %{field: new_value})
+      {:ok, %Transaction{}}
+
+      iex> update_transaction(transaction, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_transaction(%Transaction{} = transaction, attrs) do
+    transaction
+    |> Transaction.changeset(attrs)
+    |> Repo.update()
+  end
+
+  alias Ptx.Accounts.Ticket
+
+  @doc """
+  Creates a ticket.
+
+  ## Examples
+
+      iex> create_ticket(%{field: value})
+      {:ok, %Ticket{}}
+
+      iex> create_ticket(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_ticket(attrs \\ %{}) do
+    %Ticket{}
+    |> Ticket.changeset(attrs)
+    |> Repo.insert()
   end
 end

@@ -1,20 +1,33 @@
 defmodule PtxWeb.PayController do
   use PtxWeb, :controller
   use Guardian.Phoenix.Controller
-  alias Ptx.Pay
+  alias Ptx.{Pay, Accounts}
 
   def index(conn, _params, nil) do
-    json conn, %{status: :not_auth}
+    conn
+    |> put_view(PtxWeb.ErrorView)
+    |> render("auth_failure.html")
   end
 
-  def index(conn, %{"plan" => "trial"}, _user) do
-    json conn, %{status: :trial}
+  def index(conn, %{"plan" => "trial"}, user) do
+    case Accounts.activate_user_trial(user) do
+      {:ok, :activated} ->
+        redirect(conn, to: "/office")
+      _ ->
+        conn
+        |> put_view(PtxWeb.ErrorView)
+        |> render("trial_unavailable.html")
+    end
   end
 
   def index(conn, params, user) do
     case Pay.generate_link(params, user) do
-      {:ok, link} -> redirect(conn, external: link)
-      _ -> json conn, %{status: :liqpay_link_generate_error}
+      {:error, _} ->
+        conn
+        |> put_view(PtxWeb.ErrorView)
+        |> render("liqpay_link_generate_error.html")
+      {:ok, link} ->
+        redirect(conn, external: link)
     end
   end
 end

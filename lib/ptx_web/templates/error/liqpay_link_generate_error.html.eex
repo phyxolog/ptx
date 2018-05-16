@@ -1,0 +1,3 @@
+<center>
+  <h2><%= gettext "Error generate LiqPay link." %></h2>
+</center>

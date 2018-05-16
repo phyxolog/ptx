@@ -8,7 +8,11 @@ use Mix.Config
 # General application configuration
 config :ptx,
   env: Mix.env(),
-  url: "https://cuddly-emu-88.localtunnel.me",
+  url: "https://stupid-zebra-57.localtunnel.me",
+  currency: "USD",
+  trial_period: 14,
+  ticket_email: "posttrack@sloenka.com",
+  ecto_repos: [Ptx.Repo],
   plans: ~w(trial basic pro)a,
   prices: %{
     basic: %{
@@ -20,9 +24,7 @@ config :ptx,
       month: 8,
       year: 24
     }
-  },
-  currency: "USD",
-  ecto_repos: [Ptx.Repo]
+  }
 
 config :ptx, PtxWeb.Gettext,
   default_locale: "ru",

@@ -25,6 +25,7 @@ defmodule Ptx.Accounts.User do
     field :frozen, :boolean, default: true
     field :valid_until, :naive_datetime, default: nil
     field :periodicity, :string, default: nil
+    field :previous_plan, :string, default: nil ## Only for read. Changing by sql trigger.
 
     ## Google OAuth2
     field :token_type, :string
@@ -42,7 +43,7 @@ defmodule Ptx.Accounts.User do
     user
     |> cast(attrs, @optional_fields ++ @required_fields)
     |> validate_required(@required_fields)
-    |> validate_inclusion(:plan, @plans)
+    |> validate_inclusion(:plan, Enum.map(@plans, &to_string/1))
     |> validate_inclusion(:periodicity, @periodicities)
   end
 end
