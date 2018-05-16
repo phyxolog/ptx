@@ -70,6 +70,9 @@ defmodule Ptx.Mixfile do
       {:ueberauth_google, "~> 0.7"},
       {:guardian, "~> 1.0"},
       {:guardian_db, github: "ueberauth/guardian_db"},
+
+      ## For payments with Liqpay
+      {:exliqpay, git: "git@bitbucket.org:theengineerscrew/exliqpay-lib.git"}
     ]
   end
 

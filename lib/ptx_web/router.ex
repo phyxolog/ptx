@@ -40,6 +40,12 @@ defmodule PtxWeb.Router do
     get "/pricing", PageController, :dummy
   end
 
+  scope "/", PtxWeb do
+    pipe_through [:browser, :auth]
+
+    get "/pay", PayController, :index
+  end
+
   scope "/:locale", PtxWeb do
     pipe_through [:browser, :locale, :auth]
 
@@ -47,7 +53,7 @@ defmodule PtxWeb.Router do
   end
 
   scope "/auth", PtxWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     get "/google", AuthController, :request
     get "/google/callback", AuthController, :callback

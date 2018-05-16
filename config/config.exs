@@ -7,12 +7,29 @@ use Mix.Config
 
 # General application configuration
 config :ptx,
-  plans: ~w(trial basic pro),
+  env: Mix.env(),
+  plans: ~w(trial basic pro)a,
+  prices: %{
+    basic: %{
+      month: 5,
+      year: 12
+    },
+
+    pro: %{
+      month: 8,
+      year: 24
+    }
+  },
+  currency: "USD",
   ecto_repos: [Ptx.Repo]
 
 config :ptx, PtxWeb.Gettext,
   default_locale: "ru",
   locales: ~w(en ru uk)
+
+config :exliqpay,
+  public_key: "i34689789506",
+  private_key: "XqKEpPpqouvQa9AGBnNEuc0Pn2h8gvTwuJjhOFbW"
 
 # Configures the endpoint
 config :ptx, PtxWeb.Endpoint,

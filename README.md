@@ -1,5 +1,7 @@
 # Ptx
 
+Temp card: 5167 9911 0313 6550
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

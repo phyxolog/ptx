@@ -1,5 +1,11 @@
 <%= for plan <- Application.get_env(:ptx, :plans) do %>
-  <a href="/auth/google?state=pay_<%= plan %>">
+  <% periodicity = "month" %>
+  <%
+    state = %{plan: plan, periodicity: periodicity, locale: @conn.assigns.locale}
+    |> Ptx.Helper.encode_term()
+  %>
+  <% plan = to_string(plan) %>
+  <a href="/auth/google?state=<%= state %>">
     <%= String.capitalize(Gettext.gettext(PtxWeb.Gettext, plan)) %>
   </a>
 <% end %>

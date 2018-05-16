@@ -21,18 +21,30 @@ defmodule PtxWeb.AuthController do
   @doc """
   Handler for requests from pricing page
   """
-  def callback(conn, %{"state" => "pay_" <> _plan}, _user) do
-    conn = do_callback(conn)
-
-    ## TODO: Generate link for pay and redirect
-
-    conn
-    |> redirect(external: "https://liqpay.ua")
+  def callback(conn, %{"state" => state}, _user) do
+    do_callback(conn)
+    |> processign(Ptx.Helper.decode_term(state))
   end
 
+  ## TODO: Where we must redirect user without pay state?
   def callback(conn, _params, _user) do
     do_callback(conn)
-    |> redirect(to: "/")
+    |> redirect(to: "/office")
+  end
+
+  ## Process pay state
+  defp processign(conn, %{plan: _plan} = state) do
+    query_string = URI.encode_query(state)
+
+    conn
+    |> redirect(to: "/pay?#{query_string}")
+  end
+
+  defp processign(conn, _state) do
+    conn
+    |> put_status(422)
+    |> put_view(PtxWeb.ErrorView)
+    |> render("422.html")
   end
 
   ## Get user attributes from Google response

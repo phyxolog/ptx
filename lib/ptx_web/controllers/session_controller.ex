@@ -1,9 +1,9 @@
 defmodule PtxWeb.SessionController do
   use PtxWeb, :controller
 
-  def auth_error(conn, {type, reason}, _opts) do
+  def auth_error(conn, _params, _opts) do
     conn
-    |> put_status(400)
-    |> json(%{error: %{type: to_string(type), reaosn: to_string(reason)}})
+    |> delete_resp_cookie("guardian_default_token")
+    |> redirect(to: conn.request_path)
   end
 end
