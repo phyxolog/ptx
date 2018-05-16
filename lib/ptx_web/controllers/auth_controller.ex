@@ -35,6 +35,10 @@ defmodule PtxWeb.AuthController do
     |> redirect(to: "/")
   end
 
+  ## Get user attributes from Google response
+  ## then finding user in our database or create new,
+  ## update token from G response and put to our response
+  ## and revoke old user token.
   defp do_callback(%{assigns: %{ueberauth_auth: auth}} = conn) do
     user =
       load_user_params(auth)
@@ -42,7 +46,15 @@ defmodule PtxWeb.AuthController do
       |> update_token(auth)
 
     conn
+    |> revoke_current_token()
     |> put_token_cookie(user)
+  end
+
+  ## Revoke current user token.
+  defp revoke_current_token(conn) do
+    token = conn.req_cookies["guardian_default_token"]
+    Ptx.Guardian.revoke(token)
+    conn
   end
 
   ## Get user attributes from auth data.

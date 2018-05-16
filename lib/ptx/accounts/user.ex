@@ -6,7 +6,7 @@ defmodule Ptx.Accounts.User do
   @primary_key {:id, :string, [autogenerate: false]}
   @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
   @optional_fields ~w(gender picture locale access_token refresh_token plan
-                      expires_at timezone valid_until frozen periodicity)a
+                      token_type expires_at timezone valid_until frozen periodicity)a
   @required_fields ~w(id first_name last_name full_name)a
 
   @plans Application.get_env(:ptx, :plans)
