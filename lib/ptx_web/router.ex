@@ -24,7 +24,7 @@ defmodule PtxWeb.Router do
       error_handler: PtxWeb.SessionController
 
     plug Guardian.Plug.VerifyHeader, realm: :none
-    plug Guardian.Plug.VerifyCookie, exchange_from: "access"
+    plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
     plug Guardian.Plug.LoadResource, allow_blank: true
   end
 
@@ -59,9 +59,11 @@ defmodule PtxWeb.Router do
     get "/google/callback", AuthController, :callback
   end
 
-  scope "/api" do
+  scope "/api", PtxWeb do
     pipe_through :api
 
     resources "/users", UserController, only: [:show, :update]
+
+    match :*, "/liqpay/callback", LiqPayController, :callback
   end
 end

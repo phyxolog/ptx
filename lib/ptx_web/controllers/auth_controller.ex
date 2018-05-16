@@ -89,10 +89,9 @@ defmodule PtxWeb.AuthController do
   ## Generate JWT and put to cookies.
   defp put_token_cookie(conn, {:ok, user}) do
     resource = %{id: user.id}
-    {:ok, token, _claims} = Ptx.Guardian.encode_and_sign(resource)
-
-    conn
-    |> put_resp_cookie("guardian_default_token", token, max_age: 24 * 60 * 60 * 365)
+    conn = Ptx.Guardian.Plug.sign_in(conn, resource)
+    token = Ptx.Guardian.Plug.current_token(conn)
+    put_resp_cookie(conn, "token", token, max_age: 24 * 60 * 60 * 365)
   end
 
   ## Update token in given user.

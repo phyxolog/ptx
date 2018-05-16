@@ -8,6 +8,7 @@ use Mix.Config
 # General application configuration
 config :ptx,
   env: Mix.env(),
+  url: "https://cuddly-emu-88.localtunnel.me",
   plans: ~w(trial basic pro)a,
   prices: %{
     basic: %{
@@ -64,6 +65,7 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_secret: "5VeMRO5rTdFxDZh4Ak_LmOtB"
 
 config :ptx, Ptx.Guardian,
+  ttl: {30, :days},
   allowed_algos: ["HS256"],
   issuer: "ptx",
   secret_key: "MZr8o2ruAEM/eFVAp7NcAjWJF8ufbFMIsFw4ekRU2i6DWH0CQYHiwbMquM06/wHz"

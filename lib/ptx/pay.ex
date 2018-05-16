@@ -2,6 +2,7 @@ defmodule Ptx.Pay do
   import PtxWeb.Gettext
 
   @env Application.get_env(:ptx, :env)
+  @url Application.get_env(:ptx, :url)
   @currency Application.get_env(:ptx, :currency)
   @prices Application.get_env(:ptx, :prices)
 
@@ -28,6 +29,14 @@ defmodule Ptx.Pay do
     ])
   end
 
+  @doc """
+  Processing callback from LiqPay
+  """
+  def process_callback({:ok, params}) do
+    params = %{params | "info" => Ptx.Helper.decode_term(params.info)}
+    IO.inspect params
+  end
+
   ## Generate LiqPay pay link
   defp generate_pay_link(opts) do
     subscribe_date_start =
@@ -51,7 +60,10 @@ defmodule Ptx.Pay do
       expired_date: expired_date,
       language: opts[:locale],
       sandbox: sandbox?(),
-      description: opts[:description]
+      description: opts[:description],
+      info: opts[:info],
+      server_url: "#{@url}/api/liqpay/callback",
+      result_url: "#{@url}/office"
     })
   end
 end
