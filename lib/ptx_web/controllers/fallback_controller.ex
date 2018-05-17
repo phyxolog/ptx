@@ -17,4 +17,37 @@ defmodule PtxWeb.FallbackController do
     |> put_status(:not_found)
     |> render(PtxWeb.ErrorView, :"404")
   end
+
+  def call(conn, {:error, :not_auth}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(PtxWeb.ErrorView, :"401")
+  end
+
+  def call(conn, {:error, {:reason, :hacker}}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> json(%{error: %{details: "You want break me? Please, do not do this!"}})
+  end
+
+  def call(conn, {:error, {:reason, reason}}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> json(%{error: %{details: reason}})
+  end
+
+  def call(conn, {:error, reason}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> json(%{error: reason})
+  end
+
+  def call(conn, {:ok, result}) do
+    conn
+    |> json(result)
+  end
+
+  def call(conn, nil) do
+    send_resp(conn, 204, "")
+  end
 end

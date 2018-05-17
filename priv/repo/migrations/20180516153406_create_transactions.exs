@@ -18,6 +18,7 @@ defmodule Ptx.Repo.Migrations.CreateTransactions do
     end
 
     create index(:transactions, [:user_id])
+    create unique_index(:transactions, [:user_id])
     create constraint(:transactions, :plan, check: "plan in ('basic', 'pro')")
     create constraint(:transactions, :periodicity, check: "periodicity in ('month', 'year')")
     create constraint(:transactions, :status, check: "status in ('pending', 'sandbox', 'subscribed', 'success', 'unsubscribed', 'wait_unsubscribe', 'error', 'failure')")

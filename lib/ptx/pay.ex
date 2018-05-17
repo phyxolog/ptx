@@ -2,6 +2,7 @@ defmodule Ptx.Pay do
   import PtxWeb.Gettext
   import Ecto.Query, warn: false
   alias Ptx.{Accounts, Repo}
+  require Logger
 
   @env Application.get_env(:ptx, :env)
   @url Application.get_env(:ptx, :url)
@@ -35,16 +36,17 @@ defmodule Ptx.Pay do
 
   ## Create transaction when callback status is subscribed.
   ## In other cases - get transaction from database.
-  defp obtain_transaction(%{"status" => "subscribed"} = params) do
+  defp obtain_transaction(%{"status" => "subscribed", "order_id" => order_id, "amount" => amount} = params) do
     params
     |> Map.get("info")
     |> OK.required()
     |> OK.bind(fn info ->
+      Accounts.delete_old_user_transactions(info.user_id)
+
       Accounts.create_transaction(%{
-        id: params["order_id"],
-        amount: params["amount"],
-        status: params["status"],
-        receipt: %{"subscribed" => params},
+        id: order_id,
+        amount: amount,
+        status: "subscribed",
         plan: info.plan,
         periodicity: info.periodicity,
         user_id: info.user_id
@@ -80,7 +82,7 @@ defmodule Ptx.Pay do
     :ok
   end
 
-  ## Send ticket to user email and our email
+  ## Send ticket to user and our email
   defp send_ticket(user, transaction) do
     Task.start(ExLiqpay, :ticket, [user.id, transaction.id])
     Task.start(ExLiqpay, :ticket, [@ticket_email, transaction.id])
@@ -133,8 +135,9 @@ defmodule Ptx.Pay do
     Accounts.update_transaction(transaction, %{status: status})
   end
 
-  ## If transaction not found - ok.
-  defp process_transaction({:error, _}, _params, _user) do
+  ## If transaction not found or `info` doesn't exists - ok.
+  defp process_transaction({:error, reason}, params, user) do
+    Logger.error("Error in process_transaction. Reason: #{inspect reason}.\nParams: #{inspect params}\nUser: #{inspect user}")
     :ok
   end
 

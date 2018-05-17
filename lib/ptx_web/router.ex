@@ -60,7 +60,12 @@ defmodule PtxWeb.Router do
   end
 
   scope "/api", PtxWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
+
+    get "/translations", TranslationController, :index
+    get "/timestamp", ApiController, :timestamp
+    get "/identity", ApiController, :identity
+    get "/timezones", ApiController, :timezones
 
     resources "/users", UserController, only: [:show, :update]
 

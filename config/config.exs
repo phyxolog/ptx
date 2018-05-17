@@ -56,7 +56,7 @@ config :phoenix,
 config :ueberauth, Ueberauth,
   providers: [
     google: {Ueberauth.Strategy.Google, [
-      default_scope: "email profile https://mail.google.com/",
+      default_scope: "email profile https://mail.google.com/ https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.compose",
       access_type: "offline",
       prompt: "consent"
     ]}

@@ -2,7 +2,6 @@ defmodule Ptx.Accounts do
   @moduledoc """
   The Accounts context.
   """
-
   import Ecto.Query, warn: false
   require OK
   alias Ptx.Repo
@@ -10,6 +9,46 @@ defmodule Ptx.Accounts do
   alias Ptx.Accounts.User
 
   @trial_period Application.get_env(:ptx, :trial_period, 14)
+
+  @doc """
+  Get user by token.
+  Used Guardian.
+  """
+  def get_user_by_token(token) do
+    case Ptx.Guardian.resource_from_token(token) do
+      {:ok, resource, _claims} -> resource
+      {:error, _reason} -> nil
+    end
+  end
+
+  @doc """
+  Deteting old transaction by user.
+  """
+  def delete_old_user_transactions(user_id) do
+    Transaction
+    |> where(user_id: ^user_id)
+    |> Repo.delete_all()
+  end
+
+  @doc """
+
+  """
+  def refresh_access_token(user) do
+    case user do
+      %{refresh_token: nil} ->
+        {:error, :empty_refresh_token}
+      %{refresh_token: refresh_token} ->
+        Ptx.Google.OAuth.get_new_access_token(refresh_token)
+        |> OK.bind(fn
+          %{access_token: access_token, expires_in: expires_in, token_type: token_type} ->
+            update_user(user, %{
+              access_token: access_token,
+              token_type: token_type,
+              expires_at: :os.system_time(:seconds) + expires_in
+            })
+        end)
+    end
+  end
 
   @doc """
   Activate user trial period (if available)
