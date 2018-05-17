@@ -14,6 +14,7 @@ defmodule Ptx.Application do
       supervisor(PtxWeb.Endpoint, []),
       # Start your own worker by calling: Ptx.Worker.start_link(arg1, arg2, arg3)
       # worker(Ptx.Worker, [arg1, arg2, arg3]),
+      {Ptx.Scheduler, []},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -10,6 +10,28 @@ defmodule Ptx.Accounts do
 
   @trial_period Application.get_env(:ptx, :trial_period, 14)
 
+  def time_to_cron(time) do
+    Timex.format!(time, "%S %M %I %d %m %Y", :strftime)
+    # {{year, month, day}, {hour, minute, _second}} = Timex.to_erl(time)
+    # "#{minute} #{hour} #{day} #{month} #{year}"
+  end
+
+  # def time_to_cron(time, :extended) do
+  #   {{year, month, day}, {hour, minute, second}} = Timex.to_erl(time)
+  #   "#{second} #{minute} #{hour} #{day} #{month} #{year}"
+  # end
+
+  @doc """
+  Freeze user. Check only by valid_until.
+  Call every 2 hours.
+  """
+  def freeze_expired_users do
+    query = from u in User,
+      where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '0 days'", u.valid_until)
+
+    Repo.update_all(query, set: [frozen: true])
+  end
+
   @doc """
   Get user by token.
   Used Guardian.

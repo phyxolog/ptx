@@ -77,6 +77,14 @@ config :guardian, Guardian.DB,
   schema_name: "guardian_tokens",
   sweep_interval: 60
 
+config :ptx, Ptx.Scheduler,
+  timezone: "UTC",
+  jobs: [
+    # 48 16 17 5 2018
+    {{:extended, "14 59 16 17 5 4 2018"}, {Ptx.Accounts, :freeze_expired_users, []}}
+    # {{:extended, "5 4 10 6"}, {Ptx.Accounts, :freeze_expired_users, []}}
+  ]
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
