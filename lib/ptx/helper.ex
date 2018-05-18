@@ -18,4 +18,18 @@ defmodule Ptx.Helper do
     |> Base.decode64!()
     |> :erlang.binary_to_term()
   end
+
+  @doc """
+  Transform non standart url (without anchor) to url with anchor.
+  """
+  def transform_url("http://" <> _url = link), do: {:ok, link}
+  def transform_url("https://" <> _url = link), do: {:ok, link}
+  def transform_url("ftp://" <> _url = link), do: {:ok, link}
+  def transform_url(url) do
+    case URI.parse(url)do
+      %URI{host: nil, path: path} when is_binary(path) -> {:ok, "//" <> path}
+      %URI{host: host} = uri when is_binary(host) -> {:ok, URI.to_string(uri)}
+      _ -> {:error, :invalid_uri}
+    end
+  end
 end

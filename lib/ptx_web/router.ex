@@ -59,6 +59,8 @@ defmodule PtxWeb.Router do
     get "/google/callback", AuthController, :callback
   end
 
+  get "/link", PtxWeb.LinkTrackerController, :index
+
   scope "/api", PtxWeb do
     pipe_through [:api, :auth]
 
