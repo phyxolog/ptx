@@ -19,6 +19,6 @@ defmodule PtxWeb.ApiController do
   end
 
   def timezones(conn, _params, _user) do
-    json conn, Ptx.format_canonical_zone_list(Tzdata.canonical_zone_list())
+    json conn, Ptx.Helper.format_canonical_zone_list(Tzdata.canonical_zone_list())
   end
 end
