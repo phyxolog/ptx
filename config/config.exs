@@ -7,6 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :ptx,
+  from_email_string: "PostTrack Alerts <noreply@posttrack.com>",
   env: Mix.env(),
   url: "https://stupid-zebra-57.localtunnel.me",
   currency: "USD",
