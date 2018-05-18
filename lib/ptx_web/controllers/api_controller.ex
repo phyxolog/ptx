@@ -15,7 +15,6 @@ defmodule PtxWeb.ApiController do
   end
 
   def identity(conn, _params, user) do
-    IO.inspect user
     render(conn, PtxWeb.UserView, "show.json", user: user)
   end
 

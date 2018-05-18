@@ -75,7 +75,10 @@ defmodule Ptx.Mixfile do
       {:exliqpay, git: "git@bitbucket.org:theengineerscrew/exliqpay-lib.git"},
 
       ## For pagination in Ecto
-      {:scrivener_ecto, "~> 1.3.0"}
+      {:scrivener_ecto, "~> 1.3.0"},
+
+      ## For static analysis
+      {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false},
     ]
   end
 

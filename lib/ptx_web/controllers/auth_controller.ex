@@ -22,13 +22,15 @@ defmodule PtxWeb.AuthController do
   Handler for requests from pricing page.
   """
   def callback(conn, %{"state" => state}, _user) do
-    do_callback(conn)
+    conn
+    |> do_callback()
     |> processign(Ptx.Helper.decode_term(state))
   end
 
   ## TODO: Where we must redirect user without pay state?
   def callback(conn, _params, _user) do
-    do_callback(conn)
+    conn
+    |> do_callback()
     |> redirect(to: "/office")
   end
 
@@ -53,7 +55,8 @@ defmodule PtxWeb.AuthController do
   ## and revoke old user token.
   defp do_callback(%{assigns: %{ueberauth_auth: auth}} = conn) do
     user =
-      load_user_params(auth)
+      auth
+      |> load_user_params()
       |> Accounts.find_or_create_user()
       |> update_token(auth)
 

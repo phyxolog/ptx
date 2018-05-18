@@ -8,7 +8,8 @@ defmodule Ptx.Guardian do
   end
 
   def resource_from_claims(claims) do
-    OK.bind({:ok, claims}, &Map.fetch(&1, "sub"))
+    {:ok, claims}
+    |> OK.bind(&Map.fetch(&1, "sub"))
     |> OK.bind(fn user_id -> Accounts.fetch_user(id: user_id) end)
   end
 

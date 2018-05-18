@@ -1,5 +1,6 @@
 defmodule Ptx.MailNotifier do
   @moduledoc """
+  Module for sending notifies to users.
   """
 
   @doc """

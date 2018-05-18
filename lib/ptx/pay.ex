@@ -63,7 +63,8 @@ defmodule Ptx.Pay do
     params = %{params | "info" => Ptx.Helper.decode_term(params["info"])}
     {:ok, user} = Accounts.fetch_user(id: params["info"].user_id)
 
-    obtain_transaction(params)
+    params
+    |> obtain_transaction()
     |> process_transaction(params, user)
   end
 
@@ -105,7 +106,8 @@ defmodule Ptx.Pay do
       Accounts.update_transaction(transaction, %{status: "success"})
 
     valid_until =
-      Timex.from_unix(end_date, :millisecond)
+      end_date
+      |> Timex.from_unix(:millisecond)
       |> Timex.shift("#{transaction.periodicity}s": 1)
       |> Timex.to_naive_datetime()
 

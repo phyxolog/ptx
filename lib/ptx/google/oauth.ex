@@ -48,7 +48,8 @@ defmodule Ptx.Google.OAuth do
     url = "https://www.googleapis.com/oauth2/v3/tokeninfo?"
     params = %{access_token: user.access_token}
 
-    get(url <> URI.encode_query(params))
+    url <> URI.encode_query(params)
+    |> get()
     ## First off, transform expires_in to integer
     ## for easy comparing in guard
     |> OK.bind(fn

@@ -13,7 +13,8 @@ defmodule Ptx do
   Get timezone offset by name.
   """
   def get_timezone_offset_by_name(timezone) do
-    Timex.Timezone.get(timezone)
+    timezone
+    |> Timex.Timezone.get()
     |> Timex.Timezone.total_offset()
     |> Kernel./(3600)
     |> Float.round()
@@ -23,7 +24,8 @@ defmodule Ptx do
   Pad leading number.
   """
   def pad(number) do
-    abs(number)
+    number
+    |> abs()
     |> Integer.to_string()
     |> String.pad_leading(2, "0")
   end
@@ -32,7 +34,8 @@ defmodule Ptx do
   Format timezone.
   """
   def format_timezone(tz) do
-    {hours, minutes, _, _} = Timex.Duration.from_hours(tz.offset)
+    {hours, minutes, _, _} = tz.offset
+    |> Timex.Duration.from_hours()
     |> Timex.Duration.to_clock()
 
     prefix = if hours >= 0, do: "+", else: "-"

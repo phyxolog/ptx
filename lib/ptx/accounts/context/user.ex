@@ -40,7 +40,8 @@ defmodule Ptx.Accounts.Context.User do
           %{refresh_token: nil} ->
             {:error, :empty_refresh_token}
           %{refresh_token: refresh_token} ->
-            Ptx.Google.OAuth.get_new_access_token(refresh_token)
+            refresh_token
+            |> Ptx.Google.OAuth.get_new_access_token()
             |> OK.bind(fn
               %{access_token: access_token, expires_in: expires_in, token_type: token_type} ->
                 update_user(user, %{
