@@ -18,10 +18,10 @@ defmodule PtxWeb.Router do
 
   pipeline :auth do
     plug Guardian.Plug.Pipeline,
+      error_handler: PtxWeb.SessionController,
       otp_app: :ptx,
       module: Ptx.Guardian,
-      key: "default",
-      error_handler: PtxWeb.SessionController
+      key: "default"
 
     plug Guardian.Plug.VerifyHeader, realm: :none
     plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
