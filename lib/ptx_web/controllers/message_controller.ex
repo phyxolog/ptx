@@ -1,6 +1,7 @@
 defmodule PtxWeb.MessageController do
   use PtxWeb, :controller
   use Guardian.Phoenix.Controller
+
   alias Ptx.Messages
   alias Ptx.Messages.Message
 

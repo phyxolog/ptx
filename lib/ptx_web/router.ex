@@ -68,7 +68,7 @@ defmodule PtxWeb.Router do
     get "/timezones", ApiController, :timezones
 
     resources "/messages", MessageController, only: [:create]
-    resources "/users", UserController, only: [:show, :update]
+    resources "/users", UserController, only: [:update]
     resources "/faq", FaqController, only: [:index]
 
     match :*, "/liqpay/callback", LiqPayController, :callback

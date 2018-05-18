@@ -5,10 +5,11 @@ defmodule Ptx.Accounts.User do
   @default_locale Application.get_env(:ptx, PtxWeb.Gettext)[:default_locale]
   @primary_key {:id, :string, [autogenerate: false]}
   @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
-  @optional_fields ~w(gender picture locale access_token refresh_token plan
+  @optional_fields ~w(gender picture locale access_token refresh_token plan full_name
                       token_type expires_at timezone valid_until frozen periodicity)a
-  @required_fields ~w(id first_name last_name full_name)a
+  @required_fields ~w(id first_name last_name)a
 
+  @locales Application.get_env(:ptx, PtxWeb.Gettext)[:locales]
   @plans Application.get_env(:ptx, :plans)
   @periodicities ~w(month year)
 
@@ -45,5 +46,16 @@ defmodule Ptx.Accounts.User do
     |> validate_required(@required_fields)
     |> validate_inclusion(:plan, Enum.map(@plans, &to_string/1))
     |> validate_inclusion(:periodicity, @periodicities)
+    |> validate_inclusion(:locale, @locales)
+    |> update_full_name()
+  end
+
+  ## Update full name field
+  ## When first_name or last_name changed
+  defp update_full_name(changeset) do
+    first_name = get_field(changeset, :first_name)
+    last_name = get_field(changeset, :last_name)
+
+    put_change(changeset, :full_name, Enum.join([first_name, last_name], " "))
   end
 end
