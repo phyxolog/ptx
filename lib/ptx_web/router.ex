@@ -67,6 +67,7 @@ defmodule PtxWeb.Router do
     get "/identity", ApiController, :identity
     get "/timezones", ApiController, :timezones
 
+    resources "/messages", MessageController, only: [:create]
     resources "/users", UserController, only: [:show, :update]
     resources "/faq", FaqController, only: [:index]
 

@@ -5,9 +5,7 @@ defmodule Ptx.Messages.Context.Message do
 
   defmacro __using__(_) do
     quote do
-      import Ecto.Query, warn: false
       alias Ptx.Repo
-
       alias Ptx.Messages.Message
 
       @doc """
@@ -55,6 +53,15 @@ defmodule Ptx.Messages.Context.Message do
         %Message{}
         |> Message.changeset(attrs)
         |> Repo.insert()
+      end
+
+      @doc """
+      Similar to create_message/1, but change sender_id to user id.
+      """
+      def create_message(attrs, user) do
+        attrs
+        |> Map.put("sender_id", user.id)
+        |> create_message()
       end
 
       @doc """

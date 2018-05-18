@@ -5,9 +5,7 @@ defmodule Ptx.Accounts.Context.Transaction do
 
   defmacro __using__(_) do
     quote do
-      import Ecto.Query, warn: false
       alias Ptx.Repo
-
       alias Ptx.Accounts.Transaction
 
       @doc """

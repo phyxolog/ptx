@@ -5,9 +5,7 @@ defmodule Ptx.Accounts.Context.User do
 
   defmacro __using__(_) do
     quote do
-      import Ecto.Query, warn: false
       alias Ptx.Repo
-
       alias Ptx.Accounts.User
 
       @trial_period Application.get_env(:ptx, :trial_period, 14)

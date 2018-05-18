@@ -7,7 +7,7 @@ defmodule Ptx.Messages.Message do
   @primary_key {:id, :string, [autogenerate: false]}
   @derive {Jason.Encoder, except: [:__meta__, :sender]}
   @optional_fields ~w(subject first_readed_at recipients_clear readed)a
-  @required_fields ~w(thread_id recipients sender_id)a
+  @required_fields ~w(id recipients sender_id)a
 
   schema "messages" do
     field :subject, :string, default: nil
@@ -16,8 +16,8 @@ defmodule Ptx.Messages.Message do
     field :readed, :boolean, default: false
     field :first_readed_at, :naive_datetime
     field :first_readed_at_string, :string, virtual: true, default: nil
-    belongs_to :sender, User
-    belongs_to :thread, Thread
+    belongs_to :sender, User, type: :string
+    belongs_to :thread, Thread, type: :string
     timestamps()
   end
 
@@ -25,8 +25,9 @@ defmodule Ptx.Messages.Message do
   def changeset(message, attrs) do
     message
     |> cast(attrs, @optional_fields ++ @required_fields)
+    |> unique_constraint(:id, name: :messages_pkey)
+    |> cast_assoc(:thread, required: true)
     |> validate_required(@required_fields)
     |> foreign_key_constraint(:sender_id)
-    |> foreign_key_constraint(:thread_id)
   end
 end
