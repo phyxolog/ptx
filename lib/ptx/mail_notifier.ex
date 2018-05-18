@@ -25,13 +25,13 @@ defmodule Ptx.MailNotifier do
   end
 
   def change_password_notify(user) do
-    if user.notification_settings.change_pw do
+    if user.notification_settings.pw_changed do
       MailSender.send(:password_changed, user)
     end
   end
 
   def change_plan_notify(user, old_plan, new_plan) do
-    if user.notification_settings.change_plan do
+    if user.notification_settings.plan_changed do
       MailSender.send(:plan_changed, user, old_plan: old_plan, new_plan: new_plan)
     end
   end

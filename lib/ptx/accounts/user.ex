@@ -52,6 +52,9 @@ defmodule Ptx.Accounts.User do
     |> validate_inclusion(:periodicity, @periodicities)
     |> validate_inclusion(:locale, @locales)
     |> update_full_name()
+    |> validate_change(:timezone, fn _, timezone ->
+      if Tzdata.zone_exists?(timezone), do: [], else: [timezone: "invalid timezone"]
+    end)
   end
 
   ## Update full name field
