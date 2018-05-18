@@ -1,8 +1,7 @@
 defmodule Ptx.Faq do
   use Ecto.Schema
+  alias Ptx.Faq
   require I18n
-
-  alias Ptx.Repo
 
   @derive {Jason.Encoder, except: [:__meta__]}
 
@@ -20,7 +19,6 @@ defmodule Ptx.Faq do
   With pagination.
   """
   def list(params) do
-    Ptx.Faq
-    |> Repo.paginate(params)
+    Ptx.Repo.paginate(Faq, params)
   end
 end
