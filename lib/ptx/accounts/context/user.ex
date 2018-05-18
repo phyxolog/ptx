@@ -26,21 +26,10 @@ defmodule Ptx.Accounts.Context.User do
       Used Guardian.
       """
       def get_user_by_token(token) do
-        try do
-          {:ok, resource, _claims} = Ptx.Guardian.resource_from_token(token)
-          resource
-        rescue
-          _ -> nil
-        end
-      end
-
-      @doc """
-      Deteting old transaction by user.
-      """
-      def delete_old_user_transactions(user_id) do
-        Transaction
-        |> where(user_id: ^user_id)
-        |> Repo.delete_all()
+        {:ok, resource, _claims} = Ptx.Guardian.resource_from_token(token)
+        resource
+      rescue
+        _ -> nil
       end
 
       @doc """

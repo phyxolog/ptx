@@ -77,9 +77,6 @@ defmodule PtxWeb.Router do
   end
 end
 
-# get "/lt", PtWeb.LinkTrackerController, :index
-# get "/lt/:url", PtWeb.LinkTrackerController, :url
-
 # scope path: "/api/v1", as: :api_v1, alias: PtWeb do
 #   pipe_through :api
 
