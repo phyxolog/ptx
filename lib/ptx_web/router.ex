@@ -86,9 +86,6 @@ end
 
 #   get "/lt", EmailLinkController, :index
 
-#   resources "/emails", EmailController, only: [:create]
-#   resources "/users", UserController, only: [:update]
-
 #   get "/trace/mail/:id", EmailController, :trace
 
 #   post "/email_checker", EmailController, :email_checker

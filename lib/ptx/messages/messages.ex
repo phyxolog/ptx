@@ -8,4 +8,5 @@ defmodule Ptx.Messages do
 
   use Ptx.Messages.Context.Message
   use Ptx.Messages.Context.Thread
+  use Ptx.Messages.Context.Read
 end
