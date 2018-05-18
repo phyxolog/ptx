@@ -1,6 +1,7 @@
 defmodule Ptx.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Ptx.Accounts.NotificationSettings
 
   @default_locale Application.get_env(:ptx, PtxWeb.Gettext)[:default_locale]
   @primary_key {:id, :string, [autogenerate: false]}
@@ -34,15 +35,18 @@ defmodule Ptx.Accounts.User do
     field :refresh_token, :string
     field :expires_at, :integer
 
+    has_one :notification_settings, NotificationSettings, on_replace: :update
+
     timestamps()
   end
 
-  def preloaded, do: []
+  def preloaded, do: [:notification_settings]
 
   @doc false
   def changeset(user, attrs) do
     user
     |> cast(attrs, @optional_fields ++ @required_fields)
+    |> cast_assoc(:notification_settings, required: true)
     |> validate_required(@required_fields)
     |> validate_inclusion(:plan, Enum.map(@plans, &to_string/1))
     |> validate_inclusion(:periodicity, @periodicities)
