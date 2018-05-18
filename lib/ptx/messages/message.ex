@@ -1,7 +1,7 @@
 defmodule Ptx.Messages.Message do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Ptx.Messages.Thread
+  alias Ptx.Messages.{Thread, Link, Read}
   alias Ptx.Accounts.User
 
   @primary_key {:id, :string, [autogenerate: false]}
@@ -18,6 +18,8 @@ defmodule Ptx.Messages.Message do
     field :first_readed_at_string, :string, virtual: true, default: nil
     belongs_to :sender, User, type: :string
     belongs_to :thread, Thread, type: :string
+    has_many :reads, Read
+    has_many :links, Link
     timestamps()
   end
 

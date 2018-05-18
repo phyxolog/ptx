@@ -15,13 +15,15 @@ defmodule PtxWeb.FallbackController do
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> render(PtxWeb.ErrorView, :"404")
+    |> put_view(PtxWeb.ErrorView)
+    |> render(:"404")
   end
 
   def call(conn, {:error, :not_auth}) do
     conn
     |> put_status(:unauthorized)
-    |> render(PtxWeb.ErrorView, :"401")
+    |> put_view(PtxWeb.ErrorView)
+    |> render(:"401")
   end
 
   def call(conn, {:error, {:reason, :hacker}}) do
