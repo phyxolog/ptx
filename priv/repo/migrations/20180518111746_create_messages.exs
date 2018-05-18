@@ -2,14 +2,15 @@ defmodule Ptx.Repo.Migrations.CreateMessages do
   use Ecto.Migration
 
   def change do
-    create table(:messages) do
-      add :id, :string
-      add :subject, :string
-      add :recipients, {:array, :string}
-      add :recipients_clear, {:array, :string}
-      add :sender_id, references(:users, on_delete: :nothing)
-      add :thread_id, references(:threads, on_delete: :nothing)
-
+    create table(:messages, primary_key: false) do
+      add :id, :string, size: 1000, primary_key: true
+      add :subject, :string, default: nil
+      add :recipients, {:array, :string}, default: []
+      add :recipients_clear, {:array, :string}, default: []
+      add :readed, :boolean, default: false
+      add :first_readed_at, :naive_datetime
+      add :sender_id, references(:users, type: :string, on_delete: :delete_all)
+      add :thread_id, references(:threads, type: :string, on_delete: :delete_all)
       timestamps()
     end
 
