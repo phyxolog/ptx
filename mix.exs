@@ -55,7 +55,7 @@ defmodule Ptx.Mixfile do
       {:timex, "~> 3.3.0"},
 
       ## Job scheduler
-      {:quantum, "~> 2.2.7"},
+      {:quantum, github: "quantum-elixir/quantum-core"},
 
       ## Email library
       {:bamboo, "~> 0.8.0"},
@@ -72,7 +72,10 @@ defmodule Ptx.Mixfile do
       {:guardian_db, github: "ueberauth/guardian_db"},
 
       ## For payments with Liqpay
-      {:exliqpay, git: "git@bitbucket.org:theengineerscrew/exliqpay-lib.git"}
+      {:exliqpay, git: "git@bitbucket.org:theengineerscrew/exliqpay-lib.git"},
+
+      ## For pagination in Ecto
+      {:scrivener_ecto, "~> 1.3.0"}
     ]
   end
 

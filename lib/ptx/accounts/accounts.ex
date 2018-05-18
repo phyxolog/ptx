@@ -10,17 +10,6 @@ defmodule Ptx.Accounts do
 
   @trial_period Application.get_env(:ptx, :trial_period, 14)
 
-  def time_to_cron(time) do
-    Timex.format!(time, "%S %M %I %d %m %Y", :strftime)
-    # {{year, month, day}, {hour, minute, _second}} = Timex.to_erl(time)
-    # "#{minute} #{hour} #{day} #{month} #{year}"
-  end
-
-  # def time_to_cron(time, :extended) do
-  #   {{year, month, day}, {hour, minute, second}} = Timex.to_erl(time)
-  #   "#{second} #{minute} #{hour} #{day} #{month} #{year}"
-  # end
-
   @doc """
   Freeze user. Check only by valid_until.
   Call every 2 hours.
@@ -39,7 +28,7 @@ defmodule Ptx.Accounts do
   def get_user_by_token(token) do
     case Ptx.Guardian.resource_from_token(token) do
       {:ok, resource, _claims} -> resource
-      {:error, _reason} -> nil
+      _ -> nil
     end
   end
 
