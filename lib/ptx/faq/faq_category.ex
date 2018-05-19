@@ -1,7 +1,7 @@
 defmodule Ptx.Faq.FaqCategory do
   use Ecto.Schema
   import Ecto.Query
-  require I18n
+  import I18n
 
   alias Ptx.Faq
   alias Ptx.Faq.FaqCategory
@@ -13,7 +13,7 @@ defmodule Ptx.Faq.FaqCategory do
   ]
 
   schema "faq_categories" do
-    I18n.i18n(@translation_fields)
+    i18n(@translation_fields)
     has_many :data, Faq, foreign_key: :category_id
   end
 

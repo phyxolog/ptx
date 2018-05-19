@@ -1,9 +1,9 @@
 defmodule Ptx.Faq do
   use Ecto.Schema
   import Ecto.Query
-  alias Ptx.Faq
-  require I18n
+  import I18n
 
+  alias Ptx.Faq
   alias Ptx.Faq.FaqCategory
 
   @derive {Jason.Encoder, except: [:__meta__, :category_id]}
@@ -14,16 +14,8 @@ defmodule Ptx.Faq do
   ]
 
   schema "faqs" do
-    I18n.i18n(@translation_fields)
+    i18n(@translation_fields)
     belongs_to :category, FaqCategory
-  end
-
-  @doc """
-  List of Frequently Asked Questions.
-  With pagination.
-  """
-  def list(params) do
-    Ptx.Repo.paginate(Faq, params)
   end
 
   @doc """
