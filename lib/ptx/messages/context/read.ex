@@ -13,14 +13,14 @@ defmodule Ptx.Messages.Context.Read do
 
       ## Examples
 
-          iex> create_email_read(%{field: value})
+          iex> create_read(%{field: value})
           {:ok, %Read{}}
 
-          iex> create_email_read(%{field: bad_value})
+          iex> create_read(%{field: bad_value})
           {:error, %Ecto.Changeset{}}
 
       """
-      def create_email_read(attrs \\ %{}) do
+      def create_read(attrs \\ %{}) do
         %Read{}
         |> Read.changeset(attrs)
         |> Repo.insert()

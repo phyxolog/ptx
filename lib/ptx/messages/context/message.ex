@@ -7,6 +7,36 @@ defmodule Ptx.Messages.Context.Message do
     quote do
       alias Ptx.Repo
       alias Ptx.Messages.Message
+      require OK
+
+      @doc """
+      Mark message as read.
+      """
+      def read_message(message, fun) do
+        if message.readed do
+          ## First off, update message.
+          {:ok, message} = update_message(message, %{
+            readed: true,
+            first_readed_at: NaiveDateTime.utc_now()
+          })
+
+          ## Then, call function where we will call a broadcast
+          fun.({:first_time, message})
+
+          ## Message as result
+          message
+        else
+          fun.({:once_again, message})
+        end
+      end
+
+      @doc """
+      Returns recipient. If message have > 1 recipients - return nil,
+      because we don't know, who of them really readed message.
+      """
+      def get_message_recipient(%Message{recipients: recipients})
+        when length(recipients) == 1, do: hd(recipients)
+      def get_message_recipient(_message), do: nil
 
       @doc """
       Returns the list of messages.
@@ -36,6 +66,14 @@ defmodule Ptx.Messages.Context.Message do
 
       """
       def get_message!(id), do: Repo.get!(Message, id)
+
+      def get_message(id) do
+        Message
+        |> where(id: ^id)
+        |> limit(1)
+        |> Repo.one()
+        |> OK.required(:not_found)
+      end
 
       @doc """
       Creates a message.

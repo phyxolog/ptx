@@ -62,18 +62,25 @@ defmodule PtxWeb.Router do
   get "/link", PtxWeb.LinkTrackerController, :index
 
   scope "/api", PtxWeb do
-    pipe_through [:api, :auth]
+    pipe_through :api
 
+    get "/trace/mail/:id", TraceController, :index
     get "/translations", TranslationController, :index
     get "/timestamp", ApiController, :timestamp
-    get "/identity", ApiController, :identity
     get "/timezones", ApiController, :timezones
 
-    resources "/messages", MessageController, only: [:create]
-    resources "/users", UserController, only: [:update]
     resources "/faq", FaqController, only: [:index]
 
     match :*, "/liqpay/callback", LiqPayController, :callback
+  end
+
+  scope "/api", PtxWeb do
+    pipe_through [:api, :auth]
+
+    get "/identity", ApiController, :identity
+
+    resources "/messages", MessageController, only: [:create]
+    resources "/users", UserController, only: [:update]
   end
 end
 

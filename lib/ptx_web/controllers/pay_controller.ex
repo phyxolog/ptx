@@ -22,12 +22,12 @@ defmodule PtxWeb.PayController do
 
   def index(conn, params, user) do
     case Pay.generate_link(params, user) do
-      {:error, _} ->
+      {:ok, link} ->
+        redirect(conn, external: link)
+      _ ->
         conn
         |> put_view(PtxWeb.ErrorView)
         |> render("liqpay_link_generate_error.html")
-      {:ok, link} ->
-        redirect(conn, external: link)
     end
   end
 end

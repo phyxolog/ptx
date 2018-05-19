@@ -89,6 +89,7 @@ defmodule PtxWeb.AuthController do
       access_token: credentials.token,
       refresh_token: credentials.refresh_token,
       expires_at: credentials.expires_at,
+      notification_settings: Map.from_struct(%Ptx.Accounts.NotificationSettings{})
     }
   end
 
