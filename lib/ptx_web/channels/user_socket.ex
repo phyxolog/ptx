@@ -19,8 +19,17 @@ defmodule PtxWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
+  def connect(%{"token" => token}, socket) do
+    case Guardian.Phoenix.Socket.authenticate(socket, Ptx.Guardian, token) do
+      {:ok, authed_socket} ->
+        {:ok, authed_socket}
+      {:error, _} -> {:error, :unauthenticated}
+    end
+  end
+
+  # This function will be called when there was no authentication information
   def connect(_params, socket) do
-    {:ok, socket}
+    :error
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
