@@ -28,7 +28,7 @@ defmodule Ptx.Messages do
             nil
           {:once_again, _message} ->
             ## Only if pro or trial account
-            ## And if user.notification_settings.once_again_email_readed
+            ## And if user.notification_settings.once_again_readed_email
             ## TODO: Send email notify of read emails
             nil
         end)
