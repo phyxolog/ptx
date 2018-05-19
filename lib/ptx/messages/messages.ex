@@ -25,6 +25,9 @@ defmodule Ptx.Messages do
     PtxWeb.Endpoint.broadcast("room:#{message.sender_id}", "refresh_markers", params)
   end
 
+  @doc """
+  Call when user opened email.
+  """
   def trace(nil), do: {:error, :empty_id}
   def trace(id) do
     case get_message(id) do
@@ -54,6 +57,7 @@ defmodule Ptx.Messages do
     {:ok, id}
   end
 
+  @doc false
   def list_messages_by_thread_ids(thread_ids, sender_id) do
     query = from m in Message,
       where: m.sender_id == ^sender_id,
@@ -65,5 +69,73 @@ defmodule Ptx.Messages do
       }
 
     Repo.all(query)
+  end
+
+  @doc """
+  Filter query by given `start_date`.
+  Date need be in a format: DD.MM.YYYY
+  """
+  def filter_by_start_date(query, nil), do: query
+  def filter_by_start_date(query, start_date) do
+    case Timex.parse(start_date, "{0D}.{0M}.{YYYY}") do
+      {:ok, date} ->
+        date = Timex.to_naive_datetime(date)
+
+        from q in query,
+          where: q.inserted_at >= ^date
+      _ -> query
+    end
+  end
+
+  @doc """
+  Filter query by given `end_date`.
+  Date need be in a format: DD.MM.YYYY
+  """
+  def filter_by_end_date(query, nil), do: query
+  def filter_by_end_date(query, end_date) do
+    case Timex.parse(end_date, "{0D}.{0M}.{YYYY}") do
+      {:ok, date} ->
+        date = Timex.to_naive_datetime(date)
+
+        from q in query,
+          where: q.inserted_at <= ^date
+      _ -> query
+    end
+  end
+
+  @doc """
+  Get count of send emails.
+  Include filters by date fields.
+  """
+  def get_sended_messages_count(user_id, params) do
+    Message
+    |> filter_by_start_date(params["start_date"])
+    |> filter_by_end_date(params["end_date"])
+    |> where(sender_id: ^user_id)
+    |> Repo.aggregate(:count, :id)
+  end
+
+  @doc """
+  Get count of readed emails.
+  Include filters by date fields.
+  """
+  def get_readed_messages_count(user_id, params) do
+    Message
+    |> filter_by_start_date(params["start_date"])
+    |> filter_by_end_date(params["end_date"])
+    |> where(sender_id: ^user_id)
+    |> where(readed: true)
+    |> Repo.aggregate(:count, :id)
+  end
+
+  @doc false
+  def list_messages_with_links_by_sender(sender_id, params) do
+    Message
+    |> filter_by_start_date(params["start_date"])
+    |> filter_by_end_date(params["end_date"])
+    |> where(sender_id: ^sender_id)
+    |> order_by(desc: :inserted_at)
+    |> preload([:links])
+    |> Repo.all()
   end
 end

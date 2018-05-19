@@ -2,7 +2,7 @@ defmodule PtxWeb.ApiController do
   use PtxWeb, :controller
   use Guardian.Phoenix.Controller
 
-  alias Ptx.Accounts
+  alias Ptx.{Accounts, Messages}
 
   def timestamp(conn, _params, _user) do
     timestamp = DateTime.to_unix(DateTime.utc_now(), :milliseconds)
@@ -28,4 +28,17 @@ defmodule PtxWeb.ApiController do
     json conn, %{status: :wait}
   end
   def unsubscribe(_conn, _params, _user), do: {:error, :not_found}
+
+  def statictic(_conn, _params, nil), do: {:error, :not_auth}
+  def statictic(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
+    Accounts.get_statistic(user_id, params)
+  end
+  def statictic(_conn, _params, _user), do: {:error, :not_found}
+
+  def links_statictic(_conn, _params, nil), do: {:error, :not_auth}
+  def links_statictic(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
+    messages = Messages.list_messages_with_links_by_sender(user_id, params)
+    {:ok, messages}
+  end
+  def links_statictic(_conn, _params, _user), do: {:error, :not_found}
 end

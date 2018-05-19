@@ -1,9 +1,12 @@
 defmodule Ptx.Faq do
   use Ecto.Schema
+  import Ecto.Query
   alias Ptx.Faq
   require I18n
 
-  @derive {Jason.Encoder, except: [:__meta__]}
+  alias Ptx.Faq.FaqCategory
+
+  @derive {Jason.Encoder, except: [:__meta__, :category_id]}
 
   @translation_fields [
     %{name: :title, type: :string},
@@ -12,6 +15,7 @@ defmodule Ptx.Faq do
 
   schema "faqs" do
     I18n.i18n(@translation_fields)
+    belongs_to :category, FaqCategory
   end
 
   @doc """
@@ -20,5 +24,14 @@ defmodule Ptx.Faq do
   """
   def list(params) do
     Ptx.Repo.paginate(Faq, params)
+  end
+
+  @doc """
+  Gets a single faq.
+  """
+  def show(id) do
+    Faq
+    |> where(id: ^id)
+    |> Ptx.Repo.one()
   end
 end

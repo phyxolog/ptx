@@ -69,7 +69,8 @@ defmodule PtxWeb.Router do
     get "/timestamp", ApiController, :timestamp
     get "/timezones", ApiController, :timezones
 
-    resources "/faq", FaqController, only: [:index]
+    get "/faq/list", FaqController, :list
+    get "/faq/:id", FaqController, :show
 
     match :*, "/liqpay/callback", LiqPayController, :callback
   end
@@ -82,17 +83,9 @@ defmodule PtxWeb.Router do
     post "/messages/list", MessageController, :index
     resources "/messages", MessageController, only: [:create]
     resources "/users", UserController, only: [:update] do
+      get "/statistic", ApiController, :statistic
+      get "/statistic/links", ApiController, :links_statistic
       post "/unsubscribe", ApiController, :unsubscribe
     end
   end
 end
-
-# scope path: "/api/v1", as: :api_v1, alias: PtWeb do
-#   pipe_through :api
-
-#   get "/stats", ApiController, :stats
-
-#   get "/lt", EmailLinkController, :index
-
-#   post "/email_checker", EmailController, :email_checker
-# end

@@ -3,7 +3,8 @@ defmodule Ptx.Accounts do
   The Accounts context.
   """
   import Ecto.Query, warn: false
-  alias Ptx.Repo
+  alias Ptx.{Repo, Messages}
+  require OK
 
   ## Composition of contexts
   use Ptx.Accounts.Context.User
@@ -17,5 +18,15 @@ defmodule Ptx.Accounts do
         ExLiqpay.cancel_subscription(transaction.id)
         {:ok, :success}
     end)
+  end
+
+  @doc """
+  Get account statistic.
+  """
+  def get_statistic(user_id, params) do
+    OK.success(%{
+      sent_count: Messages.get_sended_messages_count(user_id, params),
+      read_count: Messages.get_readed_messages_count(user_id, params)
+    })
   end
 end
