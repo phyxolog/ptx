@@ -7,6 +7,7 @@ defmodule Ptx.Faq.FaqCategory do
   alias Ptx.Faq.FaqCategory
 
   @derive {Jason.Encoder, except: [:__meta__]}
+  @locales Application.get_env(:ptx, PtxWeb.Gettext)[:locales]
 
   @translation_fields [
     %{name: :title, type: :string}
@@ -17,21 +18,11 @@ defmodule Ptx.Faq.FaqCategory do
     has_many :data, Faq, foreign_key: :category_id
   end
 
-  defmacro select_l(q) do
-    quote do
-      # TODO: Make automatically
-      %{
-        id: unquote(q).id,
-        title_ru: unquote(q).title_ru,
-        title_uk: unquote(q).title_uk,
-        title_en: unquote(q).title_en
-      }
-    end
-  end
-
   def data_preload_query do
+    field_list = Enum.reduce(@locales, [:id], &([:"title_#{&1}" | &2]))
+
     from q in Faq,
-      select: select_l(q)
+      select: map(q, ^field_list)
   end
 
   def preloaded, do: [data: data_preload_query()]
