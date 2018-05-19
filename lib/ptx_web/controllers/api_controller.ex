@@ -21,4 +21,11 @@ defmodule PtxWeb.ApiController do
   def timezones(conn, _params, _user) do
     json conn, Ptx.Helper.format_canonical_zone_list(Tzdata.canonical_zone_list())
   end
+
+  def unsubscribe(_conn, _params, nil), do: {:error, :not_auth}
+  def unsubscribe(conn, %{"user_id" => user_id}, %{id: id} = user) when user_id == id do
+    Accounts.unsubscribe(user)
+    json conn, %{status: :wait}
+  end
+  def unsubscribe(_conn, _params, _user), do: {:error, :not_found}
 end

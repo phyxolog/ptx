@@ -9,4 +9,13 @@ defmodule Ptx.Accounts do
   use Ptx.Accounts.Context.User
   use Ptx.Accounts.Context.Transaction
   use Ptx.Accounts.Context.Ticket
+
+  def unsubscribe(user) do
+    fetch_transaction(user_id: user.id)
+    |> OK.bind(fn
+      transaction ->
+        ExLiqpay.cancel_subscription(transaction.id)
+        {:ok, :success}
+    end)
+  end
 end
