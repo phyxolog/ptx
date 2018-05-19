@@ -71,6 +71,7 @@ defmodule PtxWeb.Router do
 
     get "/faq/list", FaqController, :list
     get "/faq/:id", FaqController, :show
+    get "/pages/:id", ApiController, :show_page
 
     match :*, "/liqpay/callback", LiqPayController, :callback
   end

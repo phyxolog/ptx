@@ -2,7 +2,7 @@ defmodule PtxWeb.LinkTrackerController do
   use PtxWeb, :controller
   alias Ptx.{Messages, MailNotifier}
 
-  action_fallback PtWeb.FallbackController
+  action_fallback PtxWeb.FallbackController
 
   def index(conn, %{"url" => url, "id" => message_id, "link_id" => link_id}) do
     Messages.increment_clicks_count(link_id)

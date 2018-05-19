@@ -4,6 +4,8 @@ defmodule PtxWeb.ApiController do
 
   alias Ptx.{Accounts, Messages}
 
+  action_fallback PtxWeb.FallbackController
+
   def timestamp(conn, _params, _user) do
     timestamp = DateTime.to_unix(DateTime.utc_now(), :milliseconds)
     json conn, %{timestamp: timestamp}
@@ -20,6 +22,10 @@ defmodule PtxWeb.ApiController do
 
   def timezones(conn, _params, _user) do
     json conn, Ptx.Helper.format_canonical_zone_list(Tzdata.canonical_zone_list())
+  end
+
+  def show_page(_conn, %{"id" => id}, _user) do
+    Ptx.Pages.get_page(id)
   end
 
   def unsubscribe(_conn, _params, nil), do: {:error, :not_auth}
