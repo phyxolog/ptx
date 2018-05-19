@@ -28,8 +28,8 @@ defmodule PtxWeb.UserSocket do
   end
 
   # This function will be called when there was no authentication information
-  def connect(_params, socket) do
-    :error
+  def connect(_params, _socket) do
+    {:error, :missed_token}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

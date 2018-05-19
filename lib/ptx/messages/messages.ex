@@ -37,4 +37,17 @@ defmodule Ptx.Messages do
 
     {:ok, id}
   end
+
+  def list_messages_by_thread_ids(thread_ids, sender_id) do
+    query = from m in Message,
+      where: m.sender_id == ^sender_id,
+      where: m.thread_id in ^thread_ids,
+      limit: 1000,
+      preload: [:reads],
+      select_merge: %{
+        readed: fragment("(not (exists(select true from messages where thread_id = ? and readed = false limit 1)))", m.thread_id)
+      }
+
+    Repo.all(query)
+  end
 end

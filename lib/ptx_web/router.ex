@@ -79,6 +79,7 @@ defmodule PtxWeb.Router do
 
     get "/identity", ApiController, :identity
 
+    post "/messages/list", MessageController, :index
     resources "/messages", MessageController, only: [:create]
     resources "/users", UserController, only: [:update]
   end
@@ -91,8 +92,6 @@ end
 #   post "/unsubscribe", ApiController, :unsubscribe
 
 #   get "/lt", EmailLinkController, :index
-
-#   get "/trace/mail/:id", EmailController, :trace
 
 #   post "/email_checker", EmailController, :email_checker
 # end
