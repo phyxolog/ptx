@@ -1,10 +1,10 @@
 # .deliver/config
 
-BUILD_HOST="159.65.125.151"
+BUILD_HOST="posttrack.email"
 BUILD_USER="phyx"
 BUILD_AT="/tmp/edeliver/ptx/builds"
 
-PRODUCTION_HOSTS="159.65.125.151" # deploy / production hosts separated by space
+PRODUCTION_HOSTS="posttrack.email" # deploy / production hosts separated by space
 PRODUCTION_USER="phyx" # local user at deploy hosts
 DELIVER_TO="/home/phyx/applications/ptx" # deploy directory on production hosts
 
