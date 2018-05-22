@@ -1,5 +1,7 @@
 # .deliver/config
 
+APP = "ptx"
+
 BUILD_HOST="posttrack.email"
 BUILD_USER="phyx"
 BUILD_AT="/tmp/edeliver/ptx/builds"
@@ -16,4 +18,19 @@ pre_erlang_get_and_update_deps() {
       ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
     "
   fi
+}
+
+post_erlang_update() {
+  symlink_static
+}
+
+post_upgrade_release() {
+  symlink_static
+}
+
+symlink_static(){
+  status "running post update!"
+  __remote "
+    ln -sfn $DELIVER_TO$APP/lib/$APP$RELEASE-$VERSION/priv/static $DELIVER_TO$APP/static
+  "
 }
