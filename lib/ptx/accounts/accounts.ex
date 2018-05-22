@@ -24,9 +24,9 @@ defmodule Ptx.Accounts do
   Get account statistic.
   """
   def get_statistic(user_id, params) do
-    OK.success(%{
+    %{
       sent_count: Messages.get_sended_messages_count(user_id, params),
       read_count: Messages.get_readed_messages_count(user_id, params)
-    })
+    }
   end
 end

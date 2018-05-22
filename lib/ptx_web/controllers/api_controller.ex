@@ -24,27 +24,25 @@ defmodule PtxWeb.ApiController do
     json conn, Ptx.Helper.format_canonical_zone_list(Tzdata.canonical_zone_list())
   end
 
-  def show_page(_conn, %{"id" => id}, _user) do
-    Ptx.Pages.get_page(id)
-  end
-
-  def unsubscribe(_conn, _params, nil), do: {:error, :not_auth}
   def unsubscribe(conn, %{"user_id" => user_id}, %{id: id} = user) when user_id == id do
     Accounts.unsubscribe(user)
     json conn, %{status: :wait}
   end
   def unsubscribe(_conn, _params, _user), do: {:error, :not_found}
 
-  def statictic(_conn, _params, nil), do: {:error, :not_auth}
   def statictic(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    Accounts.get_statistic(user_id, params)
+    statistic = Accounts.get_statistic(user_id, params)
+    {:ok, statistic}
   end
   def statictic(_conn, _params, _user), do: {:error, :not_found}
 
-  def links_statictic(_conn, _params, nil), do: {:error, :not_auth}
   def links_statictic(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
     messages = Messages.list_messages_with_links_by_sender(user_id, params)
     {:ok, messages}
   end
   def links_statictic(_conn, _params, _user), do: {:error, :not_found}
+
+  def show_page(_conn, %{"id" => id}, _user) do
+    Ptx.Pages.get_page(id)
+  end
 end

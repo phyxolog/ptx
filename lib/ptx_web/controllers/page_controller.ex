@@ -5,4 +5,8 @@ defmodule PtxWeb.PageController do
   def pricing(conn, _params, _user) do
     render conn, "pricing.html"
   end
+
+  def getting_started(conn, _params, _user) do
+    render conn, "getting_started.html"
+  end
 end

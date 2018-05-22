@@ -98,7 +98,7 @@ defmodule PtxWeb.AuthController do
     resource = %{id: user.id}
     conn = Ptx.Guardian.Plug.sign_in(conn, resource)
     token = Ptx.Guardian.Plug.current_token(conn)
-    put_resp_cookie(conn, "token", token, max_age: 24 * 60 * 60 * 365)
+    put_resp_cookie(conn, "token", token, max_age: 24 * 60 * 60 * 365, http_only: false)
   end
 
   ## Update token in given user.

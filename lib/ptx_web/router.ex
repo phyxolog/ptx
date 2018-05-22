@@ -38,18 +38,20 @@ defmodule PtxWeb.Router do
     pipe_through [:browser, :locale, :auth]
 
     get "/pricing", PageController, :dummy
-  end
-
-  scope "/", PtxWeb do
-    pipe_through [:browser, :auth]
-
-    get "/pay", PayController, :index
+    get "/getting-started", PageController, :dummy
   end
 
   scope "/:locale", PtxWeb do
     pipe_through [:browser, :locale, :auth]
 
     get "/pricing", PageController, :pricing
+    get "/getting-started", PageController, :getting_started
+  end
+
+  scope "/", PtxWeb do
+    pipe_through [:browser, :auth]
+
+    get "/pay", PayController, :index
   end
 
   scope "/auth", PtxWeb do
@@ -71,6 +73,10 @@ defmodule PtxWeb.Router do
 
     get "/faq/list", FaqController, :list
     get "/faq/:id", FaqController, :show
+
+    get "/plan/list", PlanController, :list
+    get "/plan/:id", PlanController, :show
+
     get "/pages/:id", ApiController, :show_page
 
     match :*, "/liqpay/callback", LiqPayController, :callback
