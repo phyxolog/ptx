@@ -3,10 +3,6 @@ defmodule PtxWeb.FaqView do
 
   alias PtxWeb.FaqView
 
-  def render("list.json", %{list: list}) do
-    list
-  end
-
   def render("index.json", %{faqs: %Scrivener.Page{} = faqs}) do
     %{faqs | entries: render_many(faqs.entries, FaqView, "faq.json")}
   end
