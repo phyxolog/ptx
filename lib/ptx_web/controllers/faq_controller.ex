@@ -4,8 +4,8 @@ defmodule PtxWeb.FaqController do
   alias Ptx.Faq
   alias Ptx.Faq.FaqCategory
 
-  def list(conn, params) do
-    render(conn, "index.json", faqs: FaqCategory.list(params))
+  def list(conn, _params) do
+    render(conn, "index.json", faqs: FaqCategory.list())
   end
 
   def show(conn, %{"id" => id}) do

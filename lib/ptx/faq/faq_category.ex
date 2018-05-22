@@ -15,27 +15,27 @@ defmodule Ptx.Faq.FaqCategory do
 
   schema "faq_categories" do
     i18n(@translation_fields)
-    has_many :data, Faq, foreign_key: :category_id
+    has_many :faqs, Faq, foreign_key: :category_id
   end
 
-  def data_preload_query do
-    field_list = Enum.reduce(@locales, [:id], &([:"title_#{&1}" | &2]))
+  @field_list Enum.reduce(@locales, [:id], &([String.to_existing_atom("title_#{&1}") | &2]))
 
+  def faqs_preload_query do
     from q in Faq,
-      select: map(q, ^field_list)
+      select: map(q, @field_list)
   end
 
-  def preloaded, do: [data: data_preload_query()]
+  def preloaded, do: [faqs: faqs_preload_query()]
 
   @doc """
   List of Frequently Asked Questions.
   With pagination.
   """
-  def list(params) do
+  def list() do
     query = from fc in FaqCategory,
       preload: ^preloaded(),
       select: fc
 
-    Ptx.Repo.paginate(query, params)
+    Ptx.Repo.all(query)
   end
 end
