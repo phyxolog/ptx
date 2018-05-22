@@ -77,7 +77,7 @@ defmodule PtxWeb.Router do
     get "/plan/list", PlanController, :list
     get "/plan/:id", PlanController, :show
 
-    get "/pages/:id", ApiController, :show_page
+    get "/pages/:id", PagesController, :index
 
     match :*, "/liqpay/callback", LiqPayController, :callback
   end

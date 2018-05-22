@@ -41,8 +41,4 @@ defmodule PtxWeb.ApiController do
     {:ok, messages}
   end
   def links_statictic(_conn, _params, _user), do: {:error, :not_found}
-
-  def show_page(_conn, %{"id" => id}, _user) do
-    Ptx.Pages.get_page(id)
-  end
 end
