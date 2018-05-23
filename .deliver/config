@@ -14,7 +14,7 @@ post_extract_release_archive() {
   status "Creating Static Assets Symlink for Release"
   if [ "$TARGET_MIX_ENV" = "prod" ]; then
     __sync_remote "
-        ln -sfn '$DELIVER_TO/$APP/lib/$APP-$VERSION/priv/static' '$DELIVER_TO/$APP/static'
+        ln -sfn '$BUILD_AT/priv/static' '/home/phyx/applications/ptx/static'
     "
   fi
 }
