@@ -1,6 +1,6 @@
 # .deliver/config
 
-APP = "ptx"
+APP="ptx"
 
 BUILD_HOST="posttrack.email"
 BUILD_USER="phyx"
