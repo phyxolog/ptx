@@ -12,13 +12,16 @@ DELIVER_TO="~/applications/$APP" # deploy directory on production hosts
 
 post_extract_release_archive() {
   status "Creating Static Assets Symlink for Release"
-  __sync_remote "
-      ln -sfn $DELIVER_TO/$APP/lib/$APP-$VERSION/priv/static $DELIVER_TO/$APP/static
-  "
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+        ln -sfn $DELIVER_TO/$APP/lib/$APP-$VERSION/priv/static $DELIVER_TO/$APP/static
+    "
+  fi
 }
 
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
+  status "Copying Production Config for Release"
   local _prod_secret_path="/home/phyx/applications/ptx/config/prod.secret.exs"
   if [ "$TARGET_MIX_ENV" = "prod" ]; then
     __sync_remote "
