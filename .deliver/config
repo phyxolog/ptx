@@ -10,6 +10,13 @@ PRODUCTION_HOSTS="posttrack.email" # deploy / production hosts separated by spac
 PRODUCTION_USER="phyx" # local user at deploy hosts
 DELIVER_TO="~/applications/$APP" # deploy directory on production hosts
 
+post_extract_release_archive() {
+  status "Creating Static Assets Symlink for Release"
+  __sync_remote "
+      ln -sfn $DELIVER_TO/$APP/lib/$APP-$VERSION/priv/static $DELIVER_TO/$APP/static
+  "
+}
+
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
   local _prod_secret_path="/home/phyx/applications/ptx/config/prod.secret.exs"
