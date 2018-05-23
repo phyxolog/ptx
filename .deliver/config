@@ -8,7 +8,7 @@ BUILD_AT="/tmp/edeliver/$APP/builds"
 
 PRODUCTION_HOSTS="posttrack.email" # deploy / production hosts separated by space
 PRODUCTION_USER="phyx" # local user at deploy hosts
-DELIVER_TO="~/applications/$APP" # deploy directory on production hosts
+DELIVER_TO="/home/phyx/applications/$APP" # deploy directory on production hosts
 
 post_extract_release_archive() {
   status "Creating Static Assets Symlink for Release"
