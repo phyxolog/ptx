@@ -29,6 +29,7 @@ defmodule Ptx.Messages.Message do
     |> cast(attrs, @optional_fields ++ @required_fields)
     |> unique_constraint(:id, name: :messages_pkey)
     |> cast_assoc(:thread, required: true)
+    |> cast_assoc(:links, required: false)
     |> validate_required(@required_fields)
     |> foreign_key_constraint(:sender_id)
   end
