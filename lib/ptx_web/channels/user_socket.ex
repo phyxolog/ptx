@@ -20,10 +20,7 @@ defmodule PtxWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(%{"token" => token}, socket) do
-    IO.inspect "Connect witj token #{token}"
-    guardian_result = Guardian.Phoenix.Socket.authenticate(socket, Ptx.Guardian, token)
-    IO.inspect "Guardian result: #{inspect guardian_result}"
-    case guardian_result do
+    case Guardian.Phoenix.Socket.authenticate(socket, Ptx.Guardian, token) do
       {:ok, authed_socket} ->
         {:ok, authed_socket}
       {:error, _} -> :error
