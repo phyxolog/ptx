@@ -7,44 +7,42 @@ defmodule PtxWeb.MessageController do
 
   action_fallback PtxWeb.FallbackController
 
-  ## TODO: Refactoring
-
-  defp get_user(user, _token) when not is_nil(user), do: user
-  defp get_user(_user, token) when not token in [nil, ""], do: Accounts.get_user_by_token(token)
-  defp get_user(_user, _token), do: nil
-
   def index(conn, %{"thread_ids" => thread_ids} = params, user) do
     case get_user(user, params["token"]) do
-      nil ->
-        conn
-        |> put_resp_header("Access-Control-Allow-Origin", "*")
-        |> json(%{messages: []})
+      nil -> res_json(conn, %{messages: []})
       user ->
         thread_ids = Enum.take(thread_ids, 1000)
         messages = Messages.list_messages_by_thread_ids(thread_ids, user.id)
-
-        conn
-        |> put_resp_header("Access-Control-Allow-Origin", "*")
-        |> json(%{messages: messages})
+        res_json(conn, %{messages: messages})
     end
   end
 
-  def index(conn, _params, _user) do
-    conn
-    |> put_resp_header("Access-Control-Allow-Origin", "*")
-    |> json(%{messages: []})
-  end
+  def index(conn, _params, _user), do:
+    res_json(conn, %{messages: []})
 
   def create(conn, params, user) do
     case get_user(user, params["token"]) do
       nil -> {:error, :not_auth}
       user ->
+        Messages.upsert_thread(params["thread_id"])
+
         with {:ok, %Message{} = _message} <- Messages.create_message(params, user) do
           conn
           |> put_status(:created)
-          |> put_resp_header("Access-Control-Allow-Origin", "*")
-          |> json(%{status: :created})
+          |> res_json(%{status: :created})
         end
     end
+  end
+
+  ## PRIVATE METHODS
+
+  defp get_user(user, _token) when not is_nil(user), do: user
+  defp get_user(_user, token) when not token in [nil, ""], do: Accounts.get_user_by_token(token)
+  defp get_user(_user, _token), do: nil
+
+  defp res_json(conn, data) do
+    conn
+    |> put_resp_header("Access-Control-Allow-Origin", "*")
+    |> json(data)
   end
 end

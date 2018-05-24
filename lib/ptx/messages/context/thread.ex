@@ -7,6 +7,18 @@ defmodule Ptx.Messages.Context.Thread do
     quote do
       alias Ptx.Repo
       alias Ptx.Messages.Thread
+      require OK
+
+      @doc """
+      Update or insert new thread.
+      Return a tuple {:ok, thread} | {:error, reason}
+      """
+      def upsert_thread(thread_id) do
+        case get_thread(thread_id) do
+          {:ok, thread} -> {:ok, thread}
+          _ -> create_thread(%{id: thread_id})
+        end
+      end
 
       @doc """
       Returns the list of threads.
@@ -36,6 +48,16 @@ defmodule Ptx.Messages.Context.Thread do
 
       """
       def get_thread!(id), do: Repo.get!(Thread, id)
+
+      @doc """
+      Similar to get_thread!/1, but return a tuple if the Thread does not exists.
+      """
+      def get_thread(id) do
+        Thread
+        |> where(id: ^id)
+        |> Repo.one()
+        |> OK.required()
+      end
 
       @doc """
       Creates a thread.

@@ -6,7 +6,7 @@ defmodule Ptx.Messages.Message do
 
   @primary_key {:id, :string, [autogenerate: false]}
   @derive {Jason.Encoder, except: [:__meta__, :sender]}
-  @optional_fields ~w(subject first_readed_at recipients_clear readed)a
+  @optional_fields ~w(subject first_readed_at recipients_clear readed thread_id)a
   @required_fields ~w(id recipients sender_id)a
 
   schema "messages" do
@@ -28,7 +28,6 @@ defmodule Ptx.Messages.Message do
     message
     |> cast(attrs, @optional_fields ++ @required_fields)
     |> unique_constraint(:id, name: :messages_pkey)
-    |> cast_assoc(:thread, required: true)
     |> cast_assoc(:links, required: false)
     |> validate_required(@required_fields)
     |> foreign_key_constraint(:sender_id)
