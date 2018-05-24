@@ -5,6 +5,8 @@ defmodule PtxWeb.FaqController do
   alias Ptx.Faq.FaqCategory
   require OK
 
+  action_fallback PtxWeb.FallbackController
+
   def list(conn, _params) do
     render(conn, "index.json", faqs: FaqCategory.list())
   end
