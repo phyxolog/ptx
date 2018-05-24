@@ -7,6 +7,8 @@ defmodule PtxWeb.MessageController do
 
   action_fallback PtxWeb.FallbackController
 
+  ## TODO: Refactoring
+
   defp get_user(user, _token) when not is_nil(user), do: user
   defp get_user(_user, token) when not token in [nil, ""], do: Accounts.get_user_by_token(token)
   defp get_user(_user, _token), do: nil
@@ -40,6 +42,7 @@ defmodule PtxWeb.MessageController do
         with {:ok, %Message{} = _message} <- Messages.create_message(params, user) do
           conn
           |> put_status(:created)
+          |> put_resp_header("Access-Control-Allow-Origin", "*")
           |> json(%{status: :created})
         end
     end
