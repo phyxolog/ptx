@@ -23,7 +23,7 @@ defmodule PtxWeb.Router do
       module: Ptx.Guardian,
       key: "default"
 
-    plug Guardian.Plug.VerifyHeader, realm: :none
+    plug Guardian.Plug.VerifyHeader, claims: %{typ: "access"}, realm: :none
     plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
     plug Guardian.Plug.LoadResource, allow_blank: true
   end

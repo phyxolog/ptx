@@ -7,18 +7,24 @@ defmodule PtxWeb.MessageController do
 
   action_fallback PtxWeb.FallbackController
 
-  def index(conn, %{"token" => token} = params, _user) do
-    index(conn, params, Accounts.get_user_by_token(token))
-  end
+  defp get_user(user, _token) when not is_nil(user), do: user
+  defp get_user(_user, token) when not token in [nil, ""], do: Accounts.get_user_by_token(token)
+  defp get_user(_user, _token), do: nil
 
-  def index(_conn, _params, nil), do: {:error, :not_auth}
-  def index(conn, %{"thread_ids" => thread_ids}, user) do
-    thread_ids = Enum.take(thread_ids, 1000)
-    messages = Messages.list_messages_by_thread_ids(thread_ids, user.id)
+  def index(conn, %{"thread_ids" => thread_ids} = params, user) do
+    case get_user(user, params["token"]) do
+      nil ->
+        conn
+        |> put_resp_header("Access-Control-Allow-Origin", "*")
+        |> json(%{messages: []})
+      user ->
+        thread_ids = Enum.take(thread_ids, 1000)
+        messages = Messages.list_messages_by_thread_ids(thread_ids, user.id)
 
-    conn
-    |> put_resp_header("Access-Control-Allow-Origin", "*")
-    |> json(%{messages: messages})
+        conn
+        |> put_resp_header("Access-Control-Allow-Origin", "*")
+        |> json(%{messages: messages})
+    end
   end
 
   def index(conn, _params, _user) do
