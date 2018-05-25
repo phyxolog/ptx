@@ -120,9 +120,9 @@ msgstr "Наши поздравления!"
 msgid "Payment of the «%{plan}» for %{email}"
 msgstr "Оплата тарифа «%{plan}» для %{email}"
 
-#, elixir-format
+#, elixir-format, fuzzy
 #: lib/ptx/mailer/mail_sender.ex:15
-msgid "PostTrack Уведомления <noreply@posttrack.com>"
+msgid "PostTrack Alerts <noreply@posttrack.com>"
 msgstr ""
 
 #, elixir-format
@@ -240,3 +240,8 @@ msgstr "год"
 #: lib/ptx_web/templates/page/pricing.html.eex:202
 msgid "© PostTrack Sloenka. All rights reserved."
 msgstr "© PostTrack Sloenka. Все права защищены."
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/page/pricing.html.eex:144
+msgid "Go Basic"
+msgstr "Базовый"

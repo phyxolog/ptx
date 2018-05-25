@@ -240,3 +240,8 @@ msgstr ""
 #: lib/ptx_web/templates/page/pricing.html.eex:202
 msgid "© PostTrack Sloenka. All rights reserved."
 msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/page/pricing.html.eex:144
+msgid "Go Basic"
+msgstr ""

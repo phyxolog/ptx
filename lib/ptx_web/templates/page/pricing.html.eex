@@ -141,7 +141,7 @@
             </div>
           </div>
           <div class="actions">
-            <a class="main-action" href="#" data-plan="basic">Go Basic</a>
+            <a class="main-action" href="#" data-plan="basic"><%= gettext "Go Basic" %></a>
             <div class="subaction" data-type="basic" target="_BLANK">
               <span><%= gettext "Video presentation of services in a Basic plan" %></span>
               <img src="<%= static_path(@conn, "/images/tables/video_basic.svg") %>" alt="video_basic">

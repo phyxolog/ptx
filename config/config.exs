@@ -23,7 +23,7 @@ config :ptx,
 
     pro: %{
       month: 8,
-      year: 24
+      year: 20
     }
   }
 
