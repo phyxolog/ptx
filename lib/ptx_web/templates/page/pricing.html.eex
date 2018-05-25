@@ -114,7 +114,7 @@
             </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "14 dayf of free test period" %></li>
+            <li><%= gettext "14 days of free test period" %></li>
             <li>
               <%= gettext "All features of the «Pro» plan, but all messages will be sent with the signature «Send with PostTrack»" %>
             </li>
