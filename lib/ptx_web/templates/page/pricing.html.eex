@@ -1,11 +1,201 @@
-<%= for plan <- Application.get_env(:ptx, :plans) do %>
-  <% periodicity = "month" %>
-  <%
-    state = %{plan: plan, periodicity: periodicity, locale: @conn.assigns.locale}
-    |> Ptx.Helper.encode_term()
-  %>
-  <% plan = to_string(plan) %>
-  <a href="/auth/google?state=<%= state %>">
-    <%= String.capitalize(Gettext.gettext(PtxWeb.Gettext, plan)) %>
-  </a>
-<% end %>
+<!-- #region Navbar -->
+<nav class="g-main-menu" id="mainMenu">
+  <div class="mm-inner-wrapper">
+    <section class="logo">
+      <a href="/" class="item hoverable">
+        <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="PostTrack">
+        PostTrack
+      </a>
+    </section>
+    <section class="menu-button hoverable" id="menuButton">
+      <div class="mb-icon"></div>
+    </section>
+    
+    <section class="navigation">
+      <div class="item hoverable"><%= gettext "Pricing" %></div>
+      <a href="/path/to/faq" class="item hoverable"><%= gettext "Faq" %></a>
+      <a href="/path/to/license" class="item hoverable"><%= gettext "License" %></a>
+      <% locales = %{
+        "ru" => gettext("Russian"),
+        "uk" => gettext("Ukrainian"),
+        "en" => gettext("English")
+      } %>
+      <%= if !is_nil(@conn.assigns.locale) do %>
+        <div class="item">
+          <div class="c-locale-select" id="localeSelect">
+            <div class="ls-item selected">
+              <div class="before">
+                <img
+                  class="u-flag"
+                  src="<%= static_path(@conn, "/images/flags/#{@conn.assigns.locale}.png") %>"
+                  alt="<%= locales[@conn.assigns.locale] %>">
+              </div>
+              <div class="content"><%= locales[@conn.assigns.locale] %></div>
+              <div class="after">
+                <img src="<%= static_path(@conn, "/images/dd-arrow-white.svg") %>" alt="arrow-down">
+              </div>
+            </div>
+            <div class="ls-list hidden">
+              <div class="ls-item list-selected">
+                <div class="before">
+                  <img class="u-flag" src="<%= static_path(@conn, "/images/flags/#{@conn.assigns.locale}.png") %>" alt="<%= locales[@conn.assigns.locale] %>">
+                </div>
+                <div class="content"><%= locales[@conn.assigns.locale] %></div>
+                <div class="after">
+                  <img src="<%= static_path(@conn, "/images/done-blue.svg") %>" alt="selected"/>
+                </div>
+              </div>
+
+              <%= for key <- List.delete(Map.keys(locales), @conn.assigns.locale) do %>
+                <a class="ls-item" href="/<%= key %>/pricing">
+                  <div class="before">
+                    <img class="u-flag" src="<%= static_path(@conn, "/images/flags/#{key}.png") %>" alt="<%= locales[key] %>">
+                  </div>
+                  <div class="content"><%= locales[key] %></div>
+                </a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+</nav>
+<!-- #endregion Navbar -->
+
+<!-- #region Main content -->
+<main class="v-pricing-tables">
+  <h1><%= gettext "Лучшие тарифные планы" %></h1>
+  
+  <div class="switch-wrapper">
+    <label class="switch-label left"><%= gettext "Каждый месяц" %></label>
+    <div class="switch" id="switch">
+      <div class="switch-thumb"></div>
+    </div>
+    <label class="switch-label right"><%= gettext "Сразу за год" %> <span><%= gettext "скидка -80%" %></span></label>
+  </div>
+
+  <script>
+    window.pricingStates = {
+      trial: '<%= Ptx.Helper.encode_term(%{plan: "trial", locale: @conn.assigns.locale}) %>',
+      basic_month: '<%= Ptx.Helper.encode_term(%{plan: "basic", periodicity: "month", locale: @conn.assigns.locale}) %>',
+      basic_year: '<%= Ptx.Helper.encode_term(%{plan: "basic", periodicity: "year", locale: @conn.assigns.locale}) %>',
+      pro_month: '<%= Ptx.Helper.encode_term(%{plan: "pro", periodicity: "month", locale: @conn.assigns.locale}) %>',
+      pro_year: '<%= Ptx.Helper.encode_term(%{plan: "pro", periodicity: "year", locale: @conn.assigns.locale}) %>'
+    };
+  </script>
+
+  <div class="pricing-tables">
+    <section class="pricing-table trial disabled">
+      <img src="<%= static_path(@conn, "/images/tables/bg_trial.png") %>" alt="trial" draggable="false">
+      <div class="content-wrapper">
+        <div class="content">
+          <h2><%= gettext "Бесплатный" %></h2>
+          <div class="price-wrapper">
+            <div class="main-price">
+              <span class="before">$</span>
+              <span class="value" data-yearly="0.00" data-monthly="0.00"></span>
+              <span class="after"><%= gettext "/ день" %></span>
+            </div>
+            <div class="subprice">
+              <%= gettext "Всего: $ 0.00 / 14 дней" %>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="main-action" href="#" data-plan="trial"><%= gettext "Протестировать Бесплатно" %></a>
+            <div class="subaction" data-type="trial" target="_BLANK">
+              <span><%= gettext "Видео-презентация услуг в Бесплатном тарифе" %></span>
+              <img src="<%= static_path(@conn, "/images/tables/video_trial.svg") %>" alt="video_trial">
+            </div>
+          </div>
+          <ul class="benefits">
+            <li><%= gettext "14 дней бесплатного тестового периода" %></li>
+            <li>
+              <%= gettext "Все преимущества «Профессионального тарифа», только все сообщения будут отправляться с подписью «Отправлено с PostTrack»" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-table basic">
+      <img src="<%= static_path(@conn, "/images/tables/bg_basic.png") %>" alt="basic" draggable="false">
+      <div class="content-wrapper">
+        <div class="content">
+          <h2><%= gettext "Базовый" %></h2>
+          <div class="price-wrapper">
+            <div class="main-price">
+              <span class="before">$</span>
+              <span class="value" data-yearly="0.033" data-monthly="0.16"></span>
+              <span class="after"><%= gettext "/ день" %></span>
+            </div>
+            <div class="subprice">
+              <%= gettext "Всего: $" %>
+              <span class="value" data-yearly="11.99" data-monthly="4.99"></span> / 
+              <span class="value" data-yearly='<%= gettext "год" %>' data-monthly='<%= gettext "месяц" %>'></span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="main-action" href="#" data-plan="basic">Выбрать тариф</a>
+            <div class="subaction" data-type="basic" target="_BLANK">
+              <span><%= gettext "Видео-презентация услуг в Базовом тарифе" %></span>
+              <img src="<%= static_path(@conn, "/images/tables/video_basic.svg") %>" alt="video_basic">
+            </div>
+          </div>
+          <ul class="benefits">
+            <li><%= gettext "Неограниченное количество email" %></li>
+            <li><%= gettext "Получение статуса и статистики просмотров письма" %></li>
+            <li><%= gettext "Email-уведомление и уведомление на рабочем столе, после прочтения email" %></li>
+            <li><%= gettext "Нет подписи «Отправлено с PostTrack»" %></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-table pro">
+      <img src="<%= static_path(@conn, "/images/tables/bg_pro.png") %>" alt="pro" draggable="false">
+      <div class="content-wrapper">
+        <div class="content">
+          <h2><%= gettext "Профессиональный" %></h2>
+          <div class="price-wrapper">
+            <div class="main-price">
+              <span class="before">$</span>
+              <span class="value" data-yearly="0.055" data-monthly="0.26"></span>
+              <span class="after"><%= gettext "/ день" %></span>
+            </div>
+            <div class="subprice">
+              <%= gettext "Всего: $" %>
+              <span class="value" data-yearly="19.99" data-monthly="7.99"></span> / 
+              <span class="value" data-yearly='<%= gettext "год" %>' data-monthly='<%= gettext "месяц" %>'></span>
+            </div>
+          </div>
+          <div class="actions">
+            <a class="main-action" href="#" data-plan="pro"><%= gettext "Выбрать тариф" %></a>
+            <div class="subaction" data-type="pro" target="_BLANK">
+              <span><%= gettext "Видео-презентация услуг в Pro тарифе" %></span>
+              <img src="<%= static_path(@conn, "/images/tables/video_pro.svg") %>" alt="video_pro">
+            </div>
+          </div>
+          <ul class="benefits">
+            <li><%= gettext "Неограниченное количество email" %></li>
+            <li><%= gettext "Получение статуса и статистики просмотров письма" %></li>
+            <li><%= gettext "Email-уведомление и уведомление на рабочем столе, после прочтения email" %></li>
+            <li><%= gettext "Нет подписи «Отправлено с PostTrack»" %></li>
+            <li><%= gettext "Анализ времени и количества переходов по ссылкам в email" %></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<!-- #endregion Main content -->
+<!-- #region Footer -->
+<footer class="g-footer">
+  <div class="bottom">
+    <div class="gf-inner-wrapper">
+      <span>© PostTrack Sloenka. All rights reserved.</span>
+      <span>Site built with Sloenka.com</span>
+    </div>
+  </div>
+</footer>
+<!-- #endregion Footer -->
