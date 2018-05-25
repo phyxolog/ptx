@@ -68,14 +68,14 @@
 
 <!-- #region Main content -->
 <main class="v-pricing-tables">
-  <h1><%= gettext "Лучшие тарифные планы" %></h1>
+  <h1><%= gettext "The best payment plans" %></h1>
   
   <div class="switch-wrapper">
-    <label class="switch-label left"><%= gettext "Каждый месяц" %></label>
+    <label class="switch-label left"><%= gettext "Every month" %></label>
     <div class="switch" id="switch">
       <div class="switch-thumb"></div>
     </div>
-    <label class="switch-label right"><%= gettext "Сразу за год" %> <span><%= gettext "скидка -80%" %></span></label>
+    <label class="switch-label right"><%= gettext "Immediately for a year" %> <span><%= gettext "discount -80%" %></span></label>
   </div>
 
   <script>
@@ -95,28 +95,28 @@
       <img src="<%= static_path(@conn, "/images/tables/bg_trial.png") %>" alt="trial" draggable="false">
       <div class="content-wrapper">
         <div class="content">
-          <h2><%= gettext "Бесплатный" %></h2>
+          <h2><%= gettext "Free" %></h2>
           <div class="price-wrapper">
             <div class="main-price">
               <span class="before">$</span>
               <span class="value" data-yearly="0.00" data-monthly="0.00"></span>
-              <span class="after"><%= gettext "/ день" %></span>
+              <span class="after"><%= gettext "/ day" %></span>
             </div>
             <div class="subprice">
-              <%= gettext "Всего: $ 0.00 / 14 дней" %>
+              <%= gettext "Total: $ 0.00 / 14 days" %>
             </div>
           </div>
           <div class="actions">
-            <a class="main-action" href="#" data-plan="trial"><%= gettext "Протестировать Бесплатно" %></a>
+            <a class="main-action" href="#" data-plan="trial"><%= gettext "Try Free" %></a>
             <div class="subaction" data-type="trial" target="_BLANK">
-              <span><%= gettext "Видео-презентация услуг в Бесплатном тарифе" %></span>
+              <span><%= gettext "Video presentation of services in a Free plan" %></span>
               <img src="<%= static_path(@conn, "/images/tables/video_trial.svg") %>" alt="video_trial">
             </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "14 дней бесплатного тестового периода" %></li>
+            <li><%= gettext "14 dayf of free test period" %></li>
             <li>
-              <%= gettext "Все преимущества «Профессионального тарифа», только все сообщения будут отправляться с подписью «Отправлено с PostTrack»" %>
+              <%= gettext "All features of the «Pro» plan, but all messages will be sent with the signature «Send with PostTrack»" %>
             </li>
           </ul>
         </div>
@@ -127,31 +127,31 @@
       <img src="<%= static_path(@conn, "/images/tables/bg_basic.png") %>" alt="basic" draggable="false">
       <div class="content-wrapper">
         <div class="content">
-          <h2><%= gettext "Базовый" %></h2>
+          <h2><%= gettext "Basic" %></h2>
           <div class="price-wrapper">
             <div class="main-price">
               <span class="before">$</span>
               <span class="value" data-yearly="0.033" data-monthly="0.16"></span>
-              <span class="after"><%= gettext "/ день" %></span>
+              <span class="after"><%= gettext "/ day" %></span>
             </div>
             <div class="subprice">
-              <%= gettext "Всего: $" %>
+              <%= gettext "Total: $" %>
               <span class="value" data-yearly="11.99" data-monthly="4.99"></span> / 
-              <span class="value" data-yearly='<%= gettext "год" %>' data-monthly='<%= gettext "месяц" %>'></span>
+              <span class="value" data-yearly='<%= gettext "year" %>' data-monthly='<%= gettext "month" %>'></span>
             </div>
           </div>
           <div class="actions">
-            <a class="main-action" href="#" data-plan="basic">Выбрать тариф</a>
+            <a class="main-action" href="#" data-plan="basic">Go Basic</a>
             <div class="subaction" data-type="basic" target="_BLANK">
-              <span><%= gettext "Видео-презентация услуг в Базовом тарифе" %></span>
+              <span><%= gettext "Video presentation of services in a Basic plan" %></span>
               <img src="<%= static_path(@conn, "/images/tables/video_basic.svg") %>" alt="video_basic">
             </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "Неограниченное количество email" %></li>
-            <li><%= gettext "Получение статуса и статистики просмотров письма" %></li>
-            <li><%= gettext "Email-уведомление и уведомление на рабочем столе, после прочтения email" %></li>
-            <li><%= gettext "Нет подписи «Отправлено с PostTrack»" %></li>
+            <li><%= gettext "Unlimited emails" %></li>
+            <li><%= gettext "Obtaining the status and statistics of message views" %></li>
+            <li><%= gettext "Email and desktop notifications after reading email" %></li>
+            <li><%= gettext "Without signature «Send with PostTrack»" %></li>
           </ul>
         </div>
       </div>
@@ -161,32 +161,32 @@
       <img src="<%= static_path(@conn, "/images/tables/bg_pro.png") %>" alt="pro" draggable="false">
       <div class="content-wrapper">
         <div class="content">
-          <h2><%= gettext "Профессиональный" %></h2>
+          <h2><%= gettext "Professional" %></h2>
           <div class="price-wrapper">
             <div class="main-price">
               <span class="before">$</span>
               <span class="value" data-yearly="0.055" data-monthly="0.26"></span>
-              <span class="after"><%= gettext "/ день" %></span>
+              <span class="after"><%= gettext "/ day" %></span>
             </div>
             <div class="subprice">
-              <%= gettext "Всего: $" %>
+              <%= gettext "Total: $" %>
               <span class="value" data-yearly="19.99" data-monthly="7.99"></span> / 
-              <span class="value" data-yearly='<%= gettext "год" %>' data-monthly='<%= gettext "месяц" %>'></span>
+              <span class="value" data-yearly='<%= gettext "year" %>' data-monthly='<%= gettext "month" %>'></span>
             </div>
           </div>
           <div class="actions">
-            <a class="main-action" href="#" data-plan="pro"><%= gettext "Выбрать тариф" %></a>
+            <a class="main-action" href="#" data-plan="pro"><%= gettext "Go Pro" %></a>
             <div class="subaction" data-type="pro" target="_BLANK">
-              <span><%= gettext "Видео-презентация услуг в Pro тарифе" %></span>
+              <span><%= gettext "Video presentation of services in a Pro plan" %></span>
               <img src="<%= static_path(@conn, "/images/tables/video_pro.svg") %>" alt="video_pro">
             </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "Неограниченное количество email" %></li>
-            <li><%= gettext "Получение статуса и статистики просмотров письма" %></li>
-            <li><%= gettext "Email-уведомление и уведомление на рабочем столе, после прочтения email" %></li>
-            <li><%= gettext "Нет подписи «Отправлено с PostTrack»" %></li>
-            <li><%= gettext "Анализ времени и количества переходов по ссылкам в email" %></li>
+            <li><%= gettext "Unlimited emails" %></li>
+            <li><%= gettext "Obtaining the status and statistics of message views" %></li>
+            <li><%= gettext "Email and desktop notifications after reading email" %></li>
+            <li><%= gettext "Without signature «Send with PostTrack»" %></li>
+            <li><%= gettext "Analysis of the time and count of links in email" %></li>
           </ul>
         </div>
       </div>
@@ -194,12 +194,13 @@
   </div>
 </main>
 <!-- #endregion Main content -->
+
 <!-- #region Footer -->
 <footer class="g-footer">
   <div class="bottom">
     <div class="gf-inner-wrapper">
-      <span>© PostTrack Sloenka. All rights reserved.</span>
-      <span>Site built with Sloenka.com</span>
+      <span><%= gettext "© PostTrack Sloenka. All rights reserved." %></span>
+      <span><%= gettext "Site built with Sloenka.com" %></span>
     </div>
   </div>
 </footer>
