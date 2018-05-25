@@ -28,11 +28,11 @@ defmodule Ptx.Messages do
   @doc """
   Call when user opened email.
   """
-  def trace(nil), do: {:error, :empty_id}
-  def trace(id) do
-    case get_message(id) do
+  def trace(nil), do: {:error, :empty_uuid}
+  def trace(uuid) do
+    case fetch_message(uuid: uuid) do
       {:ok, message} ->
-        create_read(%{recepient: get_message_recipient(message), message: message})
+        create_read(%{recepient: get_message_recipient(message), message_id: message.id})
 
         {:ok, user} = Accounts.fetch_user(id: message.sender_id)
 
@@ -54,7 +54,7 @@ defmodule Ptx.Messages do
       _ -> {:error, :not_found}
     end
 
-    {:ok, id}
+    :ok
   end
 
   @doc false

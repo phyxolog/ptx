@@ -42,11 +42,11 @@ defmodule Ptx.Mixfile do
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 2.10"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_html, "~> 2.11.2"},
+      {:phoenix_live_reload, "~> 1.1.5", only: :dev},
       {:gettext, "~> 0.15.0", override: true},
-      {:cowboy, "~> 1.0"},
-      {:jason, "~> 1.0"},
+      {:cowboy, "~> 1.1.2"},
+      {:jason, "~> 1.0.0"},
 
       ## For multilanguage support
       {:set_locale, "~> 0.2.4"},
@@ -68,8 +68,8 @@ defmodule Ptx.Mixfile do
       {:ok, "~> 1.10.0"},
 
       ## Google OAuth2
-      {:ueberauth_google, "~> 0.7"},
-      {:guardian, "~> 1.0"},
+      {:ueberauth_google, "~> 0.7.0"},
+      {:guardian, "~> 1.0.1"},
       {:guardian_db, github: "ueberauth/guardian_db"},
 
       ## For payments with Liqpay
@@ -79,7 +79,7 @@ defmodule Ptx.Mixfile do
       {:scrivener_ecto, "~> 1.3.0"},
 
       ## For static analysis
-      {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false},
+      {:credo, "~> 0.9.2", only: [:dev, :test], runtime: false},
     ]
   end
 

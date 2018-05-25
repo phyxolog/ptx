@@ -17,7 +17,6 @@ defmodule Ptx.Messages.Read do
   def changeset(read, attrs) do
     read
     |> cast(attrs, @optional_fields ++ @required_fields)
-    |> cast_assoc(:message)
     |> foreign_key_constraint(:message_id)
     |> validate_required(@required_fields)
   end

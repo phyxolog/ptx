@@ -75,7 +75,7 @@
     <div class="switch" id="switch">
       <div class="switch-thumb"></div>
     </div>
-    <label class="switch-label right"><%= gettext "Immediately for a year" %> <span><%= gettext "discount -80%" %></span></label>
+    <label class="switch-label right"><%= gettext "Annually" %> <span><%= gettext "discount -80%" %></span></label>
   </div>
 
   <script>
@@ -89,6 +89,9 @@
   </script>
 
   <% plan = if assigns[:user], do: @user.plan, else: nil %>
+  <script>
+    console.warn("User plan: ", "<%= plan %>");
+  </script>
 
   <div class="pricing-tables">
     <section class="pricing-table trial <%= if plan == "trial", do: "disabled", else: "" %>">

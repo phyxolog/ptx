@@ -91,7 +91,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:78
-msgid "Immediately for a year"
+msgid "Annually"
 msgstr ""
 
 #, elixir-format

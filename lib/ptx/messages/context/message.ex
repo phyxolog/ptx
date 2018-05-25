@@ -13,7 +13,7 @@ defmodule Ptx.Messages.Context.Message do
       Mark message as read.
       """
       def read_message(message, fun) do
-        if message.readed do
+        if !message.readed do
           ## First off, update message.
           {:ok, message} = update_message(message, %{
             readed: true,
@@ -37,6 +37,14 @@ defmodule Ptx.Messages.Context.Message do
       def get_message_recipient(%Message{recipients: recipients})
         when length(recipients) == 1, do: hd(recipients)
       def get_message_recipient(_message), do: nil
+
+      def fetch_message(opts) do
+        Message
+        |> where(^opts)
+        |> limit(1)
+        |> Repo.one()
+        |> OK.required(:not_found)
+      end
 
       @doc """
       Returns the list of messages.
