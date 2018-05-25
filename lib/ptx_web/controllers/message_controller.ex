@@ -24,7 +24,7 @@ defmodule PtxWeb.MessageController do
     case get_user(user, params["token"]) do
       nil -> {:error, :not_auth}
       user ->
-        Messages.upsert_thread(params["thread_id"])
+        Messages.get_or_insert_thread(params["thread_id"])
 
         with {:ok, %Message{} = _message} <- Messages.create_message(params, user) do
           conn

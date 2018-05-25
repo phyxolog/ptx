@@ -22,9 +22,6 @@ defmodule Ptx.Messages.Context.Message do
 
           ## Then, call function where we will call a broadcast
           fun.({:first_time, message})
-
-          ## Message as result
-          message
         else
           fun.({:once_again, message})
         end
@@ -35,7 +32,7 @@ defmodule Ptx.Messages.Context.Message do
       because we don't know, who of them really readed message.
       """
       def get_message_recipient(%Message{recipients: recipients})
-        when length(recipients) == 1, do: hd(recipients)
+        when is_list(recipients) and length(recipients) == 1, do: hd(recipients)
       def get_message_recipient(_message), do: nil
 
       def fetch_message(opts) do

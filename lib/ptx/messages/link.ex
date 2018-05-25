@@ -12,7 +12,7 @@ defmodule Ptx.Messages.Link do
     field :clicks_count, :integer, default: 0
     field :text, :string
     field :url, :string
-    belongs_to :message, Message
+    belongs_to :message, Message, type: :string
     timestamps()
   end
 

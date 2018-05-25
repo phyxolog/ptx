@@ -33,7 +33,8 @@ defmodule Ptx.Accounts.Context.User do
       end
 
       @doc """
-
+      Check if user have refresh_token - send request to Google,
+      get new access token and save to user.
       """
       def refresh_access_token(user) do
         case user do

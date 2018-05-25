@@ -13,7 +13,7 @@ defmodule Ptx.Messages.Context.Thread do
       Update or insert new thread.
       Return a tuple {:ok, thread} | {:error, reason}
       """
-      def upsert_thread(thread_id) do
+      def get_or_insert_thread(thread_id) do
         case get_thread(thread_id) do
           {:ok, thread} -> {:ok, thread}
           _ -> create_thread(%{id: thread_id})

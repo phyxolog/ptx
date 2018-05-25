@@ -90,7 +90,7 @@
 
   <% plan = if assigns[:user], do: @user.plan, else: nil %>
   <script>
-    console.warn("User plan: ", "<%= plan %>");
+    console.warn("User plan:", "<%= plan %>");
   </script>
 
   <div class="pricing-tables">

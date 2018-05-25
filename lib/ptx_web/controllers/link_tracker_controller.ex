@@ -4,9 +4,9 @@ defmodule PtxWeb.LinkTrackerController do
 
   action_fallback PtxWeb.FallbackController
 
-  def index(conn, %{"url" => url, "id" => message_id, "link_id" => link_id}) do
+  def index(conn, %{"url" => url, "uuid" => message_uuid, "link_id" => link_id}) do
     Messages.increment_clicks_count(link_id)
-    MailNotifier.open_link_notify(message_id, link_id)
+    MailNotifier.open_link_notify(message_uuid, link_id)
 
     case Base.decode64(url) do
       {:ok, url} ->
