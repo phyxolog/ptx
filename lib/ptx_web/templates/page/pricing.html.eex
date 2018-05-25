@@ -10,7 +10,7 @@
     <section class="menu-button hoverable" id="menuButton">
       <div class="mb-icon"></div>
     </section>
-    
+
     <section class="navigation">
       <div class="item hoverable"><%= gettext "Pricing" %></div>
       <a href="/path/to/faq" class="item hoverable"><%= gettext "Faq" %></a>
