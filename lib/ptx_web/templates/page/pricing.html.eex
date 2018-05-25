@@ -38,7 +38,10 @@
             <div class="ls-list hidden">
               <div class="ls-item list-selected">
                 <div class="before">
-                  <img class="u-flag" src="<%= static_path(@conn, "/images/flags/#{@conn.assigns.locale}.png") %>" alt="<%= locales[@conn.assigns.locale] %>">
+                  <img
+                    class="u-flag"
+                    src="<%= static_path(@conn, "/images/flags/#{@conn.assigns.locale}.png") %>"
+                    alt="<%= locales[@conn.assigns.locale] %>">
                 </div>
                 <div class="content"><%= locales[@conn.assigns.locale] %></div>
                 <div class="after">
@@ -85,8 +88,10 @@
     };
   </script>
 
+  <% plan = if assigns[:user], do: @user.plan, else: nil %>
+
   <div class="pricing-tables">
-    <section class="pricing-table trial disabled">
+    <section class="pricing-table trial <%= if plan == "trial", do: "disabled", else: "" %>">
       <img src="<%= static_path(@conn, "/images/tables/bg_trial.png") %>" alt="trial" draggable="false">
       <div class="content-wrapper">
         <div class="content">
@@ -118,7 +123,7 @@
       </div>
     </section>
 
-    <section class="pricing-table basic">
+    <section class="pricing-table basic <%= if plan == "basic", do: "disabled", else: "" %>">
       <img src="<%= static_path(@conn, "/images/tables/bg_basic.png") %>" alt="basic" draggable="false">
       <div class="content-wrapper">
         <div class="content">
@@ -152,7 +157,7 @@
       </div>
     </section>
 
-    <section class="pricing-table pro">
+    <section class="pricing-table pro <%= if plan == "pro", do: "disabled", else: "" %>">
       <img src="<%= static_path(@conn, "/images/tables/bg_pro.png") %>" alt="pro" draggable="false">
       <div class="content-wrapper">
         <div class="content">
