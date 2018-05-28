@@ -86,6 +86,7 @@ defmodule PtxWeb.Router do
     pipe_through [:api, :auth]
 
     get "/identity", ApiController, :identity
+    get "/link/:id", LinkController, :show
 
     post "/messages/list", MessageController, :index
     resources "/messages", MessageController, only: [:create]
