@@ -39,7 +39,7 @@ defmodule Ptx.MailSender do
     frozen_trial: gettext("Your account has been frozen!"),
     outdated: gettext("Your account has been outdated!"),
     outdated_trial: gettext("Your account has been outdated!"),
-    unsubscribe: gettext("You successfully unsubscribed!")
+    unsubscribed: gettext("You successfully unsubscribed!")
   ]
 
   def send(_method, _user, _opts \\ [])
