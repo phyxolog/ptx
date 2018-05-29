@@ -9,7 +9,7 @@ use Mix.Config
 config :ptx,
   from_email_string: "PostTrack Alerts <noreply@posttrack.com>",
   env: Mix.env(),
-  url: "https://stupid-zebra-57.localtunnel.me",
+  url: "https://posttrack.email",
   currency: "USD",
   trial_period: 14,
   ticket_email: "posttrack@sloenka.com",
@@ -64,8 +64,8 @@ config :ueberauth, Ueberauth,
   ]
 
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: "457128893119-as5ctpvf6r1e116eni0o6erij3viq3oh.apps.googleusercontent.com",
-  client_secret: "5VeMRO5rTdFxDZh4Ak_LmOtB"
+  client_id: "478003371123-gl3ni8o1csbc8ttq54k0d7fdiv8nc06i.apps.googleusercontent.com",
+  client_secret: "T3zrZtuiLOcIHxCtqNa69ET3"
 
 config :ptx, Ptx.Guardian,
   ttl: {30, :days},
