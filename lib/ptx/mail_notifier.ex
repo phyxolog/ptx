@@ -40,19 +40,11 @@ defmodule Ptx.MailNotifier do
     MailSender.send(:new_plan, user, new_plan: new_plan)
   end
 
-  def account_binding_nofity(user, params) do
-    MailSender.send(:account_binding, user, params)
-  end
-
-  def forgot_login_notify(user, params) do
-    MailSender.send(:forgot_login, user, params)
-  end
-
   def forgot_password_notify(user, params) do
     MailSender.send(:forgot_password, user, params)
   end
 
-  def welcome_nofity(user, params) do
-    MailSender.send(:welcome, user, params)
+  def welcome_nofity(user) do
+    MailSender.send(:welcome, user)
   end
 end

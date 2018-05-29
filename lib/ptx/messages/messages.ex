@@ -57,18 +57,22 @@ defmodule Ptx.Messages do
     :ok
   end
 
+  defp preload_reads do
+    order_by(Read, asc: :inserted_at)
+  end
+
   @doc false
   def list_messages_by_thread_ids(thread_ids, sender_id) do
     query = from m in Message,
       where: m.sender_id == ^sender_id,
       where: m.thread_id in ^thread_ids,
       limit: 1000,
-      preload: [:reads],
       select_merge: %{
         readed: fragment("(not (exists(select true from messages where thread_id = ? and readed = false limit 1)))", m.thread_id)
       }
 
     Repo.all(query)
+    |> Repo.preload([reads: preload_reads()])
   end
 
   @doc """

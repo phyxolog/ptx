@@ -110,6 +110,11 @@ defmodule Ptx.Accounts.Context.User do
         |> OK.required(:not_found)
       end
 
+      ## Send email when user is registered
+      defp send_welcome_notify({:ok, user}), do:
+        Ptx.MailNotifier.welcome_nofity(user)
+      defp send_welcome_notify(_), do: :error
+
       @doc """
       Creates a user.
 
@@ -126,6 +131,7 @@ defmodule Ptx.Accounts.Context.User do
         %User{}
         |> User.changeset(attrs)
         |> Repo.insert()
+        |> send_welcome_notify()
       end
 
       @doc """
@@ -144,6 +150,20 @@ defmodule Ptx.Accounts.Context.User do
         user
         |> User.changeset(attrs)
         |> Repo.update()
+        |> notify_users_about_changes(user)
+      end
+
+      defp notify_users_about_changes({:error, user}, _old_user), do: {:error, user}
+      defp notify_users_about_changes({:ok, user}, old_user) do
+        ## Check, if password changed - notify about this
+        if [user.pw, user.salt] != [old_user.pw, old_user.salt] do
+          Ptx.MailNotifier.change_password_notify(user)
+        end
+
+        ## Refresh all tabs which user opened
+        PtxWeb.Endpoint.broadcast("room:#{user.id}", "refresh_tabs", %{})
+
+        {:ok, user}
       end
     end
   end

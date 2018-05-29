@@ -27,29 +27,30 @@ defmodule Ptx.MailSender do
     |> Mailer.deliver_later()
   end
 
-  def send(_method, _user, _params \\ [])
-  def send(:read_email, user, opts) do
-    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
-      subject = gettext("Your email has been read!")
-      deliver(user.id, subject, "read_email.html", opts)
-    end)
-  end
+  @conformity_table [
+    welcome: gettext("Welcome!"),
+    read_email: gettext("Your email has been read!"),
+    open_link: gettext("Your link has been clicked!"),
+    change_password: gettext("Your password has been changed!"),
+    change_plan: gettext("Your plan has been changed!"),
+    new_plan: gettext("For you fixed the plan!"),
+    forgot_password: gettext("Forgot password?"),
+    frozen: gettext("Your account has been frozen!"),
+    frozen_trial: gettext("Your account has been frozen!"),
+    outdated: gettext("Your account has been outdated!"),
+    outdated_trial: gettext("Your account has been outdated!"),
+    unsubscribe: gettext("You successfully unsubscribed!")
+  ]
 
-  def send(:account_binding, user, opts) do
-    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
-      subject = gettext("Our congratulations!")
-      deliver(user.id, subject, "account_binding.html", opts)
-    end)
-  end
-
-  def send(:welcome, user, opts) do
-    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
-      subject = gettext("Welcome!")
-      deliver(user.id, subject, "welcome.html", opts)
-    end)
-  end
-
-  def send(method, _user, _params) do
-    Logger.error("Not found handle for Ptx.MailSender.send/3.\nMethod: #{inspect method}")
+  def send(_method, _user, _opts \\ [])
+  def send(method, user, opts) do
+    if @conformity_table[method] != nil do
+      Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
+        subject = @conformity_table[method]
+        deliver(user.id, subject, Atom.to_string(method) <> ".html", Keyword.put(opts, :user, user))
+      end)
+    else
+      Logger.error("Not found handler for Ptx.MailSender.send/3.\nMethod: #{inspect method}")
+    end
   end
 end

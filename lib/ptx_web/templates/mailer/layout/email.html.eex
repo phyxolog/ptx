@@ -15,7 +15,7 @@
         <%= @title %>
       </h1>
 
-      <%= Phoenix.View.render(PtxWeb.Mailer.Modules, "opening.html", login: @login) %>
+      <%= Phoenix.View.render(PtxWeb.Mailer.Modules, "opening.html", login: @user.id) %>
       <%= render @view_module, @view_template, assigns %>
       <%= Phoenix.View.render(PtxWeb.Mailer.Modules, "ending.html", []) %>
     </div>
