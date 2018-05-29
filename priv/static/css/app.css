@@ -105,6 +105,7 @@ footer.g-footer div.bottom {
           margin-bottom: 10px; }
           footer.g-footer div.bottom div.gf-inner-wrapper span:last-child {
             margin-bottom: 0; } }
+
 nav.g-main-menu {
   position: absolute;
   top: 0;
@@ -158,7 +159,7 @@ nav.g-main-menu {
             nav.g-main-menu div.mm-inner-wrapper section.logo .item {
               font-size: 24px; } }
           nav.g-main-menu div.mm-inner-wrapper section.logo .item img {
-            height: 38px;
+            height: 48px;
             margin-right: 15px; }
             @media (max-width: 1199px) {
               nav.g-main-menu div.mm-inner-wrapper section.logo .item img {
@@ -318,6 +319,7 @@ div.c-locale-select {
           opacity: 0.54; }
       div.c-locale-select .ls-list .ls-item .before {
         box-shadow: 0 0 0 1px rgba(65, 50, 188, 0.24); }
+
 @charset "UTF-8";
 html, body {
   position: relative;
@@ -340,27 +342,27 @@ body, body * {
 @font-face {
   font-family: "Gotham Pro";
   font-weight: 400;
-  src: local("Gotham Pro Regular"), local("GothamPro"), url("/fonts/GothamPro.woff") format("woff"); }
+  src: local("Gotham Pro Regular"), local("GothamPro"), url("../fonts/GothamPro.woff") format("woff"); }
 @font-face {
   font-family: "Gotham Pro";
   font-weight: 500;
-  src: local("Gotham Pro Medium"), local("GothamProMedium"), url("/fonts/GothamProMedium.woff") format("woff"); }
+  src: local("Gotham Pro Medium"), local("GothamProMedium"), url("../fonts/GothamProMedium.woff") format("woff"); }
 @font-face {
   font-family: "Gotham Pro";
   font-weight: 700;
-  src: local("Gotham Pro Bold"), local("GothamProBold"), url("/fonts/GothamProBold.woff") format("woff"); }
+  src: local("Gotham Pro Bold"), local("GothamProBold"), url("../fonts/GothamProBold.woff") format("woff"); }
 @font-face {
   font-family: "Avenir Next Cyr";
   font-weight: 400;
-  src: local("Avenir Next Cyr"), local("AvenirNextCyrRegular"), url("/fonts/AvenirNextCyrRegular.woff") format("woff"); }
+  src: local("Avenir Next Cyr"), local("AvenirNextCyrRegular"), url("../fonts/AvenirNextCyrRegular.woff") format("woff"); }
 @font-face {
   font-family: "Avenir Next Cyr";
   font-weight: 500;
-  src: local("Avenir Next Cyr Medium"), local("AvenirNextCyrMedium"), url("/fonts/AvenirNextCyrMedium.woff") format("woff"); }
+  src: local("Avenir Next Cyr Medium"), local("AvenirNextCyrMedium"), url("../fonts/AvenirNextCyrMedium.woff") format("woff"); }
 @font-face {
   font-family: "Avenir Next Cyr";
   font-weight: 700;
-  src: local("Avenir Next Cyr Bold"), local("AvenirNextCyrBold"), url("/fonts/AvenirNextCyrBold.woff") format("woff"); }
+  src: local("Avenir Next Cyr Bold"), local("AvenirNextCyrBold"), url("../fonts/AvenirNextCyrBold.woff") format("woff"); }
 main.v-pricing-tables {
   background: linear-gradient(45deg, #c993fe, #4132bc);
   padding-top: 80px;
@@ -423,12 +425,16 @@ main.v-pricing-tables {
         main.v-pricing-tables div.switch-wrapper label.right span {
           display: inline-block;
           vertical-align: top;
-          line-height: 35px;
+          line-height: 25px;
           padding: 0 10px;
           background: #f69;
-          font-size: 20px;
+          font-size: 16px;
           font-weight: 400;
           color: white !important; }
+          @media (min-width: 730px) {
+            main.v-pricing-tables div.switch-wrapper label.right span {
+              position: relative;
+              top: -5px; } }
           @media (max-width: 899px) {
             main.v-pricing-tables div.switch-wrapper label.right span {
               font-size: 18px; } }
@@ -482,8 +488,15 @@ main.v-pricing-tables {
           opacity: 0; }
         main.v-pricing-tables div.pricing-tables section.pricing-table.disabled div.content-wrapper div.content div.actions .main-action {
           box-shadow: none; }
+      @media (min-width: 1300px) {
+        main.v-pricing-tables div.pricing-tables section.pricing-table.trial > img {
+          min-width: 590px;
+          min-height: 1115px; } }
       main.v-pricing-tables div.pricing-tables section.pricing-table.trial div.content-wrapper {
         padding: 155px 102px 364px 102px; }
+        @media (min-width: 1300px) {
+          main.v-pricing-tables div.pricing-tables section.pricing-table.trial div.content-wrapper div.content {
+            min-height: 600px; } }
       main.v-pricing-tables div.pricing-tables section.pricing-table.trial div.subprice {
         color: #f48e17; }
       main.v-pricing-tables div.pricing-tables section.pricing-table.trial .main-action {
@@ -491,8 +504,15 @@ main.v-pricing-tables {
       main.v-pricing-tables div.pricing-tables section.pricing-table.trial .subaction {
         color: #f48e17;
         border-color: #f48e17 !important; }
+      @media (min-width: 1300px) {
+        main.v-pricing-tables div.pricing-tables section.pricing-table.basic > img {
+          min-width: 590px;
+          min-height: 1150px; } }
       main.v-pricing-tables div.pricing-tables section.pricing-table.basic div.content-wrapper {
         padding: 162px 102px 364px 102px; }
+        @media (min-width: 1300px) {
+          main.v-pricing-tables div.pricing-tables section.pricing-table.basic div.content-wrapper div.content {
+            min-height: 655px; } }
       main.v-pricing-tables div.pricing-tables section.pricing-table.basic div.subprice {
         color: #34a853; }
       main.v-pricing-tables div.pricing-tables section.pricing-table.basic .main-action {
@@ -500,8 +520,15 @@ main.v-pricing-tables {
       main.v-pricing-tables div.pricing-tables section.pricing-table.basic .subaction {
         color: #7fa720;
         border-color: #7fa720 !important; }
+      @media (min-width: 1300px) {
+        main.v-pricing-tables div.pricing-tables section.pricing-table.pro > img {
+          min-width: 590px;
+          min-height: 1185px; } }
       main.v-pricing-tables div.pricing-tables section.pricing-table.pro div.content-wrapper {
         padding: 172px 102px 364px 102px; }
+        @media (min-width: 1300px) {
+          main.v-pricing-tables div.pricing-tables section.pricing-table.pro div.content-wrapper div.content {
+            min-height: 705px; } }
       main.v-pricing-tables div.pricing-tables section.pricing-table.pro div.subprice {
         color: #5340c5; }
       main.v-pricing-tables div.pricing-tables section.pricing-table.pro .main-action {
@@ -716,5 +743,6 @@ div.pt-video-modal {
     opacity: 0; }
   100% {
     opacity: 1; } }
+
 
 /*# sourceMappingURL=app.css.map*/

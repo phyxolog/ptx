@@ -92,7 +92,7 @@ msgstr "Выбрать тариф"
 #, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:78
 msgid "Annually"
-msgstr "сразу на год"
+msgstr "Сразу за год"
 
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:5
@@ -201,7 +201,7 @@ msgstr "Видео-презентация услуг в Бесплатном т�
 #, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:180
 msgid "Video presentation of services in a Pro plan"
-msgstr "Видео-презентация услуг в Профессиональном тарифе"
+msgstr "Видео-презентация услуг в Pro тарифе"
 
 #, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:47
@@ -244,4 +244,4 @@ msgstr "© PostTrack Sloenka. Все права защищены."
 #, elixir-format, fuzzy
 #: lib/ptx_web/templates/page/pricing.html.eex:144
 msgid "Go Basic"
-msgstr "Базовый"
+msgstr "Выбрать тариф"
