@@ -31,10 +31,8 @@ defmodule Ptx.MailSender do
     welcome: gettext("Welcome!"),
     read_email: gettext("Your email has been read!"),
     open_link: gettext("Your link has been clicked!"),
-    change_password: gettext("Your password has been changed!"),
     change_plan: gettext("Your plan has been changed!"),
     new_plan: gettext("For you fixed the plan!"),
-    forgot_password: gettext("Forgot password?"),
     frozen: gettext("Your account has been frozen!"),
     frozen_trial: gettext("Your account has been frozen!"),
     outdated: gettext("Your account has been outdated!"),
@@ -42,7 +40,7 @@ defmodule Ptx.MailSender do
     unsubscribed: gettext("You successfully unsubscribed!")
   ]
 
-  def send(_method, _user, _opts \\ [])
+  def send(method, user, opts \\ [])
   def send(method, user, opts) do
     if @conformity_table[method] != nil do
       Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->

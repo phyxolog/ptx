@@ -3,7 +3,33 @@ defmodule Ptx.MailNotifier do
   Module for sending notifies to users.
   """
 
-  alias Ptx.MailSender
+  alias Ptx.{MailSender, Messages}
+
+  def welcome_nofity(user) do
+    MailSender.send(:welcome, user)
+  end
+
+  def change_plan_notify(user, old_plan, new_plan) do
+    if user.notification_settings.plan_changed do
+      MailSender.send(:plan_changed, user, old_plan: old_plan, new_plan: new_plan)
+    end
+  end
+
+  def new_plan_notify(user) do
+    MailSender.send(:new_plan, user)
+  end
+
+  def frozen(user) do
+    MailSender.send(:frozen, user)
+  end
+
+  def frozen_trial(user) do
+    MailSender.send(:frozen_trial, user)
+  end
+
+  def unsubscribe(user) do
+    MailSender.send(:unsubscribe, user)
+  end
 
   @doc """
   Called when someone open user email.
@@ -17,34 +43,11 @@ defmodule Ptx.MailNotifier do
   @doc """
   Called when user opened our link.
   """
-  def open_link_notify(_email_id, _link_id) do
-    # TODO
-    # if user.notification_settings.link_opened do
-    # end
-    MailSender.send(:link_opened, nil, [])
-  end
-
-  def change_password_notify(user) do
-    if user.notification_settings.pw_changed do
-      MailSender.send(:password_changed, user)
+  def open_link_notify(message_uuid, _link_id) do
+    user = Messages.get_user_by_message_uuid(message_uuid)
+    if user.notification_settings.link_opened do
+      # TODO: Get parameters for send an email
+      MailSender.send(:link_opened, user, [])
     end
-  end
-
-  def change_plan_notify(user, old_plan, new_plan) do
-    if user.notification_settings.plan_changed do
-      MailSender.send(:plan_changed, user, old_plan: old_plan, new_plan: new_plan)
-    end
-  end
-
-  def new_plan_notify(user, new_plan) do
-    MailSender.send(:new_plan, user, new_plan: new_plan)
-  end
-
-  def forgot_password_notify(user, params) do
-    MailSender.send(:forgot_password, user, params)
-  end
-
-  def welcome_nofity(user) do
-    MailSender.send(:welcome, user)
   end
 end

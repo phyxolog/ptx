@@ -155,9 +155,31 @@ defmodule Ptx.Accounts.Context.User do
 
       defp notify_users_about_changes({:error, user}, _old_user), do: {:error, user}
       defp notify_users_about_changes({:ok, user}, old_user) do
-        ## Check, if password changed - notify about this
-        if [user.pw, user.salt] != [old_user.pw, old_user.salt] do
-          Ptx.MailNotifier.change_password_notify(user)
+        ## If new plan
+        if is_nil(old_user.plan) && !is_nil(user.plan) do
+          Ptx.MailNotifier.new_plan_notify(user)
+        end
+
+        ## Plan changed
+        if !is_nil(old_user.plan) && (old_user.plan != user.plan) do
+          Ptx.MailNotifier.change_plan_notify(user, old_user.plan, user.plan)
+        end
+
+        ## Frozen
+        if old_user.plan != "trial" && user.plan != "trial"
+          && !old_user.frozen && user.frozen do
+          Ptx.MailNotifier.frozen(user)
+        end
+
+        ## Frozen trial
+        if [old_user.plan, old_user.frozen] == ["trial", false]
+          && [user.plan, user.frozen] == ["trial", true] do
+          Ptx.MailNotifier.frozen_trial(user)
+        end
+
+        ## Unsubscribe
+        if !is_nil(old_user.plan) && is_nil(user.plan) do
+          Ptx.MailNotifier.unsubscribe(user)
         end
 
         ## Refresh all tabs which user opened

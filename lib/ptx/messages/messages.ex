@@ -142,4 +142,19 @@ defmodule Ptx.Messages do
     |> preload([:links])
     |> Repo.all()
   end
+
+  @doc """
+  Gets a single user by email id.
+  """
+  def get_user_by_message_uuid(uuid) do
+    alias Ptx.Accounts.User
+
+    query = from m in Message,
+      join: user in assoc(m, :sender),
+      where: m.uuid == ^uuid,
+      select: user
+
+    Repo.one(query)
+    |> Repo.preload(User.preloaded())
+  end
 end
