@@ -111,9 +111,11 @@ defmodule Ptx.Accounts.Context.User do
       end
 
       ## Send email when user is registered
-      defp send_welcome_notify({:ok, user}), do:
+      defp send_welcome_notify({:ok, user}) do
         Ptx.MailNotifier.welcome_nofity(user)
-      defp send_welcome_notify(_), do: :error
+        {:ok, user}
+      end
+      defp send_welcome_notify({:error, reason}), do: {:error, reason}
 
       @doc """
       Creates a user.

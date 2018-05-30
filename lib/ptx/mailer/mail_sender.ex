@@ -25,6 +25,8 @@ defmodule Ptx.MailSender do
     |> subject(subject)
     |> render(layout, assigns)
     |> Mailer.deliver_later()
+  rescue
+    error -> Logger.error("Error when email was send. #{inspect error}")
   end
 
   @conformity_table [
