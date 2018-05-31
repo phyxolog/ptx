@@ -8,13 +8,9 @@ defmodule PtxWeb.LinkTrackerController do
     Messages.increment_clicks_count(link_id)
     MailNotifier.open_link_notify(message_uuid, link_id)
 
-    case Base.decode64(url) do
-      {:ok, url} ->
-        case Ptx.Helper.transform_url(url) do
-          {:ok, url} -> redirect(conn, external: url)
-          {:error, _} -> {:error, {:reason, "Invalid url"}}
-        end
-      _ -> {:error, {:reason, "Invalid url"}}
+    case Ptx.Helper.transform_url(url) do
+      {:ok, url} -> redirect(conn, external: url)
+      {:error, _} -> {:error, {:reason, "Invalid url"}}
     end
   end
 end
