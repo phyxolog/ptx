@@ -2,7 +2,7 @@ defmodule PtxWeb.ApiController do
   use PtxWeb, :controller
   use Guardian.Phoenix.Controller
 
-  alias Ptx.{Accounts, Messages}
+  alias Ptx.Accounts
 
   action_fallback PtxWeb.FallbackController
 
@@ -23,22 +23,4 @@ defmodule PtxWeb.ApiController do
   def timezones(conn, _params, _user) do
     json conn, Ptx.Helper.format_canonical_zone_list(Tzdata.canonical_zone_list())
   end
-
-  def unsubscribe(conn, %{"user_id" => user_id}, %{id: id} = user) when user_id == id do
-    Accounts.unsubscribe(user)
-    json conn, %{status: :wait}
-  end
-  def unsubscribe(_conn, _params, _user), do: {:error, :not_found}
-
-  def statictic(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    statistic = Accounts.get_statistic(user_id, params)
-    {:ok, statistic}
-  end
-  def statictic(_conn, _params, _user), do: {:error, :not_found}
-
-  def links_statictic(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    messages = Messages.list_messages_with_links_by_sender(user_id, params)
-    {:ok, messages}
-  end
-  def links_statictic(_conn, _params, _user), do: {:error, :not_found}
 end

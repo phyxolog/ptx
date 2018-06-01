@@ -5,30 +5,8 @@ defmodule Ptx.MailNotifier do
 
   alias Ptx.{MailSender, Messages}
 
-  def welcome_nofity(user) do
+  def welcome_notify(user) do
     MailSender.send(:welcome, user)
-  end
-
-  def change_plan_notify(user, old_plan, new_plan) do
-    if user.notification_settings.plan_changed do
-      MailSender.send(:plan_changed, user, old_plan: old_plan, new_plan: new_plan)
-    end
-  end
-
-  def new_plan_notify(user) do
-    MailSender.send(:new_plan, user)
-  end
-
-  def frozen(user) do
-    MailSender.send(:frozen, user)
-  end
-
-  def frozen_trial(user) do
-    MailSender.send(:frozen_trial, user)
-  end
-
-  def unsubscribe(user) do
-    MailSender.send(:unsubscribe, user)
   end
 
   @doc """
@@ -49,5 +27,35 @@ defmodule Ptx.MailNotifier do
       # TODO: Get parameters for send an email
       MailSender.send(:link_opened, user, [])
     end
+  end
+
+  def change_plan_notify(user, old_plan, new_plan) do
+    if user.notification_settings.plan_changed do
+      MailSender.send(:plan_changed, user, old_plan: old_plan, new_plan: new_plan)
+    end
+  end
+
+  def new_plan_notify(user) do
+    MailSender.send(:new_plan, user)
+  end
+
+  def frozen_notify(user) do
+    MailSender.send(:frozen, user)
+  end
+
+  def frozen_trial_notify(user) do
+    MailSender.send(:frozen_trial, user)
+  end
+
+  def outdated_notify(user) do
+    MailSender.send(:outdated, user)
+  end
+
+  def outdated_trial_notify(user) do
+    MailSender.send(:outdated_trial, user)
+  end
+
+  def unsubscribed_notify(user) do
+    MailSender.send(:unsubscribed, user)
   end
 end

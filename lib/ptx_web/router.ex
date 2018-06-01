@@ -91,9 +91,11 @@ defmodule PtxWeb.Router do
     post "/messages/list", MessageController, :index
     resources "/messages", MessageController, only: [:create]
     resources "/users", UserController, only: [:update] do
-      get "/statistic", ApiController, :statistic
-      get "/statistic/links", ApiController, :links_statistic
-      post "/unsubscribe", ApiController, :unsubscribe
+      get "/time-and-count", UserController, :time_and_count
+      get "/recipients", UserController, :recipients
+      get "/statistic", UserController, :statistic
+      get "/statistic/links", UserController, :links_statistic
+      post "/unsubscribe", UserController, :unsubscribe
     end
   end
 end

@@ -108,6 +108,76 @@ defmodule Ptx.Messages do
   end
 
   @doc """
+  Filter by recipients list.
+  """
+  def filter_by_recipients(query, recipients) when not is_list(recipients), do: query
+  def filter_by_recipients(query, recipients) do
+    from q in query,
+      where: fragment("? && ?", ^recipients, q.recipients_clear)
+  end
+
+  @doc """
+  Gets a average of time email opening.
+  """
+  def get_avg_open_time(user_id, params) do
+    Message
+    |> filter_by_start_date(params["start_date"])
+    |> filter_by_end_date(params["end_date"])
+    |> filter_by_recipients(params["recipients"])
+    |> where(sender_id: ^user_id)
+    |> where([m], not is_nil(m.first_readed_at))
+    |> select([m], fragment("ceil(EXTRACT(EPOCH FROM avg((? - ?)::interval)))", m.first_readed_at, m.inserted_at))
+    |> Repo.one()
+  end
+
+  # /*SELECT ceil(EXTRACT(EPOCH FROM avg((first_readed_at - inserted_at)::interval)))
+  # FROM messages AS m
+  # WHERE first_readed_at IS NOT NULL;*/
+
+  # /*SELECT *
+  # FROM date_trunc('day', current_date);*/
+
+  # --select date_trunc('day', current_date) + interval '1 day' - interval '1 second'
+
+  # --SELECT * FROM CURRENT_TIME
+
+  # SELECT key::time,
+  # (key + interval '59 minutes 59 seconds')::time AS before,
+  # (SELECT ceil(EXTRACT(EPOCH FROM avg((first_readed_at - inserted_at)::interval))) FROM messages WHERE first_readed_at::time BETWEEN key::time AND (key + interval '59 minutes')::time) AS value
+  # FROM generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key
+
+  # --(SELECT ceil(EXTRACT(EPOCH from MAX(first_readed_at - inserted_at)) / 60) FROM messages)
+
+  # --SELECT key::date AS key,
+  # --(SELECT ceil(EXTRACT(EPOCH from avg(first_readed_at - inserted_at)) / 60) FROM messages WHERE first_readed_at - interval '1 day' + interval '1 second' BETWEEN key AND key + interval '1 day' - interval '1 second') AS value
+  # --FROM generate_series('2018-05-20', '2018-06-01', '1 day'::interval) AS key
+
+  @doc """
+  Gets a list of time (00:00 - 23:59) and count of opened email.
+  """
+  def time_and_count(user_id, params) do
+    subq =
+      Message
+      |> where(sender_id: ^user_id)
+      |> where([m], not is_nil(m.first_readed_at))
+      |> filter_by_start_date(params["start_date"])
+      |> filter_by_end_date(params["end_date"])
+      |> filter_by_recipients(params["recipients"])
+
+    query = from m in subquery(subq),
+      right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
+      on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes')::time", m.first_readed_at, time.key, time.key),
+      group_by: time.key,
+      order_by: time.key,
+      select: %{
+        key: fragment("?::time::text", time.key),
+        value: count(m.id)
+      }
+
+    Repo.all(query)
+  end
+
+  @doc """
   Get count of send emails.
   Include filters by date fields.
   """
@@ -115,6 +185,7 @@ defmodule Ptx.Messages do
     Message
     |> filter_by_start_date(params["start_date"])
     |> filter_by_end_date(params["end_date"])
+    |> filter_by_recipients(params)
     |> where(sender_id: ^user_id)
     |> Repo.aggregate(:count, :id)
   end
@@ -127,6 +198,7 @@ defmodule Ptx.Messages do
     Message
     |> filter_by_start_date(params["start_date"])
     |> filter_by_end_date(params["end_date"])
+    |> filter_by_recipients(params)
     |> where(sender_id: ^user_id)
     |> where(readed: true)
     |> Repo.aggregate(:count, :id)
