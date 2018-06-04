@@ -1,28 +1,75 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Email</title>
 </head>
 <body>
-	<div style="background-color:#EAE2F0;font-family:'Noto Sans',Roboto,Ubuntu,Arial,sans-serif; padding:0 5px">
-		<div style="padding:20px 0;text-align:center">
-			<img src="https://posttrack.sloenka.com/images/email_logo.png" alt="PostTrack Email">
+	<!-- #region email -->
+	<div style="background-color: #8461DD; font-family: sans-serif" bgcolor="#8461DD">
+		<!-- #region logotype -->
+		<img src="/static/images/email_template/logo.gif" alt="PostTrack" style="width: 100%; max-width: 600px; display: block; margin: 0 auto">
+		<!-- #endregion -->
+
+		<!-- #region main content -->
+		<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+			<!-- #region firstpart -->
+			<div style="padding: 30px">
+				<h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px">Header</h1>
+
+				<!-- #region simple paragraph -->
+				<p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;">
+					User <a href="mailto:levitatormailer@gmail.com" style="color: #005CFF">levitatormailer@gmail.com</a> just read yout email with subject <span style="font-weight: bold">&laquo;Kappa Pride poryadok navede&raquo;</span>.
+				</p>
+				<!-- #endregion -->
+
+				<!-- #region iconic items -->
+				<div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
+					<img src="/static/images/email_template/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+					Sent on 12.12.2012 at 11:13
+				</div>
+				<!-- last item has no margin-bottom -->
+				<div style="font-size: 12px; line-height: 20px; color: #9E9E9E">
+					<img src="/static/images/email_template/read.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+					Read on 12.12.2012 at 11:13 by <a href="mailto:levitatormailer@gmail.com" style="color: #005CFF;">levitatormailer@gmail.com</a>
+				</div>
+				<!-- #endregion -->
+			</div>
+			<!-- #endregion -->
+
+			<!-- #region last part -->
+			<div style="padding: 30px; border-top: 1px solid #F0ECFB;">
+				<p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;">Recepients</p>
+				<!-- #region iconic items -->
+				<div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
+					<img src="/static/images/email_template/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+					<a href="mailto:levitatormailer@gmail.com" style="color: #005CFF;">levitatormailer@gmail.com</a>
+				</div>
+				<div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
+					<img src="/static/images/email_template/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+					<a href="mailto:levitatormailer@gmail.com" style="color: #005CFF;">levitatormailer@gmail.com</a>
+				</div>
+				<!-- last item has no margin-bottom -->
+				<div style="font-size: 12px; line-height: 20px; color: #9E9E9E">
+					<img src="/static/images/email_template/read.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+					<a href="mailto:levitatormailer@gmail.com" style="color: #005CFF;">levitatormailer@gmail.com</a>
+				</div>
+				<!-- #endregion -->
+			</div>
+			<!-- #region -->
 		</div>
+		<!-- #endregion -->
 
-    <div style="background:#FFF;border-radius:6px;margin:0 auto;max-width:480px;padding:20px;width:100%">
-      <h1 style="color:#9F41D2;font-size:20px;font-weight:400;margin:0;margin-bottom:20px;opacity:.54;padding:0;text-align:center">
-        <%= @title %>
-      </h1>
-
-      <%= Phoenix.View.render(PtxWeb.Mailer.Modules, "opening.html", login: @user.id) %>
-      <%= render @view_module, @view_template, assigns %>
-      <%= Phoenix.View.render(PtxWeb.Mailer.Modules, "ending.html", []) %>
-    </div>
-
-		<div style="font-size:12px;opacity:.54;padding:20px 0;text-align:center">
-			<a href="https://pto.sloenka.com/settings" style="color:#493358" target="_BLANK"><%= gettext "Disable notifications!" %></a>
-		</div>
+		<!-- #region footer -->
+		<p style="max-width: 540px; margin: 0 auto; color: #DAD0F5; padding: 30px; font-size: 12px; line-height: 15px">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio doloribus, 
+			<a href="https://posttrack.email" style="color: white">ducimus facere nesciunt</a> magnam nulla odit nihil, molestias quos velit tempora esse incidunt. Quam.
+		</p>
+		<!-- #endregion -->
 	</div>
+	<!-- #endregion -->
 </body>
 </html>

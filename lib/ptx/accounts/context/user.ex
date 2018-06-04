@@ -81,8 +81,14 @@ defmodule Ptx.Accounts.Context.User do
       @doc """
       Check available for trial plan.
       """
-      def trial_available?(%{inserted_at: inserted_at, plan: plan, previous_plan: previous_plan}) do
-        plan == nil && previous_plan == nil && Timex.diff(Timex.now(), inserted_at, :days) < @trial_period
+      def trial_available?(%{
+        inserted_at: inserted_at,
+        plan: plan,
+        previous_plan: previous_plan
+      }) do
+        plan == nil
+          && previous_plan == nil
+          && Timex.diff(Timex.now(), inserted_at, :days) < @trial_period
       end
 
       @doc """
@@ -112,7 +118,7 @@ defmodule Ptx.Accounts.Context.User do
 
       ## Send email when user is registered
       defp send_welcome_notify({:ok, user}) do
-        Ptx.MailNotifier.welcome_nofity(user)
+        Ptx.MailNotifier.welcome_notify(user)
         {:ok, user}
       end
       defp send_welcome_notify({:error, reason}), do: {:error, reason}
@@ -170,18 +176,18 @@ defmodule Ptx.Accounts.Context.User do
         ## Frozen
         if old_user.plan != "trial" && user.plan != "trial"
           && !old_user.frozen && user.frozen do
-          Ptx.MailNotifier.frozen(user)
+          Ptx.MailNotifier.frozen_notify(user)
         end
 
         ## Frozen trial
         if [old_user.plan, old_user.frozen] == ["trial", false]
           && [user.plan, user.frozen] == ["trial", true] do
-          Ptx.MailNotifier.frozen_trial(user)
+          Ptx.MailNotifier.frozen_trial_notify(user)
         end
 
         ## Unsubscribe
         if !is_nil(old_user.plan) && is_nil(user.plan) do
-          Ptx.MailNotifier.unsubscribe(user)
+          Ptx.MailNotifier.unsubscribed_notify(user)
         end
 
         ## Refresh all tabs which user opened
