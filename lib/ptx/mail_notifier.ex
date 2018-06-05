@@ -5,15 +5,28 @@ defmodule Ptx.MailNotifier do
 
   alias Ptx.{MailSender, Messages}
 
+  ## Full implemented
   def welcome_notify(user) do
     MailSender.send(:welcome, user)
   end
 
   @doc """
   Called when someone open user email.
+
+      email_inserted_at = Timex.shift(Timex.now(), minutes: -20)
+      email_first_read_at = Timex.shift(Timex.now(), minutes: -10)
+
+      Ptx.MailNotifier.read_email_notify(user, [
+        subject: "Subject",
+        email: nil,
+        sent_date: Timex.format!(email_inserted_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+        read_date: Timex.format!(email_first_read_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+        read_user: "progur12art@gmail.com",
+        recipients: ["test@gmail.com"]
+      ])
   """
   def read_email_notify(user, params) do
-    if user.notification_settings.email_readed do
+    if user.notification_settings.email_read do
       MailSender.send(:read_email, user, params)
     end
   end
@@ -29,32 +42,29 @@ defmodule Ptx.MailNotifier do
     end
   end
 
-  def change_plan_notify(user, old_plan, new_plan) do
+  ## Ptx.MailNotifier.change_plan_notify(user, "trial", "pro")
+  def change_plan_notify(user, plan_before, plan_after) do
     if user.notification_settings.plan_changed do
-      MailSender.send(:plan_changed, user, old_plan: old_plan, new_plan: new_plan)
+      MailSender.send(:change_plan, user, plan_before: plan_before, plan_after: plan_after)
     end
   end
 
+  ## Ptx.MailNotifier.new_plan_notify(user)
   def new_plan_notify(user) do
     MailSender.send(:new_plan, user)
   end
 
+  ## Ptx.MailNotifier.frozen_notify(user)
   def frozen_notify(user) do
     MailSender.send(:frozen, user)
   end
 
-  def frozen_trial_notify(user) do
-    MailSender.send(:frozen_trial, user)
-  end
-
+  ## Ptx.MailNotifier.outdated_notify(user)
   def outdated_notify(user) do
     MailSender.send(:outdated, user)
   end
 
-  def outdated_trial_notify(user) do
-    MailSender.send(:outdated_trial, user)
-  end
-
+  ## Ptx.MailNotifier.unsubscribed_notify(user)
   def unsubscribed_notify(user) do
     MailSender.send(:unsubscribed, user)
   end

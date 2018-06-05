@@ -78,6 +78,11 @@ config :guardian, Guardian.DB,
   schema_name: "guardian_tokens",
   sweep_interval: 60
 
+config :ptx, Ptx.Mailer,
+  adapter: Bamboo.MailgunAdapter,
+  domain: "mg.posttrack.sloenka.com",
+  api_key: "key-a6a3629f652448644d04d1c4aefe43bc"
+
 config :ptx, Ptx.Scheduler,
   timezone: "Europe/Kiev",
   jobs: [

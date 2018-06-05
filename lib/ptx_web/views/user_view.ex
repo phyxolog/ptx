@@ -11,6 +11,6 @@ defmodule PtxWeb.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    user
+    %{user | timezone_offset: Ptx.get_timezone_offset_by_name(user.timezone)}
   end
 end

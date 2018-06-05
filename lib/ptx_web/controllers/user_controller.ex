@@ -50,4 +50,10 @@ defmodule PtxWeb.UserController do
     {:ok, time_and_count}
   end
   def time_and_count(_conn, _params, _user), do: {:error, :not_found}
+
+  def date_and_count(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
+    date_and_count = Messages.date_and_count(user_id, params)
+    {:ok, date_and_count}
+  end
+  def date_and_count(_conn, _params, _user), do: {:error, :not_found}
 end

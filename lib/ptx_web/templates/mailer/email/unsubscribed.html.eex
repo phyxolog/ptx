@@ -1,0 +1,3 @@
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%= gettext "You successfully unsubscribed. PostTrack doesn't work with this email anymore - %{email}", email: @user.id %>
+</p>

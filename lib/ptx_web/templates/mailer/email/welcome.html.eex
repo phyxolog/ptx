@@ -1,0 +1,8 @@
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%= gettext "Perfect, now you have a profile in the " %>
+  <%= render(PtxWeb.EmailModules, "link_office.html", []) %>
+</p>
+
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%= gettext "We are always developing our product and trying to make it better, that you can use it with convenience. Please, tell us about any bugs and disadvantages via our feedback email. We are also will be happy to consider your propositions about PostTrack improvement." %>
+</p>

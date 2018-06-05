@@ -4,13 +4,14 @@ defmodule Ptx.Accounts.NotificationSettings do
   alias Ptx.Accounts.User
 
   @derive {Jason.Encoder, except: [:__meta__, :id, :user, :user_id]}
-  @fields ~w(plan_changed email_readed link_opened once_again_readed_email)a
+  @fields ~w(plan_changed email_read link_opened email_opened_again link_opened_again)a
 
   schema "notification_settings" do
     field :plan_changed, :boolean, default: true
-    field :email_readed, :boolean, default: true
+    field :email_read, :boolean, default: true
+    field :email_opened_again, :boolean, default: true
     field :link_opened, :boolean, default: true
-    field :once_again_readed_email, :boolean, default: true
+    field :link_opened_again, :boolean, default: true
     belongs_to :user, User, type: :string
   end
 

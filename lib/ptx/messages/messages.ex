@@ -4,6 +4,7 @@ defmodule Ptx.Messages do
   """
 
   import Ecto.Query, warn: false
+  import PtxWeb.Gettext
   alias Ptx.{Repo, Accounts}
 
   ## Composition of contexts
@@ -25,6 +26,17 @@ defmodule Ptx.Messages do
     PtxWeb.Endpoint.broadcast("room:#{message.sender_id}", "refresh_markers", params)
   end
 
+  ## Send email notify of read emails
+  defp send_email_when_read(user, message) do
+    Ptx.MailNotifier.read_email_notify(user, [
+      subject: message.subject,
+      sent_date: Timex.format!(message.inserted_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+      read_date: Timex.format!(message.first_readed_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+      read_user: get_message_recipient(message),
+      recipients: message.recipients
+    ])
+  end
+
   @doc """
   Call when user opened email.
   """
@@ -40,15 +52,15 @@ defmodule Ptx.Messages do
           {:first_time, message} ->
             send_refresh_markers(message)
 
-            if user.notification_settings.email_readed do
-              ## TODO: Send email notify of read emails
+            if user.notification_settings.email_read do
+              send_email_when_read(user, message)
             end
           {:once_again, message} ->
             send_refresh_markers(message)
 
             if user.plan in ["trial", "pro"] &&
-              user.notification_settings.once_again_readed_email do
-              ## TODO: Send email notify of read emails
+              user.notification_settings.email_opened_again do
+              send_email_when_read(user, message)
             end
         end)
       _ -> {:error, :not_found}
@@ -75,18 +87,23 @@ defmodule Ptx.Messages do
     |> Repo.preload([reads: preload_reads()])
   end
 
+  ## Parse date
+  defp parse_date(date) do
+    case Timex.parse(date, "{0D}.{0M}.{YYYY}") do
+      {:ok, date} ->
+        {:ok, Timex.to_naive_datetime(date)}
+      _ -> {:error, :invalid_date}
+    end
+  end
+
   @doc """
   Filter query by given `start_date`.
   Date need be in a format: DD.MM.YYYY
   """
   def filter_by_start_date(query, nil), do: query
   def filter_by_start_date(query, start_date) do
-    case Timex.parse(start_date, "{0D}.{0M}.{YYYY}") do
-      {:ok, date} ->
-        date = Timex.to_naive_datetime(date)
-
-        from q in query,
-          where: q.inserted_at >= ^date
+    case parse_date(start_date) do
+      {:ok, date} -> where(query, [q], q.inserted_at >= ^date)
       _ -> query
     end
   end
@@ -97,12 +114,8 @@ defmodule Ptx.Messages do
   """
   def filter_by_end_date(query, nil), do: query
   def filter_by_end_date(query, end_date) do
-    case Timex.parse(end_date, "{0D}.{0M}.{YYYY}") do
-      {:ok, date} ->
-        date = Timex.to_naive_datetime(date)
-
-        from q in query,
-          where: q.inserted_at <= ^date
+    case parse_date(end_date) do
+      {:ok, date} -> where(query, [q], q.inserted_at <= ^date)
       _ -> query
     end
   end
@@ -171,6 +184,58 @@ defmodule Ptx.Messages do
       order_by: time.key,
       select: %{
         key: fragment("?::time::text", time.key),
+        value: count(m.id)
+      }
+
+    Repo.all(query)
+    |> Enum.map(fn %{key: str} = map -> %{map | key: String.slice(str, 0, 5)} end)
+  end
+
+  defp param_or_min_date(params, user_id, field) do
+    case parse_date(Map.get(params, field)) do
+      {:ok, date} -> date
+      _ ->
+        Message
+        |> where(sender_id: ^user_id)
+        |> select([m], min(m.inserted_at))
+        |> Repo.one()
+    end
+    |> NaiveDateTime.to_date()
+    |> to_string()
+  end
+
+  defp param_or_max_date(params, user_id, field) do
+    case parse_date(Map.get(params, field)) do
+      {:ok, date} -> date
+      _ ->
+        Message
+        |> where(sender_id: ^user_id)
+        |> select([m], max(m.inserted_at))
+        |> Repo.one()
+    end
+    |> NaiveDateTime.to_date()
+    |> to_string()
+  end
+
+  def date_and_count(user_id, params) do
+    subq =
+      Message
+      |> where(sender_id: ^user_id)
+      |> where([m], not is_nil(m.first_readed_at))
+      |> filter_by_start_date(params["start_date"])
+      |> filter_by_end_date(params["end_date"])
+      |> filter_by_recipients(params["recipients"])
+
+    start_date = param_or_min_date(params, user_id, "start_date")
+    end_date = param_or_max_date(params, user_id, "end_date")
+
+    query = from m in subquery(subq),
+      right_join: time in fragment("SELECT generate_series(?::text::timestamp without time zone, ?::text::timestamp without time zone, '1 day'::interval) AS key", ^start_date, ^end_date),
+      on: fragment("? - interval '1 day' + interval '1 second' BETWEEN ? AND ? + interval '1 day' - interval '1 second'", m.first_readed_at, time.key, time.key),
+      group_by: time.key,
+      order_by: time.key,
+      select: %{
+        key: fragment("?::text", time.key),
         value: count(m.id)
       }
 

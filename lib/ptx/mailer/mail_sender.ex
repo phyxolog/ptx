@@ -1,5 +1,5 @@
 defmodule Ptx.MailSender do
-  use Bamboo.Phoenix, view: Ptx.Mailer.View
+  use Bamboo.Phoenix, view: Ptx.Mailer.EmailView
   import Bamboo.Email
   import PtxWeb.Gettext, only: [gettext: 1]
   require Logger
@@ -34,11 +34,9 @@ defmodule Ptx.MailSender do
     read_email: gettext("Your email has been read!"),
     open_link: gettext("Your link has been clicked!"),
     change_plan: gettext("Your plan has been changed!"),
-    new_plan: gettext("For you fixed the plan!"),
+    new_plan: gettext("The plan is fixed for you!"),
     frozen: gettext("Your account has been frozen!"),
-    frozen_trial: gettext("Your account has been frozen!"),
     outdated: gettext("Your account has been outdated!"),
-    outdated_trial: gettext("Your account has been outdated!"),
     unsubscribed: gettext("You successfully unsubscribed!")
   ]
 

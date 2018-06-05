@@ -22,6 +22,7 @@ defmodule Ptx.Accounts.User do
     field :picture, :string
     field :locale, :string, default: @default_locale
     field :timezone, :string, default: "UTC"
+    field :timezone_offset, :integer, default: 0, virtual: true
 
     field :plan, :string, default: nil
     field :frozen, :boolean, default: true

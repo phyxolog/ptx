@@ -1,0 +1,20 @@
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%=
+    gettext "You changed your pricing plan from \"%{plan_before}\" to \"%{plan_after}\" successfully!", [
+      plan_before: String.capitalize(@plan_before),
+      plan_after: String.capitalize(@plan_after)
+    ]
+  %>
+</p>
+
+<%= render(PtxWeb.EmailModules, "hr.html", []) %>
+
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Pricing plan"]) %>
+	<b><%= String.capitalize(@plan_after) %></b>
+</p>
+
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Valid until"]) %>
+	<%= Timex.format!(@user.valid_until, gettext("%F at %k:%M"), :strftime) %>
+</p>

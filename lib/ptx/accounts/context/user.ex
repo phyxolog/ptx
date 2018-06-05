@@ -174,15 +174,8 @@ defmodule Ptx.Accounts.Context.User do
         end
 
         ## Frozen
-        if old_user.plan != "trial" && user.plan != "trial"
-          && !old_user.frozen && user.frozen do
+        if !old_user.frozen && user.frozen do
           Ptx.MailNotifier.frozen_notify(user)
-        end
-
-        ## Frozen trial
-        if [old_user.plan, old_user.frozen] == ["trial", false]
-          && [user.plan, user.frozen] == ["trial", true] do
-          Ptx.MailNotifier.frozen_trial_notify(user)
         end
 
         ## Unsubscribe

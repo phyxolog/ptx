@@ -16,6 +16,10 @@ defmodule PtxWeb.ApiController do
     render(conn, PtxWeb.UserView, "show.json", user: user)
   end
 
+  def identity(_conn, _params, nil) do
+    {:error, :not_auth}
+  end
+
   def identity(conn, _params, user) do
     render(conn, PtxWeb.UserView, "show.json", user: user)
   end

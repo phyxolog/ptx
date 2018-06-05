@@ -1,0 +1,11 @@
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%=
+    gettext "For your email %{email} you are using the \"%{plan}\" pricing plan, a validity period of which has expired. Work of extension was stopped for this email.", email: @user.id, plan: @user.plan
+  %>
+</p>
+
+<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+	<%=
+    gettext "Work of extension will resume as soon as the payment for used pricing plan is transferred. You can also switch to a different pricing plan."
+  %>
+</p>
