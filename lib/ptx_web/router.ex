@@ -52,6 +52,7 @@ defmodule PtxWeb.Router do
     pipe_through [:browser, :auth]
 
     get "/office", PageController, :office
+    get "/office/*url", PageController, :office
     get "/pay", PayController, :index
   end
 
