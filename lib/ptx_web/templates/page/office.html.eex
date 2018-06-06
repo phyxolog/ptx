@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>PostTrack Office</title>
 
-  <link href="/assets_office/50f64cd5b95add41bff1.css" rel="stylesheet"></head>
+  <link href="/assets_office/2b7cd9f036231e693eed.css" rel="stylesheet">
 </head>
 <body>
   <div id="__root"></div>
 
-  <script type="text/javascript" src="/assets_office/commons.bundle.50f64cd5b95add41bff1.js"></script>
-  <script type="text/javascript" src="/assets_office/app.bundle.50f64cd5b95add41bff1.js"></script>
+  <script type="text/javascript" src="/assets_office/commons.bundle.2b7cd9f036231e693eed.js"></script>
+  <script type="text/javascript" src="/assets_office/app.bundle.2b7cd9f036231e693eed.js"></script>
 </body>
 </html>
