@@ -45,27 +45,18 @@ defmodule PtxWeb.UserController do
   end
   def recipients(_conn, _params, _user), do: {:error, :not_found}
 
-  def time_and_count(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    time_and_count = Messages.time_and_count(user_id, params)
-    {:ok, time_and_count}
-  end
-  def time_and_count(_conn, _params, _user), do: {:error, :not_found}
+  def graph(_conn, %{"type" => type} = params, %{id: user_id}) do
+    graph = case type do
+      "time_and_count" ->
+        Messages.time_and_count(user_id, params)
+      "date_and_count" ->
+        Messages.date_and_count(user_id, params)
+      "time_and_open" ->
+        Messages.time_and_open(user_id, params)
+      "date_and_open" ->
+        Messages.date_and_open(user_id, params)
+    end
 
-  def date_and_count(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    date_and_count = Messages.date_and_count(user_id, params)
-    {:ok, date_and_count}
+    {:ok, graph}
   end
-  def date_and_count(_conn, _params, _user), do: {:error, :not_found}
-
-  def time_and_open(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    time_and_open = Messages.time_and_open(user_id, params)
-    {:ok, time_and_open}
-  end
-  def time_and_open(_conn, _params, _user), do: {:error, :not_found}
-
-  def date_and_open(_conn, %{"user_id" => user_id} = params, %{id: id}) when user_id == id do
-    date_and_open = Messages.date_and_open(user_id, params)
-    {:ok, date_and_open}
-  end
-  def date_and_open(_conn, _params, _user), do: {:error, :not_found}
 end

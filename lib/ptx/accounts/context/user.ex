@@ -186,6 +186,9 @@ defmodule Ptx.Accounts.Context.User do
         ## Refresh all tabs which user opened
         PtxWeb.Endpoint.broadcast("room:#{user.id}", "refresh_tabs", %{})
 
+        ## Notify frontend about updating user
+        PtxWeb.Endpoint.broadcast("room:#{user.id}", "after_update", %{user: user})
+
         {:ok, user}
       end
     end

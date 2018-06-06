@@ -206,7 +206,7 @@ defmodule Ptx.Messages do
       group_by: time.key,
       order_by: time.key,
       select: %{
-        key: fragment("?::text", time.key),
+        key: fragment("?::date::text", time.key),
         value: count(m.id)
       }
 
@@ -214,6 +214,20 @@ defmodule Ptx.Messages do
   end
 
   def time_and_open(user_id, params) do
+    query = from m in subquery(statistic_subquery(user_id, params)),
+      right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
+      on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes 59 seconds')::time", m.first_readed_at, time.key, time.key),
+      group_by: time.key,
+      order_by: time.key,
+      select: %{
+        key: fragment("substring(?::time::text from 0 for 6)", time.key),
+        value: fragment("coalesce(ceil(EXTRACT(EPOCH from avg(? - ?))), 0)", m.first_readed_at, m.inserted_at)
+      }
+
+    Repo.all(query)
+  end
+
+  def date_and_open(user_id, params) do
     start_date = param_or_date(params, user_id, "start_date", :min)
     end_date = param_or_date(params, user_id, "end_date", :max)
 
@@ -223,22 +237,8 @@ defmodule Ptx.Messages do
       group_by: time.key,
       order_by: time.key,
       select: %{
-        key: fragment("?::text", time.key),
-        value: fragment("coalesce(ceil(EXTRACT(EPOCH from avg(? - ?)) / 60), 0)", m.first_readed_at, m.inserted_at)
-      }
-
-    Repo.all(query)
-  end
-
-  def date_and_open(user_id, params) do
-    query = from m in subquery(statistic_subquery(user_id, params)),
-      right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
-      on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes 59 seconds')::time", m.first_readed_at, time.key, time.key),
-      group_by: time.key,
-      order_by: time.key,
-      select: %{
-        key: fragment("substring(?::time::text from 0 for 6)", time.key),
-        value: fragment("coalesce(ceil(EXTRACT(EPOCH from avg(? - ?)) / 60), 0)", m.first_readed_at, m.inserted_at)
+        key: fragment("?::date::text", time.key),
+        value: fragment("coalesce(ceil(EXTRACT(EPOCH from avg(? - ?))), 0)", m.first_readed_at, m.inserted_at)
       }
 
     Repo.all(query)
