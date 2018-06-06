@@ -51,6 +51,7 @@ defmodule PtxWeb.Router do
   scope "/", PtxWeb do
     pipe_through [:browser, :auth]
 
+    get "/office", PageController, :office
     get "/pay", PayController, :index
   end
 

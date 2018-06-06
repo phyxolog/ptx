@@ -11,4 +11,10 @@ defmodule PtxWeb.PageController do
   def getting_started(conn, _params, _user) do
     render conn, "getting_started.html"
   end
+
+  def office(conn, _params, _user) do
+    conn
+    |> put_layout(false)
+    |> render("office.html")
+  end
 end
