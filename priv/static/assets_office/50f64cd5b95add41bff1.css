@@ -1,32 +1,32 @@
 @font-face {
   font-family: 'Gotham Pro';
   font-weight: 400;
-  src: local("Gotham Pro Regular"), local("GothamPro"), url(/assets/e13724d3e4828f9b40d2f4d0e182374e.woff) format("woff"); }
+  src: local("Gotham Pro Regular"), local("GothamPro"), url(/assets_office/e13724d3e4828f9b40d2f4d0e182374e.woff) format("woff"); }
 
 @font-face {
   font-family: 'Gotham Pro';
   font-weight: 500;
-  src: local("Gotham Pro Medium"), local("GothamProMedium"), url(/assets/e26f778af2931744b9b1bfe7b58ed632.woff) format("woff"); }
+  src: local("Gotham Pro Medium"), local("GothamProMedium"), url(/assets_office/e26f778af2931744b9b1bfe7b58ed632.woff) format("woff"); }
 
 @font-face {
   font-family: 'Gotham Pro';
   font-weight: 700;
-  src: local("Gotham Pro Bold"), local("GothamProBold"), url(/assets/fa49a77f251f2faa237cf90628f35baa.woff) format("woff"); }
+  src: local("Gotham Pro Bold"), local("GothamProBold"), url(/assets_office/fa49a77f251f2faa237cf90628f35baa.woff) format("woff"); }
 
 @font-face {
   font-family: 'Avenir Next Cyr';
   font-weight: 400;
-  src: local("Avenir Next Cyr"), local("AvenirNextCyrRegular"), url(/assets/a81229c89f968c0b8eb6544e2a90d17a.woff) format("woff"); }
+  src: local("Avenir Next Cyr"), local("AvenirNextCyrRegular"), url(/assets_office/a81229c89f968c0b8eb6544e2a90d17a.woff) format("woff"); }
 
 @font-face {
   font-family: 'Avenir Next Cyr';
   font-weight: 500;
-  src: local("Avenir Next Cyr Medium"), local("AvenirNextCyrMedium"), url(/assets/241293dd350f84881201063e58f13109.woff) format("woff"); }
+  src: local("Avenir Next Cyr Medium"), local("AvenirNextCyrMedium"), url(/assets_office/241293dd350f84881201063e58f13109.woff) format("woff"); }
 
 @font-face {
   font-family: 'Avenir Next Cyr';
   font-weight: 700;
-  src: local("Avenir Next Cyr Bold"), local("AvenirNextCyrBold"), url(/assets/2dcf2324d8c5365339b70433bcd952e4.woff) format("woff"); }
+  src: local("Avenir Next Cyr Bold"), local("AvenirNextCyrBold"), url(/assets_office/2dcf2324d8c5365339b70433bcd952e4.woff) format("woff"); }
 html, body {
   position: relative;
   width: 100%;
