@@ -143,100 +143,99 @@ defmodule Ptx.Messages do
     |> Repo.one()
   end
 
-  # /*SELECT ceil(EXTRACT(EPOCH FROM avg((first_readed_at - inserted_at)::interval)))
-  # FROM messages AS m
-  # WHERE first_readed_at IS NOT NULL;*/
+  ## Return a query with needed method (min/max)
+  defp min_max_select(query, field, :min), do:
+    select(query, [m], min(field(m, ^field)))
+  defp min_max_select(query, field, :max), do:
+    select(query, [m], max(field(m, ^field)))
 
-  # /*SELECT *
-  # FROM date_trunc('day', current_date);*/
+  ## If `params` has `field` - then return this field
+  ## but before convert to date.
+  ## Else we send a query to database
+  ## and get `method` (min/max) from `messages` table.
+  defp param_or_date(params, user_id, field, method) do
+    case parse_date(Map.get(params, field)) do
+      {:ok, date} -> date
+      _ ->
+        Message
+        |> where(sender_id: ^user_id)
+        |> min_max_select(:inserted_at, method)
+        |> Repo.one()
+    end
+    |> NaiveDateTime.to_date()
+    |> to_string()
+  end
 
-  # --select date_trunc('day', current_date) + interval '1 day' - interval '1 second'
-
-  # --SELECT * FROM CURRENT_TIME
-
-  # SELECT key::time,
-  # (key + interval '59 minutes 59 seconds')::time AS before,
-  # (SELECT ceil(EXTRACT(EPOCH FROM avg((first_readed_at - inserted_at)::interval))) FROM messages WHERE first_readed_at::time BETWEEN key::time AND (key + interval '59 minutes')::time) AS value
-  # FROM generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key
-
-  # --(SELECT ceil(EXTRACT(EPOCH from MAX(first_readed_at - inserted_at)) / 60) FROM messages)
-
-  # --SELECT key::date AS key,
-  # --(SELECT ceil(EXTRACT(EPOCH from avg(first_readed_at - inserted_at)) / 60) FROM messages WHERE first_readed_at - interval '1 day' + interval '1 second' BETWEEN key AND key + interval '1 day' - interval '1 second') AS value
-  # --FROM generate_series('2018-05-20', '2018-06-01', '1 day'::interval) AS key
+  ## Return a message subquery
+  defp statistic_subquery(user_id, params) do
+    Message
+    |> where(sender_id: ^user_id)
+    |> where([m], not is_nil(m.first_readed_at))
+    |> filter_by_start_date(params["start_date"])
+    |> filter_by_end_date(params["end_date"])
+    |> filter_by_recipients(params["recipients"])
+  end
 
   @doc """
   Gets a list of time (00:00 - 23:59) and count of opened email.
   """
   def time_and_count(user_id, params) do
-    subq =
-      Message
-      |> where(sender_id: ^user_id)
-      |> where([m], not is_nil(m.first_readed_at))
-      |> filter_by_start_date(params["start_date"])
-      |> filter_by_end_date(params["end_date"])
-      |> filter_by_recipients(params["recipients"])
-
-    query = from m in subquery(subq),
+    query = from m in subquery(statistic_subquery(user_id, params)),
       right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
       on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes')::time", m.first_readed_at, time.key, time.key),
       group_by: time.key,
       order_by: time.key,
       select: %{
-        key: fragment("?::time::text", time.key),
+        key: fragment("substring(?::time::text from 0 for 6)", time.key),
         value: count(m.id)
       }
 
     Repo.all(query)
-    |> Enum.map(fn %{key: str} = map -> %{map | key: String.slice(str, 0, 5)} end)
-  end
-
-  defp param_or_min_date(params, user_id, field) do
-    case parse_date(Map.get(params, field)) do
-      {:ok, date} -> date
-      _ ->
-        Message
-        |> where(sender_id: ^user_id)
-        |> select([m], min(m.inserted_at))
-        |> Repo.one()
-    end
-    |> NaiveDateTime.to_date()
-    |> to_string()
-  end
-
-  defp param_or_max_date(params, user_id, field) do
-    case parse_date(Map.get(params, field)) do
-      {:ok, date} -> date
-      _ ->
-        Message
-        |> where(sender_id: ^user_id)
-        |> select([m], max(m.inserted_at))
-        |> Repo.one()
-    end
-    |> NaiveDateTime.to_date()
-    |> to_string()
   end
 
   def date_and_count(user_id, params) do
-    subq =
-      Message
-      |> where(sender_id: ^user_id)
-      |> where([m], not is_nil(m.first_readed_at))
-      |> filter_by_start_date(params["start_date"])
-      |> filter_by_end_date(params["end_date"])
-      |> filter_by_recipients(params["recipients"])
+    start_date = param_or_date(params, user_id, "start_date", :min)
+    end_date = param_or_date(params, user_id, "end_date", :max)
 
-    start_date = param_or_min_date(params, user_id, "start_date")
-    end_date = param_or_max_date(params, user_id, "end_date")
-
-    query = from m in subquery(subq),
+    query = from m in subquery(statistic_subquery(user_id, params)),
       right_join: time in fragment("SELECT generate_series(?::text::timestamp without time zone, ?::text::timestamp without time zone, '1 day'::interval) AS key", ^start_date, ^end_date),
-      on: fragment("? - interval '1 day' + interval '1 second' BETWEEN ? AND ? + interval '1 day' - interval '1 second'", m.first_readed_at, time.key, time.key),
+      on: fragment("? BETWEEN ?::timestamp without time zone AND (? + interval '1 day' - interval '1 second')::timestamp without time zone", m.first_readed_at, time.key, time.key),
       group_by: time.key,
       order_by: time.key,
       select: %{
         key: fragment("?::text", time.key),
         value: count(m.id)
+      }
+
+    Repo.all(query)
+  end
+
+  def time_and_open(user_id, params) do
+    start_date = param_or_date(params, user_id, "start_date", :min)
+    end_date = param_or_date(params, user_id, "end_date", :max)
+
+    query = from m in subquery(statistic_subquery(user_id, params)),
+      right_join: time in fragment("SELECT generate_series(?::text::timestamp without time zone, ?::text::timestamp without time zone, '1 day'::interval) AS key", ^start_date, ^end_date),
+      on: fragment("? BETWEEN ?::timestamp without time zone AND (? + interval '1 day' - interval '1 second')::timestamp without time zone", m.first_readed_at, time.key, time.key),
+      group_by: time.key,
+      order_by: time.key,
+      select: %{
+        key: fragment("?::text", time.key),
+        value: fragment("coalesce(ceil(EXTRACT(EPOCH from avg(? - ?)) / 60), 0)", m.first_readed_at, m.inserted_at)
+      }
+
+    Repo.all(query)
+  end
+
+  def date_and_open(user_id, params) do
+    query = from m in subquery(statistic_subquery(user_id, params)),
+      right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
+      on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes 59 seconds')::time", m.first_readed_at, time.key, time.key),
+      group_by: time.key,
+      order_by: time.key,
+      select: %{
+        key: fragment("substring(?::time::text from 0 for 6)", time.key),
+        value: fragment("coalesce(ceil(EXTRACT(EPOCH from avg(? - ?)) / 60), 0)", m.first_readed_at, m.inserted_at)
       }
 
     Repo.all(query)

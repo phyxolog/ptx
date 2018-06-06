@@ -93,8 +93,8 @@ defmodule PtxWeb.Router do
     resources "/users", UserController, only: [:update] do
       get "/statistic/time-and-count", UserController, :time_and_count
       get "/statistic/date-and-count", UserController, :date_and_count
-      # get "/statistic/open-and-time", UserController, :open_and_time
-      # get "/statistic/open-and-count", UserController, :open_and_count
+      get "/statistic/time-and-open", UserController, :time_and_open
+      get "/statistic/date-and-open", UserController, :date_and_open
       get "/recipients", UserController, :recipients
       get "/statistic", UserController, :statistic
       get "/statistic/links", UserController, :links_statistic
