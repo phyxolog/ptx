@@ -193,6 +193,9 @@ defmodule Ptx.Messages do
     Repo.all(query)
   end
 
+  @doc """
+  Gets a list of date and count of opened emails.
+  """
   def date_and_count(user_id, params) do
     start_date = param_or_date(params, user_id, "start_date", :min)
     end_date = param_or_date(params, user_id, "end_date", :max)
