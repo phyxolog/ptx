@@ -3,6 +3,7 @@ defmodule Ptx.Accounts.NotificationSettings do
   import Ecto.Changeset
   alias Ptx.Accounts.User
 
+  @derive {Poison.Encoder, except: [:__meta__, :id, :user, :user_id]}
   @derive {Jason.Encoder, except: [:__meta__, :id, :user, :user_id]}
   @fields ~w(plan_changed email_read link_opened email_opened_again link_opened_again)a
 

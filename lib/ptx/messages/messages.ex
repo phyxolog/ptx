@@ -179,16 +179,20 @@ defmodule Ptx.Messages do
   @doc """
   Gets a list of time (00:00 - 23:59) and count of opened email.
   """
-  def time_and_count(user_id, params) do
-    query = from m in subquery(statistic_subquery(user_id, params)),
+  def time_and_count(user, params) do
+    subquery = from m in subquery(statistic_subquery(user.id, params)),
       right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
-      on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes')::time", m.first_readed_at, time.key, time.key),
+      on: fragment("convert_tz(?, ?)::time BETWEEN ?::time AND (? + interval '59 minutes 59 seconds')::time", m.first_readed_at, ^user.timezone, time.key, time.key),
       group_by: time.key,
-      order_by: time.key,
       select: %{
         key: fragment("substring(?::time::text from 0 for 6)", time.key),
         value: count(m.id)
       }
+
+    query = from q in subquery(subquery),
+      group_by: [q.key, q.value],
+      order_by: q.key,
+      select_merge: %{value: fragment("ceil(?)::integer", avg(q.value))}
 
     Repo.all(query)
   end
@@ -196,11 +200,11 @@ defmodule Ptx.Messages do
   @doc """
   Gets a list of date and count of opened emails.
   """
-  def date_and_count(user_id, params) do
-    start_date = param_or_date(params, user_id, "start_date", :min)
-    end_date = param_or_date(params, user_id, "end_date", :max)
+  def date_and_count(user, params) do
+    start_date = param_or_date(params, user.id, "start_date", :min)
+    end_date = param_or_date(params, user.id, "end_date", :max)
 
-    query = from m in subquery(statistic_subquery(user_id, params)),
+    query = from m in subquery(statistic_subquery(user.id, params)),
       right_join: time in fragment("SELECT generate_series(?::text::timestamp without time zone, ?::text::timestamp without time zone, '1 day'::interval) AS key", ^start_date, ^end_date),
       on: fragment("? BETWEEN ?::timestamp without time zone AND (? + interval '1 day' - interval '1 second')::timestamp without time zone", m.first_readed_at, time.key, time.key),
       group_by: time.key,
@@ -213,10 +217,10 @@ defmodule Ptx.Messages do
     Repo.all(query)
   end
 
-  def time_and_open(user_id, params) do
-    query = from m in subquery(statistic_subquery(user_id, params)),
+  def time_and_open(user, params) do
+    query = from m in subquery(statistic_subquery(user.id, params)),
       right_join: time in fragment("SELECT generate_series(current_date, current_date + interval '1 day' - interval '1 second', '1 hour'::interval) AS key"),
-      on: fragment("?::time BETWEEN ?::time AND (? + interval '59 minutes 59 seconds')::time", m.first_readed_at, time.key, time.key),
+      on: fragment("convert_tz(?, ?)::time BETWEEN ?::time AND (? + interval '59 minutes 59 seconds')::time", m.first_readed_at, ^user.timezone, time.key, time.key),
       group_by: time.key,
       order_by: time.key,
       select: %{
@@ -227,11 +231,11 @@ defmodule Ptx.Messages do
     Repo.all(query)
   end
 
-  def date_and_open(user_id, params) do
-    start_date = param_or_date(params, user_id, "start_date", :min)
-    end_date = param_or_date(params, user_id, "end_date", :max)
+  def date_and_open(user, params) do
+    start_date = param_or_date(params, user.id, "start_date", :min)
+    end_date = param_or_date(params, user.id, "end_date", :max)
 
-    query = from m in subquery(statistic_subquery(user_id, params)),
+    query = from m in subquery(statistic_subquery(user.id, params)),
       right_join: time in fragment("SELECT generate_series(?::text::timestamp without time zone, ?::text::timestamp without time zone, '1 day'::interval) AS key", ^start_date, ^end_date),
       on: fragment("? BETWEEN ?::timestamp without time zone AND (? + interval '1 day' - interval '1 second')::timestamp without time zone", m.first_readed_at, time.key, time.key),
       group_by: time.key,

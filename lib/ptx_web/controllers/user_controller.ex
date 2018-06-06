@@ -45,16 +45,16 @@ defmodule PtxWeb.UserController do
   end
   def recipients(_conn, _params, _user), do: {:error, :not_found}
 
-  def graph(_conn, %{"type" => type} = params, %{id: user_id}) do
+  def graph(_conn, %{"type" => type} = params, user) do
     graph = case type do
       "time_and_count" ->
-        Messages.time_and_count(user_id, params)
+        Messages.time_and_count(user, params)
       "date_and_count" ->
-        Messages.date_and_count(user_id, params)
+        Messages.date_and_count(user, params)
       "time_and_open" ->
-        Messages.time_and_open(user_id, params)
+        Messages.time_and_open(user, params)
       "date_and_open" ->
-        Messages.date_and_open(user_id, params)
+        Messages.date_and_open(user, params)
     end
 
     {:ok, graph}

@@ -5,6 +5,7 @@ defmodule Ptx.Accounts.User do
 
   @default_locale Application.get_env(:ptx, PtxWeb.Gettext)[:default_locale]
   @primary_key {:id, :string, [autogenerate: false]}
+  @derive {Poison.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
   @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
   @optional_fields ~w(gender picture locale access_token refresh_token plan full_name
                       token_type expires_at timezone valid_until frozen periodicity)a
