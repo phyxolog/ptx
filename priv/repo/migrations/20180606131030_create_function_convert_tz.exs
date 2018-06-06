@@ -2,7 +2,7 @@ defmodule Ptx.Repo.Migrations.CreateFunctionConvertTz do
   use Ecto.Migration
 
   def up do
-    execute """"
+    execute """
       CREATE OR REPLACE FUNCTION convert_tz(datetime timestamp, timezone text) RETURNS timestamp without time zone AS $$
       BEGIN
         RETURN ((datetime) AT TIME ZONE 'UTC') AT TIME ZONE timezone;
