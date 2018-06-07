@@ -9,6 +9,10 @@ defmodule PtxWeb.AuthController do
 
   plug Ueberauth
 
+  def hook(conn, _params, _user) do
+    json conn, %{}
+  end
+
   @doc """
   Handle errors.
   """
@@ -22,9 +26,14 @@ defmodule PtxWeb.AuthController do
   Handler for requests from pricing page.
   """
   def callback(conn, %{"state" => state}, _user) do
+    state = Jason.decode!(URI.decode(state))
+    |> Enum.map(fn {key, value} -> {String.to_existing_atom(key), value} end)
+    |> Enum.into(%{})
+
     conn
+    |> assign(:timezone_offset, state[:timezone_offset])
     |> do_callback()
-    |> processign(Ptx.Helper.decode_term(state))
+    |> processign(state)
   end
 
   ## TODO: Where we must redirect user without pay state?
@@ -53,9 +62,10 @@ defmodule PtxWeb.AuthController do
   ## then finding user in our database or create new,
   ## update token from G response and put to our response
   ## and revoke old user token.
-  defp do_callback(%{assigns: %{ueberauth_auth: auth}} = conn) do
+  defp do_callback(%{assigns: %{ueberauth_auth: auth} = assigns} = conn) do
     user =
       auth
+      |> Map.put(:timezone_offset, assigns[:timezone_offset])
       |> load_user_params()
       |> Accounts.find_or_create_user()
       |> update_token(auth)
@@ -75,8 +85,18 @@ defmodule PtxWeb.AuthController do
     |> Ptx.Guardian.Plug.sign_out()
   end
 
+  ## Get a name of timezone offset
+  ## Need for registration
+  defp get_name_of_timezone_offset(timezone_offset) do
+    timezone_offset
+    |> Ptx.to_i()
+    |> abs()
+    |> div(60)
+    |> Timex.Timezone.name_of()
+  end
+
   ## Get user attributes from auth data.
-  defp load_user_params(%Ueberauth.Auth{credentials: credentials, extra: extra, info: info}) do
+  defp load_user_params(%{credentials: credentials, extra: extra, info: info, timezone_offset: timezone_offset}) do
     %{
       id: info.email,
       first_name: info.first_name,
@@ -89,6 +109,7 @@ defmodule PtxWeb.AuthController do
       access_token: credentials.token,
       refresh_token: credentials.refresh_token,
       expires_at: credentials.expires_at,
+      timezone: get_name_of_timezone_offset(timezone_offset),
       notification_settings: Map.from_struct(%Ptx.Accounts.NotificationSettings{})
     }
   end

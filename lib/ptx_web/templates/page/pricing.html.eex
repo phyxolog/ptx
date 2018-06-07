@@ -80,11 +80,11 @@
 
   <script>
     window.pricingStates = {
-      trial: '<%= Ptx.Helper.encode_term(%{plan: "trial", locale: @conn.assigns.locale}) %>',
-      basic_month: '<%= Ptx.Helper.encode_term(%{plan: "basic", periodicity: "month", locale: @conn.assigns.locale}) %>',
-      basic_year: '<%= Ptx.Helper.encode_term(%{plan: "basic", periodicity: "year", locale: @conn.assigns.locale}) %>',
-      pro_month: '<%= Ptx.Helper.encode_term(%{plan: "pro", periodicity: "month", locale: @conn.assigns.locale}) %>',
-      pro_year: '<%= Ptx.Helper.encode_term(%{plan: "pro", periodicity: "year", locale: @conn.assigns.locale}) %>'
+      trial: '<%= URI.encode(Jason.encode!(%{plan: "trial", locale: @conn.assigns.locale})) %>',
+      basic_month: '<%= URI.encode(Jason.encode!(%{plan: "basic", periodicity: "month", locale: @conn.assigns.locale})) %>',
+      basic_year: '<%= URI.encode(Jason.encode!(%{plan: "basic", periodicity: "year", locale: @conn.assigns.locale})) %>',
+      pro_month: '<%= URI.encode(Jason.encode!(%{plan: "pro", periodicity: "month", locale: @conn.assigns.locale})) %>',
+      pro_year: '<%= URI.encode(Jason.encode!(%{plan: "pro", periodicity: "year", locale: @conn.assigns.locale})) %>'
     };
   </script>
 

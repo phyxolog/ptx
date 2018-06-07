@@ -57,6 +57,7 @@ config :phoenix,
 config :ueberauth, Ueberauth,
   providers: [
     google: {Ueberauth.Strategy.Google, [
+      request_path: "/auth/google/request",
       default_scope: ~s(email profile),
       access_type: "offline",
       prompt: "consent"

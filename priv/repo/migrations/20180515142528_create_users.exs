@@ -27,6 +27,5 @@ defmodule Ptx.Repo.Migrations.CreateUsers do
 
     create constraint(:users, :periodicity, check: "periodicity in ('month', 'year')")
     create constraint(:users, :plan, check: "plan in ('trial', 'basic', 'pro')")
-    create constraint(:users, :gender, check: "gender in ('male', 'female')")
   end
 end

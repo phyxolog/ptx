@@ -59,7 +59,8 @@ defmodule PtxWeb.Router do
   scope "/auth", PtxWeb do
     pipe_through [:browser, :auth]
 
-    get "/google", AuthController, :request
+    get "/google", AuthHookController, :hook
+    get "/google/request", AuthController, :request
     get "/google/callback", AuthController, :callback
   end
 

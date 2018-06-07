@@ -18,4 +18,16 @@ defmodule Ptx do
     duration = Timex.diff(read_email_date, sent_email_date, :duration)
     Timex.Format.Duration.Formatter.lformat(duration, locale, :humanized)
   end
+
+  @doc """
+  Convert integer to binary
+  """
+  def to_i(nil), do: nil
+  def to_i(i) when is_integer(i), do: i
+  def to_i(s) when is_binary(s) do
+    case Integer.parse(s) do
+      {i, _} -> i
+      :error -> nil
+    end
+  end
 end

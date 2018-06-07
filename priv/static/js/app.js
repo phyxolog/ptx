@@ -178,12 +178,14 @@ function getList() {
 	return dropdown.querySelector(".ls-list");
 }
 
-dropdown.children[0].addEventListener("click", showLocalesList);
-document.addEventListener("click", hideLocalesList);
+if (dropdown) {
+	dropdown.children[0].addEventListener("click", showLocalesList);
+	document.addEventListener("click", hideLocalesList);
+}
 
 });
 
-require.register("js/mobile-menu.js", function(exports, require, module) {
+;require.register("js/mobile-menu.js", function(exports, require, module) {
 "use strict";
 
 var mmbutton = document.getElementById("menuButton");

@@ -10,6 +10,7 @@ defmodule Ptx.Accounts.User do
   @optional_fields ~w(gender picture locale access_token refresh_token plan full_name
                       token_type expires_at timezone valid_until frozen periodicity)a
   @required_fields ~w(id first_name last_name)a
+  @unupdated_fields ~w(notification_settings refresh_token)
 
   @locales Application.get_env(:ptx, PtxWeb.Gettext)[:locales]
   @plans Application.get_env(:ptx, :plans)
@@ -41,6 +42,8 @@ defmodule Ptx.Accounts.User do
 
     timestamps()
   end
+
+  def unupdated_fields, do: @unupdated_fields
 
   def preloaded, do: [:notification_settings]
 
