@@ -4,11 +4,7 @@
     <% is_nil(@read_user) -> %>
       <%= gettext "Somebody read your email with subject " %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
     <% !is_nil(@read_user) -> %>
-      <%=
-        gettext """
-        User <a href="mailto:%{read_user}" style="color: #005CFF">%{read_user}</a> just read your email with subject
-        """, read_user: @read_user, subject: @subject
-      %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
+      <%= gettext "User" %> <a href="mailto:<%= @read_user %>" style="color: #005CFF"><%= @read_user %></a> <%= gettext "just read your email with subject" %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
   <% end %>
 </p>
 <!-- #endregion -->
