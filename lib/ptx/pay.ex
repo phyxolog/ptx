@@ -47,8 +47,8 @@ defmodule Ptx.Pay do
         id: order_id,
         amount: amount,
         status: "subscribed",
-        plan: info.plan,
-        periodicity: info.periodicity,
+        plan: to_string(info.plan),
+        periodicity: to_string(info.periodicity),
         user_id: info.user_id
       })
     end)

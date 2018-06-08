@@ -3,6 +3,8 @@ defmodule Ptx.Accounts.Ticket do
   import Ecto.Changeset
   alias Ptx.Accounts.Transaction
 
+  @fields ~w(data transaction)a
+
   schema "tickets" do
     field :data, :map
     belongs_to :transaction, Transaction
@@ -12,7 +14,7 @@ defmodule Ptx.Accounts.Ticket do
   @doc false
   def changeset(ticket, attrs) do
     ticket
-    |> cast(attrs, [:data, :transaction_id])
-    |> validate_required([:data, :transaction_id])
+    |> cast(attrs, @fields)
+    |> validate_required(@fields)
   end
 end
