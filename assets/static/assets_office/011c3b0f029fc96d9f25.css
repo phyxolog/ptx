@@ -139,6 +139,22 @@ span.translation-placeholder {
     border-radius: 3px; }
   span.translation-placeholder + br + span.translation-placeholder:nth-of-type(even) {
     max-width: 240px; }
+
+.unsubscribe-confirm p {
+  font-size: 16px;
+  line-height: 25px;
+  margin: 20px 0; }
+
+.unsubscribe-confirm div.actions {
+  text-align: right; }
+  .unsubscribe-confirm div.actions > * {
+    display: inline-block;
+    vertical-align: top;
+    height: 40px;
+    min-width: 120px;
+    margin-left: 10px; }
+    .unsubscribe-confirm div.actions > *:first-child {
+      margin-left: 0; }
 .u-preload-content {
   position: fixed;
   top: 0;
@@ -217,6 +233,13 @@ span.translation-placeholder {
       font-size: 16px;
       line-height: 20px; } }
 
+.u-flag {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(116, 87, 213, 0.24); }
+
 .u-default-button {
   background: rgba(148, 148, 148, 0.12);
   transition: background 450ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -255,6 +278,11 @@ span.translation-placeholder {
     color: #f44336; }
     .u-default-button.red-light:hover {
       background: rgba(244, 67, 54, 0.24); }
+  .u-default-button.red {
+    background: #f44336;
+    color: white; }
+    .u-default-button.red:hover {
+      background: rgba(244, 67, 54, 0.72); }
 
 .u-pricing-badge {
   background: black;
@@ -528,7 +556,8 @@ nav.g-navbar {
     position: relative;
     text-decoration: none;
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
-    line-height: 20px; }
+    line-height: 20px;
+    cursor: pointer; }
     nav.g-navbar section.main-menu a span.translation-placeholder {
       max-width: 80px;
       vertical-align: middle; }
@@ -576,6 +605,8 @@ nav.g-navbar {
       text-align: left;
       font-family: "Gotham Pro";
       padding: 0 10px; }
+      nav.g-navbar section.main-menu a span.route-label span:not(.u-pricing-badge) {
+        margin-right: 5px; }
     nav.g-navbar section.main-menu a img {
       width: 40px;
       height: 40px;
@@ -962,3 +993,70 @@ div.c-main-preloader {
   100% {
     transform: translateX(0) rotateY(-30deg) rotateZ(-135deg) translateZ(180px);
     opacity: 0; } }
+div.c-default-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  padding: 30px 10px;
+  align-items: center;
+  justify-content: center;
+  z-index: 123456;
+  transform: translateZ(0); }
+  div.c-default-modal div.dm-inner-wrapper {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+    background: white;
+    border-radius: 6px;
+    max-height: 100%;
+    overflow: auto; }
+    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar {
+      width: 10px;
+      height: 10px; }
+    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-track {
+      background: rgba(116, 87, 213, 0.38); }
+    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(116, 87, 213, 0.38); }
+      div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-thumb:hover {
+        background: rgba(116, 87, 213, 0.54); }
+    @media (max-width: 729px) {
+      div.c-default-modal div.dm-inner-wrapper {
+        padding: 10px; } }
+    div.c-default-modal div.dm-inner-wrapper header {
+      position: relative;
+      margin-bottom: 20px; }
+      @media (max-width: 729px) {
+        div.c-default-modal div.dm-inner-wrapper header {
+          margin-bottom: 10px; } }
+      div.c-default-modal div.dm-inner-wrapper header h2 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 50px;
+        text-align: left; }
+        div.c-default-modal div.dm-inner-wrapper header h2 span.u-pricing-badge {
+          vertical-align: middle; }
+      div.c-default-modal div.dm-inner-wrapper header img.close-button {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: 0;
+        bottom: auto;
+        width: 40px;
+        height: 40px;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 8px;
+        transition: background 450ms cubic-bezier(0.23, 1, 0.32, 1); }
+        div.c-default-modal div.dm-inner-wrapper header img.close-button:hover {
+          background: rgba(116, 87, 213, 0.12); }
+        @media (max-width: 729px) {
+          div.c-default-modal div.dm-inner-wrapper header img.close-button {
+            width: 30px;
+            height: 30px;
+            padding: 3px;
+            top: -2px; } }
