@@ -16,6 +16,7 @@ defmodule Ptx.Accounts do
     fetch_transaction(user_id: user.id)
     |> OK.bind(fn
       transaction ->
+        update_user(user, %{in_unsubscribe_process: true})
         ExLiqpay.cancel_subscription(transaction.id)
         {:ok, :success}
     end)

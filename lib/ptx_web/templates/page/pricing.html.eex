@@ -89,8 +89,9 @@
   </script>
 
   <% plan = if assigns[:user], do: @user.plan, else: nil %>
+  <% prev_plan = if assigns[:user], do: @user.previous_plan, else: nil %>
   <div class="pricing-tables">
-    <section class="pricing-table trial <%= if plan == "trial", do: "disabled", else: "" %>">
+    <section class="pricing-table trial <%= if !is_nil(prev_plan), do: "disabled", else: "" %>">
       <img src="<%= static_path(@conn, "/images/tables/bg_trial.png") %>" alt="trial" draggable="false">
       <div class="content-wrapper">
         <div class="content">
