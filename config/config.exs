@@ -9,7 +9,7 @@ use Mix.Config
 config :ptx,
   from_email_string: "PostTrack Alerts <noreply@posttrack.com>",
   env: Mix.env(),
-  url: "https://posttrack.email",
+  url: "https://9cb94540.ngrok.io",
   currency: "RUB",
   trial_period: 14,
   ticket_email: "posttrack@sloenka.com",

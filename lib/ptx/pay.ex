@@ -2,6 +2,7 @@ defmodule Ptx.Pay do
   import PtxWeb.Gettext
   import Ecto.Query, warn: false
   alias Ptx.{Accounts, Repo}
+  alias Ptx.Accounts.Transaction
   require Logger
 
   @env Application.get_env(:ptx, :env)
@@ -69,14 +70,14 @@ defmodule Ptx.Pay do
   end
 
   ## Unsubscribe old success transaction
-  defp unsubscribe_old(user_id) do
+  def unsubscribe_old(user_id) do
     transaction = Transaction
     |> where([t], t.user_id == ^user_id)
     |> where([t], t.status == "success")
     |> Repo.one()
 
     if transaction != nil do
-      ExLiqpay.cancel_subscription(transaction.order_id)
+      ExLiqpay.cancel_subscription(transaction.id)
       Accounts.update_transaction(transaction, %{status: "wait_unsubscribe"})
     end
 
