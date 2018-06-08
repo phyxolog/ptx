@@ -8,7 +8,7 @@ defmodule Ptx.Accounts.User do
   @derive {Poison.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
   @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
   @optional_fields ~w(gender picture locale access_token refresh_token plan full_name
-                      token_type expires_at timezone valid_until frozen periodicity)a
+                      token_type expires_at timezone valid_until frozen periodicity in_unsubscribe_process)a
   @required_fields ~w(id first_name last_name)a
   @unupdated_fields ~w(notification_settings refresh_token)
 
@@ -26,6 +26,7 @@ defmodule Ptx.Accounts.User do
     field :timezone, :string, default: "UTC"
     field :timezone_offset, :integer, default: 0, virtual: true
 
+    field :in_unsubscribe_process, :boolean, default: false
     field :plan, :string, default: nil
     field :frozen, :boolean, default: true
     field :valid_until, :naive_datetime, default: nil
