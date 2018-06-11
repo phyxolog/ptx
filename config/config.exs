@@ -9,7 +9,7 @@ use Mix.Config
 config :ptx,
   from_email_string: "PostTrack Alerts <noreply@posttrack.com>",
   env: Mix.env(),
-  url: "https://9cb94540.ngrok.io",
+  url: "https://posttrack.email",
   currency: "RUB",
   trial_period: 14,
   ticket_email: "posttrack@sloenka.com",
@@ -71,7 +71,7 @@ config :ueberauth, Ueberauth,
       request_path: "/auth/google/request",
       default_scope: ~s(email profile),
       access_type: "offline",
-      prompt: "consent"
+      prompt: "force"
     ]}
   ]
 

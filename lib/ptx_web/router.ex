@@ -93,7 +93,7 @@ defmodule PtxWeb.Router do
 
     post "/messages/list", MessageController, :index
     resources "/messages", MessageController, only: [:create]
-    resources "/users", UserController, only: [:update] do
+    resources "/users", UserController, only: [:update, :delete] do
       get "/statistic/graph", UserController, :graph
       get "/recipients", UserController, :recipients
       get "/statistic", UserController, :statistic

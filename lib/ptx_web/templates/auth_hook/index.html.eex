@@ -10,13 +10,16 @@
   
   <script>
     var timezoneOffset = new Date().getTimezoneOffset();
-    const state = <%= raw @state %>;
+    var state = <%= raw @state %>;
 
     if (state !== null) {
+      state = JSON.parse(state);
       state["timezone_offset"] = timezoneOffset;
-    }
 
-    location.href = "/auth/google/request?state=" + encodeURIComponent(JSON.stringify(state));
+      location.href = "/auth/google/request?state=" + encodeURIComponent(JSON.stringify(state));
+    } else {
+      location.href = "/auth/google/request";
+    }
   </script>
 </body>
 </html>

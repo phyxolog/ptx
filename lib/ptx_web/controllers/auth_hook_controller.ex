@@ -3,6 +3,7 @@ defmodule PtxWeb.AuthHookController do
 
   def hook(conn, params) do
     state = Map.get(params, "state", nil)
+    |> Jason.encode!()
 
     conn
     |> assign(:state, state)

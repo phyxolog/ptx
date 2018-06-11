@@ -69,6 +69,7 @@ defmodule PtxWeb.AuthController do
       |> load_user_params()
       |> Accounts.find_or_create_user()
       |> update_token(auth)
+      |> reestablish_user()
 
     conn
     |> revoke_current_token()
@@ -124,13 +125,28 @@ defmodule PtxWeb.AuthController do
 
   ## Update token in given user.
   defp update_token({:ok, user}, %Ueberauth.Auth{credentials: credentials}) do
-    ## We must not updated refresh_token,
-    ## because refresh_token is only provided
-    ## on the first authorization from the user
+    ## We must update refresh_token,
+    ## when his not nil
+    ## and not equals
+    {:ok, user} =
+      update_rt({:ok, user}, credentials.refresh_token)
+
     Accounts.update_user(user, %{
       token_type: credentials.token_type,
       access_token: credentials.token,
       expires_at: credentials.expires_at
     })
   end
+
+  ## Reestablish user if need
+  defp reestablish_user({:ok, user}) do
+    Accounts.update_user(user, %{deleted: false})
+  end
+
+  ## Update refresh_token
+  defp update_rt(user, nil), do: user
+  defp update_rt({:ok, %{refresh_token: user_refresh_token} = user}, refresh_token) when user_refresh_token != refresh_token do
+    Accounts.update_user(user, %{refresh_token: refresh_token})
+  end
+  defp update_rt(user, _), do: user
 end

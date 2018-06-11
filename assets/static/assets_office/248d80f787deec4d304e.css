@@ -801,7 +801,8 @@ main.v-details {
           margin-top: 0; }
         main.v-details section.details div.details-wrapper .row label {
           font-size: 16px;
-          color: rgba(0, 0, 0, 0.54); }
+          color: rgba(0, 0, 0, 0.54);
+          font-weight: 500; }
           @media (max-width: 729px) {
             main.v-details section.details div.details-wrapper .row label {
               display: block;

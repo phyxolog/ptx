@@ -13,7 +13,7 @@ defmodule PtxWeb.ApiController do
 
   def identity(conn, %{"token" => token}, _user) do
     user = Accounts.get_user_by_token(token)
-    render(conn, PtxWeb.UserView, "show.json", user: user)
+    identity(conn, %{}, user)
   end
 
   def identity(_conn, _params, nil) do
@@ -21,7 +21,10 @@ defmodule PtxWeb.ApiController do
   end
 
   def identity(conn, _params, user) do
-    render(conn, PtxWeb.UserView, "show.json", user: user)
+    case user do
+      %{deleted: true} -> {:ok, %{deleted: true}}
+      user -> render(conn, PtxWeb.UserView, "show.json", user: user)
+    end
   end
 
   def timezones(conn, _params, _user) do

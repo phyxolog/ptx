@@ -4,15 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <%= if assigns[:title] do %>
       <title><%= @title %> - PostTrack</title>
+      <meta property="og:title" content="<%= @title %> - PostTrack" />
     <% else %>
       <title>PostTrack</title>
+      <meta property="og:title" content="PostTrack" />
     <% end %>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <%= if assigns[:og_meta] do %>
+      <%= for key <- @og_meta do %>
+        <meta property="<%= key[:property] %>" content="<%= key[:content] %>" />
+      <% end %>
+    <% end %>
 
     <!— Google Analytics —>
     <script>

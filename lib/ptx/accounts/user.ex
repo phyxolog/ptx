@@ -5,9 +5,9 @@ defmodule Ptx.Accounts.User do
 
   @default_locale Application.get_env(:ptx, PtxWeb.Gettext)[:default_locale]
   @primary_key {:id, :string, [autogenerate: false]}
-  @derive {Poison.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
-  @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at]}
-  @optional_fields ~w(gender picture locale access_token refresh_token plan full_name
+  @derive {Poison.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at, :deleted]}
+  @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at, :deleted]}
+  @optional_fields ~w(gender picture locale access_token refresh_token plan full_name deleted
                       token_type expires_at timezone valid_until frozen periodicity in_unsubscribe_process)a
   @required_fields ~w(id first_name last_name)a
   @unupdated_fields ~w(notification_settings refresh_token)
@@ -38,6 +38,8 @@ defmodule Ptx.Accounts.User do
     field :access_token, :string
     field :refresh_token, :string
     field :expires_at, :integer
+
+    field :deleted, :boolean, default: false
 
     has_one :notification_settings, NotificationSettings, on_replace: :update
 

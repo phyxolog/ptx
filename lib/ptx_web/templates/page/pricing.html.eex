@@ -16,9 +16,9 @@
       <a href="/path/to/faq" class="item hoverable"><%= gettext "Faq" %></a>
       <a href="/path/to/license" class="item hoverable"><%= gettext "License" %></a>
       <% locales = %{
-        "ru" => gettext("Russian"),
-        "uk" => gettext("Ukrainian"),
-        "en" => gettext("English")
+        "ru" => "Русский",
+        "uk" => "Українська",
+        "en" => "English"
       } %>
       <%= if !is_nil(@conn.assigns.locale) do %>
         <div class="item">
@@ -88,10 +88,8 @@
     };
   </script>
 
-  <% plan = if assigns[:user], do: @user.plan, else: nil %>
-  <% prev_plan = if assigns[:user], do: @user.previous_plan, else: nil %>
   <div class="pricing-tables">
-    <section class="pricing-table trial <%= if !is_nil(prev_plan), do: "disabled", else: "" %>">
+    <section class="pricing-table trial">
       <img src="<%= static_path(@conn, "/images/tables/bg_trial.png") %>" alt="trial" draggable="false">
       <div class="content-wrapper">
         <div class="content">
@@ -123,7 +121,7 @@
       </div>
     </section>
 
-    <section class="pricing-table basic <%= if plan == "basic", do: "disabled", else: "" %>">
+    <section class="pricing-table basic">
       <img src="<%= static_path(@conn, "/images/tables/bg_basic.png") %>" alt="basic" draggable="false">
       <div class="content-wrapper">
         <div class="content">
@@ -157,7 +155,7 @@
       </div>
     </section>
 
-    <section class="pricing-table pro <%= if plan == "pro", do: "disabled", else: "" %>">
+    <section class="pricing-table pro">
       <img src="<%= static_path(@conn, "/images/tables/bg_pro.png") %>" alt="pro" draggable="false">
       <div class="content-wrapper">
         <div class="content">

@@ -4,7 +4,8 @@ html, body {
   font-size: 14px;
   width: 100%;
   height: 100%;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; }
 
 body {
   overflow-y: scroll; }
@@ -413,8 +414,14 @@ div.pt-video-modal {
   div.pt-video-modal div.vm-inner-wrapper {
     background: white;
     width: auto; }
+    @media (max-width: 1199px) {
+      div.pt-video-modal div.vm-inner-wrapper {
+        width: 100%; } }
     div.pt-video-modal div.vm-inner-wrapper video {
       display: block; }
+      @media (max-width: 1199px) {
+        div.pt-video-modal div.vm-inner-wrapper video {
+          width: 100%; } }
 
 @keyframes fadeIn {
   0% {

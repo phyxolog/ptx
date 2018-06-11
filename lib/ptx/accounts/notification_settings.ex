@@ -10,9 +10,9 @@ defmodule Ptx.Accounts.NotificationSettings do
   schema "notification_settings" do
     field :plan_changed, :boolean, default: true
     field :email_read, :boolean, default: true
-    field :email_opened_again, :boolean, default: true
+    field :email_opened_again, :boolean, default: false
     field :link_opened, :boolean, default: true
-    field :link_opened_again, :boolean, default: true
+    field :link_opened_again, :boolean, default: false
     belongs_to :user, User, type: :string
   end
 

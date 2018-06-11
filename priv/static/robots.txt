@@ -6,3 +6,5 @@ User-agent: *
 Disallow: /other
 
 Disallow: /*/other
+
+Disallow: /office

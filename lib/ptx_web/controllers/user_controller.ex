@@ -21,6 +21,12 @@ defmodule PtxWeb.UserController do
   end
   def update(_conn, _params, _user), do: {:error, :not_found}
 
+  def delete(conn, %{"id" => unsafe_id}, %User{id: id} = user) when unsafe_id == id do
+    Accounts.update_user(user, %{deleted: true})
+    json conn, %{status: :success}
+  end
+  def delete(_conn, _params, _user), do: {:error, :not_found}
+
   def unsubscribe(conn, %{"user_id" => user_id}, %{id: id} = user) when user_id == id do
     Accounts.unsubscribe(user)
     json conn, %{status: :wait}
