@@ -12,7 +12,10 @@
       <title>PostTrack</title>
       <meta property="og:title" content="PostTrack" />
     <% end %>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <%= if !assigns[:pass_style] do %>
+      <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <% end %>
 
     <%= if assigns[:og_meta] do %>
       <%= for key <- @og_meta do %>
@@ -50,12 +53,7 @@
   </head>
 
   <body>
-    <div class="container">
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
+    <%= render @view_module, @view_template, assigns %>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

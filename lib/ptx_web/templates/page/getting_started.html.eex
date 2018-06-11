@@ -1,7 +1,20 @@
-<center>
-  <h1>Almost done!</h1>
+<link rel="stylesheet" href="<%= static_path(@conn, "/css/getting-started.css") %>">
 
-  <p>Just sign in with Google to start using PostTrack.</p>
-
-  <a href="/auth/google"><%= gettext "Sign in with Google" %></a>
-</center>
+<header>
+  <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="logo">
+  PostTrack
+</header>
+<section>
+  <h1><%= gettext "Let's get started!" %></h1>
+  <p class="description"><%= gettext "PostTrack needs you to sign in with your email account" %></p>
+  <div class="actions">
+    <a class="action white" href="/auth/google">
+      <img src="<%= static_path(@conn, "/images/ggl.svg") %>" alt="Google">
+      <span><%= gettext "Sign in with Google" %></span>
+    </a>
+  </div>
+  <p class="dimmed"><%= gettext "By continuing you agree with the " %><br><a href="/<%= @conn.assigns.locale %>/license-agreement/terms"><%= gettext "terms of use" %></a></p>
+</section>
+<footer>
+  <a href="/" class="button-small"><%= gettext "Cancel" %></a>
+</footer>

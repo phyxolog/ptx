@@ -27,7 +27,9 @@ defmodule PtxWeb.PageController do
   end
 
   def getting_started(conn, _params, _user) do
-    render conn, "getting_started.html"
+    conn
+    |> assign(:pass_style, true)
+    |> render("getting_started.html")
   end
 
   def office(conn, _params, _user) do
