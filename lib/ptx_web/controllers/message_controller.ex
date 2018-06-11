@@ -7,14 +7,22 @@ defmodule PtxWeb.MessageController do
 
   action_fallback PtxWeb.FallbackController
 
-  def index(conn, %{"thread_ids" => thread_ids} = params, user) do
+  defp list_messages(conn, params, user, list, method) do
     case get_user(user, params["token"]) do
       nil -> res_json(conn, %{messages: []})
       user ->
-        thread_ids = Enum.take(thread_ids, 1000)
-        messages = Messages.list_messages_by_thread_ids(thread_ids, user.id)
+        list = Enum.take(list, 1000)
+        messages = apply(Messages, method, [list, user.id])
         res_json(conn, %{messages: messages})
     end
+  end
+
+  def index(conn, %{"thread_ids" => thread_ids} = params, user) do
+    list_messages(conn, params, user, thread_ids, :list_messages_by_thread_ids)
+  end
+
+  def index(conn, %{"message_ids" => message_ids} = params, user) do
+    list_messages(conn, params, user, message_ids, :list_messages_by_message_ids)
   end
 
   def index(conn, _params, _user), do:
@@ -31,6 +39,7 @@ defmodule PtxWeb.MessageController do
           |> put_status(:created)
           |> res_json(%{status: :created})
         end
+        |> IO.inspect
     end
   end
 
