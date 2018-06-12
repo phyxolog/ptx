@@ -18,52 +18,37 @@ msgid "%Y-%m-%d at %H:%M"
 msgstr "%Y-%m-%d в %H:%M"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:102
-#: lib/ptx_web/templates/page/pricing.html.eex:134
-#: lib/ptx_web/templates/page/pricing.html.eex:168
+#: lib/ptx_web/templates/page/pricing.html.eex:101
+#: lib/ptx_web/templates/page/pricing.html.eex:133
+#: lib/ptx_web/templates/page/pricing.html.eex:167
 msgid "/ day"
 msgstr "/ день"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:116
+#: lib/ptx_web/templates/page/pricing.html.eex:115
 msgid "14 days of free test period"
 msgstr "14 днів безкоштовного тестового періоду"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:118
+#: lib/ptx_web/templates/page/pricing.html.eex:117
 msgid "All features of the «Pro» plan, but all messages will be sent with the signature «Send with PostTrack»"
 msgstr "Всі переваги «Професійного тарифу», тільки всі повідомлення будуть відправлятися з підписом «Відправлено за допомогою PostTrack»"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:188
+#: lib/ptx_web/templates/page/pricing.html.eex:187
 msgid "Analysis of the time and count of links in email"
 msgstr "Аналіз часу і кількості переходів по посиланнях в email"
 
 #, elixir-format
-#: lib/ptx_web/templates/error/auth_failure.html.eex:2
-msgid "Authentication error"
-msgstr "Помилка авторизації"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:129
+#: lib/ptx_web/templates/page/pricing.html.eex:128
 msgid "Basic"
 msgstr "Базовий"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:152
-#: lib/ptx_web/templates/page/pricing.html.eex:186
+#: lib/ptx_web/templates/page/pricing.html.eex:151
+#: lib/ptx_web/templates/page/pricing.html.eex:185
 msgid "Email and desktop notifications after reading email"
 msgstr "Email-повідомлення та повідомлення на робочому столі, після прочитання email"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:21
-msgid "English"
-msgstr "Англійський"
-
-#, elixir-format
-#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:2
-msgid "Error generate LiqPay link."
-msgstr "Помилка генерації лінку для оплати (LiqPay)"
 
 #, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:74
@@ -76,12 +61,12 @@ msgid "Faq"
 msgstr "Питання - Відповідь"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:97
+#: lib/ptx_web/templates/page/pricing.html.eex:96
 msgid "Free"
 msgstr "Безкоштовний"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:177
+#: lib/ptx_web/templates/page/pricing.html.eex:176
 msgid "Go Pro"
 msgstr "Вибрати тариф"
 
@@ -91,23 +76,18 @@ msgid "Annually"
 msgstr "Одразу за рік"
 
 #, elixir-format
-#: lib/ptx_web/templates/error/auth_failure.html.eex:5
-msgid "Just sign in with Google to start using PostTrack."
-msgstr "Просто увійдіть в свій аккаунт за допомогою Google для того, щоб почати використовувати PostTrack."
-
-#, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:17
 msgid "License"
 msgstr "Ліцензійна угода"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:151
-#: lib/ptx_web/templates/page/pricing.html.eex:185
+#: lib/ptx_web/templates/page/pricing.html.eex:150
+#: lib/ptx_web/templates/page/pricing.html.eex:184
 msgid "Obtaining the status and statistics of message views"
 msgstr "Отримання статусу і статистики переглядів листи"
 
 #, elixir-format
-#: lib/ptx/pay.ex:31
+#: lib/ptx/pay.ex:32
 msgid "Payment of the «%{plan}» for %{email}"
 msgstr "Оплата тарифу «%{plan}» для %{email}"
 
@@ -117,28 +97,23 @@ msgid "PostTrack Alerts <noreply@posttrack.com>"
 msgstr "PostTrack Повідомлення <noreply@posttrack.com>"
 
 #, elixir-format
+#: lib/ptx_web/controllers/page_controller.ex:24
 #: lib/ptx_web/templates/page/pricing.html.eex:15
 msgid "Pricing"
 msgstr "Тарифи"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:163
+#: lib/ptx_web/templates/page/pricing.html.eex:162
 msgid "Professional"
 msgstr "Професіональний"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:19
-msgid "Russian"
-msgstr "Російська"
-
-#, elixir-format
-#: lib/ptx_web/templates/error/auth_failure.html.eex:8
-#: lib/ptx_web/templates/page/getting_started.html.eex:6
+#: lib/ptx_web/templates/page/getting_started.html.eex:13
 msgid "Sign in with Google"
 msgstr "Увійти за допомогою Google"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:202
+#: lib/ptx_web/templates/page/pricing.html.eex:201
 msgid "Site built with Sloenka.com"
 msgstr "Сайт створено за допомогою сервісу Sloenka.com"
 
@@ -148,49 +123,44 @@ msgid "The best payment plans"
 msgstr "Кращі тарифні плани"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:137
-#: lib/ptx_web/templates/page/pricing.html.eex:171
+#: lib/ptx_web/templates/page/pricing.html.eex:136
+#: lib/ptx_web/templates/page/pricing.html.eex:170
 msgid "Total: $"
 msgstr "Всього: $"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:105
+#: lib/ptx_web/templates/page/pricing.html.eex:104
 msgid "Total: $ 0.00 / 14 days"
 msgstr "Всього: $ 0.00 / 14 дней"
 
 #, elixir-format
-#: lib/ptx_web/templates/error/trial_unavailable.html.eex:2
+#: lib/ptx_web/templates/error/trial_unavailable.html.eex:8
 msgid "Trial unavailable"
 msgstr "Безкоштовний тариф недоступний"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:109
+#: lib/ptx_web/templates/page/pricing.html.eex:108
 msgid "Try Free"
 msgstr "Протестувати Безкоштовно"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:20
-msgid "Ukrainian"
-msgstr "Українська"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:150
-#: lib/ptx_web/templates/page/pricing.html.eex:184
+#: lib/ptx_web/templates/page/pricing.html.eex:149
+#: lib/ptx_web/templates/page/pricing.html.eex:183
 msgid "Unlimited emails"
 msgstr "Необмежена кількість email"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:145
+#: lib/ptx_web/templates/page/pricing.html.eex:144
 msgid "Video presentation of services in a Basic plan"
 msgstr "Відео-презентація послуг в Базовому тарифі"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:111
+#: lib/ptx_web/templates/page/pricing.html.eex:110
 msgid "Video presentation of services in a Free plan"
 msgstr "Відео-презентація послуг в Безкоштовному тарифі"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:179
+#: lib/ptx_web/templates/page/pricing.html.eex:178
 msgid "Video presentation of services in a Pro plan"
 msgstr "Відео-презентація послуг в Pro тарифі"
 
@@ -200,8 +170,8 @@ msgid "Welcome!"
 msgstr "Ласкаво просимо!"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:153
-#: lib/ptx_web/templates/page/pricing.html.eex:187
+#: lib/ptx_web/templates/page/pricing.html.eex:152
+#: lib/ptx_web/templates/page/pricing.html.eex:186
 msgid "Without signature «Send with PostTrack»"
 msgstr "Немає підпису «Відправлено за допомогою PostTrack»"
 
@@ -216,24 +186,24 @@ msgid "discount -80%"
 msgstr "знижка -80%"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:139
-#: lib/ptx_web/templates/page/pricing.html.eex:173
+#: lib/ptx_web/templates/page/pricing.html.eex:138
+#: lib/ptx_web/templates/page/pricing.html.eex:172
 msgid "month"
 msgstr "місяць"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:139
-#: lib/ptx_web/templates/page/pricing.html.eex:173
+#: lib/ptx_web/templates/page/pricing.html.eex:138
+#: lib/ptx_web/templates/page/pricing.html.eex:172
 msgid "year"
 msgstr "рік"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:201
+#: lib/ptx_web/templates/page/pricing.html.eex:200
 msgid "© PostTrack Sloenka. All rights reserved."
 msgstr "© PostTrack Sloenka. Всі права захищені."
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:143
+#: lib/ptx_web/templates/page/pricing.html.eex:142
 msgid "Go Basic"
 msgstr "Вибрати тариф"
 
@@ -263,7 +233,7 @@ msgstr "Більш докладний опис проблеми ви может�
 msgid "Perfect, now you have a profile in the "
 msgstr "Дуже добре, тепер у вас є профіль в "
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:13
 #: lib/ptx_web/templates/mailer/email/new_plan.html.eex:11
 msgid "Pricing plan"
@@ -350,7 +320,7 @@ msgstr "Термін дії вашого тарифу закінчився!"
 msgid "Your link has been clicked!"
 msgstr "Ваше посилання було натиснуте!"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:36
 msgid "Your plan has been changed!"
 msgstr "Ваш Email був прочитаний!"
@@ -369,3 +339,78 @@ msgstr "користувачем"
 #: lib/ptx_web/templates/mailer/email/read_email.html.eex:7
 msgid "just read your email with subject"
 msgstr "прочитав вашого листа з темою"
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:12
+#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:11
+#: lib/ptx_web/templates/error/trial_unavailable.html.eex:11
+msgid "Authorize PostTrack"
+msgstr "Увійти в PostTrack"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/getting_started.html.eex:16
+msgid "By continuing you agree with the "
+msgstr "Продовжуючи, Ви погоджуєтеся з "
+
+#, elixir-format
+#: lib/ptx_web/templates/page/getting_started.html.eex:19
+msgid "Cancel"
+msgstr "Відміна"
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:9
+msgid "For being able to track your emails, PostTrack needs to connect to your email account."
+msgstr "Для відстеження ваших листів PostTrack необхідно підключитися до вашого профілю електронної пошти."
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:20
+#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:19
+#: lib/ptx_web/templates/error/trial_unavailable.html.eex:19
+msgid "Google permissions settings"
+msgstr "Налаштування доступу до облікового запису Google"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/getting_started.html.eex:8
+msgid "Let's get started!"
+msgstr "Давайте почнемо!"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/getting_started.html.eex:9
+msgid "PostTrack needs you to sign in with your email account"
+msgstr "Нам потрібно, щоб Ви увійшли в свій аккаунт електронної пошти"
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:19
+#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:18
+#: lib/ptx_web/templates/error/trial_unavailable.html.eex:18
+msgid "We also do not read or store content of your emails and share your personal data to third-party software."
+msgstr "Ми також не читаємо і не зберігаємо вміст ваших листів і не передаємо ваші особисті дані третім особам."
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:18
+#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:17
+#: lib/ptx_web/templates/error/trial_unavailable.html.eex:17
+msgid "We do not have an access to your email account password."
+msgstr "Ми не знаємо і не зберігаємо пароль від вашого облікового запису."
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:8
+msgid "You have cancelled authorizing :("
+msgstr "Помилка авторизації"
+
+#, elixir-format
+#: lib/ptx_web/templates/error/auth_failure.html.eex:20
+#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:19
+#: lib/ptx_web/templates/error/trial_unavailable.html.eex:19
+msgid "You will be able to restrict permissions for PostTrack to your account via"
+msgstr "Ви можете обмежити доступ для свого облікового запису через"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/getting_started.html.eex:16
+msgid "terms of use"
+msgstr "умови використання"
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:8
+msgid "Error generate LiqPay link"
+msgstr "Помилка генерації лінку для оплати (LiqPay)"

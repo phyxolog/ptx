@@ -1,3 +1,21 @@
-<center>
-  <h2><%= gettext "Trial unavailable" %></h2>
-</center>
+<link rel="stylesheet" href="<%= static_path(@conn, "/css/getting-started.css") %>">
+
+<header>
+  <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="logo">
+  PostTrack
+</header>
+<section>
+  <h1><%= gettext "Trial unavailable" %></h1>
+  <div class="actions">
+    <a class="action green" href="/auth/google">
+      <span><%= gettext "Authorize PostTrack" %></span>
+    </a>
+  </div>
+</section>
+<footer>
+  <p class="dimmed">
+    <%= gettext "We do not have an access to your email account password." %><br>
+    <%= gettext "We also do not read or store content of your emails and share your personal data to third-party software." %><br>
+    <%= gettext "You will be able to restrict permissions for PostTrack to your account via" %> <a target="_BLANK" href="https://myaccount.google.com/permissions"><%= gettext "Google permissions settings" %></a>
+  </p>
+</footer>

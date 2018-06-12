@@ -1,9 +1,22 @@
-<center>
-  <h2><%= gettext "Authentication error" %></h2>
+<link rel="stylesheet" href="<%= static_path(@conn, "/css/getting-started.css") %>">
 
-  <p>
-    <%= gettext "Just sign in with Google to start using PostTrack." %>
+<header>
+  <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="logo">
+  PostTrack
+</header>
+<section>
+  <h1><%= gettext "You have cancelled authorizing :(" %></h1>
+  <p class="description"><%= gettext "For being able to track your emails, PostTrack needs to connect to your email account." %></p>
+  <div class="actions">
+    <a class="action green" href="/auth/google">
+      <span><%= gettext "Authorize PostTrack" %></span>
+    </a>
+  </div>
+</section>
+<footer>
+  <p class="dimmed">
+    <%= gettext "We do not have an access to your email account password." %><br>
+    <%= gettext "We also do not read or store content of your emails and share your personal data to third-party software." %><br>
+    <%= gettext "You will be able to restrict permissions for PostTrack to your account via" %> <a target="_BLANK" href="https://myaccount.google.com/permissions"><%= gettext "Google permissions settings" %></a>
   </p>
-
-  <a href="/auth/google"><%= gettext "Sign in with Google" %></a>
-</center>
+</footer>
