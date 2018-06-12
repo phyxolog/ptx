@@ -13,8 +13,8 @@
 
     <section class="navigation">
       <div class="item hoverable"><%= gettext "Pricing" %></div>
-      <a href="/<%= @conn.assigns.local %>/faq" class="item hoverable"><%= gettext "Faq" %></a>
-      <a href="/<%= @conn.assigns.local %>/license-agreement" class="item hoverable"><%= gettext "License" %></a>
+      <a href="/<%= @conn.assigns.locale %>/faq" class="item hoverable"><%= gettext "Faq" %></a>
+      <a href="/<%= @conn.assigns.locale %>/license-agreement" class="item hoverable"><%= gettext "License" %></a>
       <% locales = %{
         "ru" => "Русский",
         "uk" => "Українська",
