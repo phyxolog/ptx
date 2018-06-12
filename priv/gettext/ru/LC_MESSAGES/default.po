@@ -396,7 +396,7 @@ msgstr "Мы не знаем и не храним пароль от Вашего
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:8
 msgid "You have cancelled authorizing :("
-msgstr ""
+msgstr "Произошла ошибка при авторизации"
 
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:20

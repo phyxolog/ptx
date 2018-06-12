@@ -18,7 +18,7 @@
 
       location.href = "/auth/google/request?state=" + encodeURIComponent(JSON.stringify(state));
     } else {
-      location.href = "/auth/google/request";
+      location.href = "/auth/google/request?state=" + encodeURIComponent(JSON.stringify({ timezone_offset: timezoneOffset }));
     }
   </script>
 </body>

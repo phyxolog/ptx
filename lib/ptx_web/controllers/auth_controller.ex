@@ -53,9 +53,7 @@ defmodule PtxWeb.AuthController do
 
   defp processign(conn, _state) do
     conn
-    |> put_status(422)
-    |> put_view(PtxWeb.ErrorView)
-    |> render("422.html")
+    |> redirect(to: "/office")
   end
 
   ## Get user attributes from Google response
