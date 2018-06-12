@@ -4,7 +4,7 @@ APP="ptx"
 
 BUILD_HOST="posttrack.email"
 BUILD_USER="phyx"
-BUILD_AT="/home/artmart/applications/edeliver/$APP/builds"
+BUILD_AT="/home/phyx/applications/edeliver/$APP/builds"
 
 PRODUCTION_HOSTS="posttrack.email" # deploy / production hosts separated by space
 PRODUCTION_USER="phyx" # local user at deploy hosts
