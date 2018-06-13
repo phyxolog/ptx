@@ -411,7 +411,7 @@ msgid "Somebody just clicked «‎%{link}» inside your mail with subject «‎%
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
 msgid "The PostTrack will restore its work as soon as there will be a successfull subscription payment. You also can move to another pricing plan or make resubscription using other requisites at"
 msgstr ""
@@ -432,23 +432,8 @@ msgid "User %{email} just clicked «‎%{link}» inside your mail with subject �
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
-msgid "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
-msgid "You are using the \"Trial\" pricing plan for your email levitatormailer@gmail.com, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at "
-msgstr ""
-
-#, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen.html.eex:8
-msgid "You had used the \"Pro\" pricing plan (monthly subscription) for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email."
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
-msgid "You had used the \"Trial\" pricing plan for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email. To allow the PostTrack to restore its work you should select another pricing plan at"
+msgid "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
 msgstr ""
 
 #, elixir-format
@@ -463,7 +448,7 @@ msgid "page."
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
 msgid "your PostTrack account"
 msgstr ""
@@ -471,4 +456,14 @@ msgstr ""
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "your PostTrack account settings page"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
+msgid "You are using the \"%{plan}\" pricing plan for your email %{email}, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at "
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
+msgid "You had used the \"%{plan}\" pricing plan for your email %{email}. This pricing plan had just expired, and the PostTrack stopped working for this email. To allow the PostTrack to restore its work you should select another pricing plan at"
 msgstr ""

@@ -388,71 +388,56 @@ msgstr "Помилка генерації лінку для оплати (LiqPay
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "Parameters of receiving email-notifications you can set up at"
-msgstr ""
+msgstr "Параметри отримання email-повідомлень можна налаштувати на"
 
 #, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:44
 msgid "Paying error!"
-msgstr ""
+msgstr "Помилка оплати!"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
 msgid "PostTrack Pricing"
-msgstr ""
+msgstr "PostTrack Тарифи"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "PostTrack contacts page"
-msgstr ""
+msgstr "PostTrack Контакти"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/link_opened.html.eex:11
 msgid "Somebody just clicked «‎%{link}» inside your mail with subject «‎%{subject}» ."
-msgstr ""
+msgstr "Хтось щойно натиснув на посилання «%{link}» в вашому листі з темою «%{subject}."
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
 msgid "The PostTrack will restore its work as soon as there will be a successfull subscription payment. You also can move to another pricing plan or make resubscription using other requisites at"
-msgstr ""
+msgstr "PostTrack відновить свою роботу як тільки буде здійснена успішна оплата підписки. Ви також можете перейти на інший тарифний план або зробити перепідписку з використанням інших реквізитів в"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "The ways to contact us you can find at"
-msgstr ""
+msgstr "Контакти для зв'язку з нами Ви можете знайти на"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/pay_error.html.eex:8
 msgid "There was a refuse of payment system during automatical subscription renew. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
-msgstr ""
+msgstr "Під час автоматичного продовження Вашої підписки сталася помилка платіжної системи. Можливо, на рахунку Вашої банківської карти недостатньо коштів для продовження підписки, або сталася помилка з боку Вашого банку. Більш детальну інформацію про відмову ви можете отримати у менеджера Вашого банку. "
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/link_opened.html.eex:16
 msgid "User %{email} just clicked «‎%{link}» inside your mail with subject «‎%{subject}» ."
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
-msgid "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
-msgid "You are using the \"Trial\" pricing plan for your email levitatormailer@gmail.com, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at "
-msgstr ""
+msgstr "Користувач %{email} тільки що натиснув на посилання «%{link}» у Вашому листі з темою «%{subject}."
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen.html.eex:8
-msgid "You had used the \"Pro\" pricing plan (monthly subscription) for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email."
-msgstr ""
+msgid "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
+msgstr "Нам не вдалося автоматично продовжити Вашу підписку через відмову платіжної системи. Можливо, на рахунку Вашої банківської карти недостатньо коштів для продовження підписки, або сталася помилка з боку Вашого банку. Більш детальну інформацію про відмову ви можете отримати у менеджера Вашого банку."
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
-msgid "You had used the \"Trial\" pricing plan for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email. To allow the PostTrack to restore its work you should select another pricing plan at"
-msgstr ""
-
-#, elixir-format, fuzzy
 #: lib/ptx/mailer/mail_sender.ex:43
 msgid "Your account has been frozen after 24 hours!"
 msgstr "Ваш аккаунт був заморожений!"
@@ -461,15 +446,25 @@ msgstr "Ваш аккаунт був заморожений!"
 #: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
 msgid "page."
-msgstr ""
+msgstr "сторінці."
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
 msgid "your PostTrack account"
-msgstr ""
+msgstr "Ваш PostTrack акаунт"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "your PostTrack account settings page"
-msgstr ""
+msgstr "Вашій сторінці налаштувань облікового запису"
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
+msgid "You are using the \"%{plan}\" pricing plan for your email %{email}, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at "
+msgstr "Ви використовуєте тарифний план \"%{plan}\" для Вашої пошти %{email}, термін дії якого закінчується завтра. Для нормальної роботи PostTrack для цієї пошти виберіть інший тарифний план на сторінці "
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
+msgid "You had used the \"%{plan}\" pricing plan for your email %{email}. This pricing plan had just expired, and the PostTrack stopped working for this email. To allow the PostTrack to restore its work you should select another pricing plan at"
+msgstr "Ви використовували тарифний план \"%{plan}\" для Вашої пошти %{email}. Термін дії цього тарифного плану закінчився, тому PostTrack перестав працювати для цієї адреси електронної пошти. Щоб відновити використання PostTrack, виберіть інший тарифний план на сторінці"
