@@ -98,7 +98,8 @@ config :ptx, Ptx.Mailer,
 config :ptx, Ptx.Scheduler,
   timezone: "Europe/Kiev",
   jobs: [
-    {"@hourly", {Ptx.Accounts, :freeze_expired_users, []}}
+    {"@hourly", {Ptx.Accounts, :freeze_and_list_expired_users, []}},
+    {"@hourly", {Ptx.Accounts, :list_expiring_tomorrow_users, []}}
   ]
 
 # Import environment specific config. This must remain at the bottom
