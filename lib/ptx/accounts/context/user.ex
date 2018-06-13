@@ -11,14 +11,30 @@ defmodule Ptx.Accounts.Context.User do
       @trial_period Application.get_env(:ptx, :trial_period, 14)
 
       @doc """
-      Freeze user. Check only by valid_until.
-      Call every 2 hours.
+      Freeze expired user.
+      Call every hour.
       """
-      def freeze_expired_users do
+      def freeze_and_list_expired_users do
         query = from u in User,
+          where: u.frozen == false,
           where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '0 days'", u.valid_until)
 
-        Repo.update_all(query, set: [frozen: true])
+        {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: true)
+        list
+      end
+
+      @doc """
+      Get a list of email that expire tomorrow.
+      Call every hour.
+      """
+      def list_expiring_tomorrow_users do
+        query = from u in User,
+          where: u.frozen == false,
+          where: u.expiring_tomorrow == false,
+          where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '1 days'", u.valid_until)
+
+        {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: true)          
+        list
       end
 
       @doc """
