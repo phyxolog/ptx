@@ -8,22 +8,12 @@
 </head>
 <body>
 	<!-- #region email -->
-	<div style="background-color: #8461DD; font-family: sans-serif" bgcolor="#8461DD">
+	<div style="padding-left: 10px; padding-right: 10px; background-color: #8461DD; font-family: sans-serif" bgcolor="#8461DD">
 		<!-- #region logotype -->
 		<img src="https://posttrack.email/images/logo.gif" alt="PostTrack" style="width: 100%; max-width: 600px; display: block; margin: 0 auto">
 		<!-- #endregion -->
-
-    <!-- #region main content -->
-    <div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
-      <!-- #region firstpart -->
-      <div style="padding: 30px">
-        <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
-
-        <%= render @view_module, @view_template, assigns %>
-      </div>
-      <!-- #region -->
-    </div>
-    <!-- #endregion -->
+    
+    <%= render @view_module, @view_template, assigns %>
 
 		<!-- #region footer -->
 		<p style="max-width: 540px; margin: 0 auto; color: #DAD0F5; padding: 30px; font-size: 12px; line-height: 15px">

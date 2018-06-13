@@ -40,7 +40,7 @@ defmodule PtxWeb.AuthController do
   def callback(conn, _params, _user) do
     conn
     |> do_callback()
-    |> redirect(to: "/office")
+    |> redirect(to: "/pricing")
   end
 
   ## Process pay state
@@ -53,7 +53,7 @@ defmodule PtxWeb.AuthController do
 
   defp processign(conn, _state) do
     conn
-    |> redirect(to: "/office")
+    |> redirect(to: "/pricing")
   end
 
   ## Get user attributes from Google response

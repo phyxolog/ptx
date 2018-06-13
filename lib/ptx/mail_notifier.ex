@@ -4,6 +4,7 @@ defmodule Ptx.MailNotifier do
   """
 
   alias Ptx.{MailSender, Messages}
+  require OK
 
   ## Full implemented
   def welcome_notify(user) do
@@ -34,12 +35,12 @@ defmodule Ptx.MailNotifier do
   @doc """
   Called when user opened our link.
   """
-  def open_link_notify(message_uuid, _link_id) do
-    user = Messages.get_user_by_message_uuid(message_uuid)
-    if user.notification_settings.link_opened do
-      # TODO: Get parameters for send an email
-      MailSender.send(:link_opened, user, [])
-    end
+  def open_link_notify(message, link, user) do
+    MailSender.send(:link_opened, user, [
+      recipient: Messages.get_message_recipient(message),
+      subject: message.subject,
+      link: link
+    ])
   end
 
   ## Ptx.MailNotifier.change_plan_notify(user, "trial", "pro")

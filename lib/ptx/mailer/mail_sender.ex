@@ -25,30 +25,30 @@ defmodule Ptx.MailSender do
     |> subject(subject)
     |> render(layout, assigns)
     |> Mailer.deliver_later()
-  rescue
-    error -> Logger.error("Error when email was send. #{inspect error}")
+  # rescue
+  #   error -> Logger.error("Error when email was send. #{inspect error}")
   end
-
-  @conformity_table [
-    welcome: gettext("Welcome!"),
-    read_email: gettext("Your email has been read!"),
-    open_link: gettext("Your link has been clicked!"),
-    change_plan: gettext("Your plan has been changed!"),
-    new_plan: gettext("The plan is fixed for you!"),
-    frozen: gettext("Your account has been frozen!"),
-    outdated: gettext("Your account has been outdated!"),
-    unsubscribed: gettext("You successfully unsubscribed!")
-  ]
 
   def send(method, user, opts \\ [])
   def send(method, user, opts) do
-    if @conformity_table[method] != nil do
-      Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
-        subject = @conformity_table[method]
+    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
+      conformity_table = [
+        welcome: gettext("Welcome!"),
+        read_email: gettext("Your email has been read!"),
+        link_opened: gettext("Your link has been clicked!"),
+        change_plan: gettext("Your plan has been changed!"),
+        new_plan: gettext("The plan is fixed for you!"),
+        frozen: gettext("Your account has been frozen!"),
+        outdated: gettext("Your account has been outdated!"),
+        unsubscribed: gettext("You successfully unsubscribed!")
+      ]
+
+      if conformity_table[method] != nil do
+        subject = conformity_table[method]
         deliver(user.id, subject, Atom.to_string(method) <> ".html", Keyword.put(opts, :user, user))
-      end)
-    else
-      Logger.error("Not found handler for Ptx.MailSender.send/3.\nMethod: #{inspect method}")
-    end
+      else
+        Logger.error("Not found handler for Ptx.MailSender.send/3.\nMethod: #{inspect method}")
+      end
+    end)
   end
 end

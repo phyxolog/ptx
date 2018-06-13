@@ -5,7 +5,12 @@ defmodule Ptx.Accounts.NotificationSettings do
 
   @derive {Poison.Encoder, except: [:__meta__, :id, :user, :user_id]}
   @derive {Jason.Encoder, except: [:__meta__, :id, :user, :user_id]}
-  @fields ~w(plan_changed email_read link_opened email_opened_again link_opened_again)a
+  @fields ~w(plan_changed
+    email_read email_opened_again
+    link_opened link_opened_again
+    push_email_read push_email_read_again
+    push_link_opened push_link_opened_again
+  )a
 
   schema "notification_settings" do
     field :plan_changed, :boolean, default: true
@@ -13,6 +18,10 @@ defmodule Ptx.Accounts.NotificationSettings do
     field :email_opened_again, :boolean, default: false
     field :link_opened, :boolean, default: true
     field :link_opened_again, :boolean, default: false
+    field :push_email_read, :boolean, default: true
+    field :push_email_read_again, :boolean, default: false
+    field :push_link_opened, :boolean, default: true
+    field :push_link_opened_again, :boolean, default: false
     belongs_to :user, User, type: :string
   end
 

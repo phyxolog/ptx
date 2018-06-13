@@ -1,39 +1,48 @@
-<!-- #region simple paragraph -->
-<p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;">
-  <%= cond do %>
-    <% is_nil(@read_user) -> %>
-      <%= gettext "Somebody read your email with subject " %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
-    <% !is_nil(@read_user) -> %>
-      <%= gettext "User" %> <a href="mailto:<%= @read_user %>" style="color: #005CFF"><%= @read_user %></a> <%= gettext "just read your email with subject" %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
-  <% end %>
-</p>
-<!-- #endregion -->
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+  <!-- #region firstpart -->
+  <div style="padding: 30px">
+    <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
 
-<!-- #region iconic items -->
-<div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
-  <img src="https://posttrack.email/images/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
-  <%= gettext "Sent on" %> <%= @sent_date %>
-</div>
-<!-- last item has no margin-bottom -->
-<div style="font-size: 12px; line-height: 20px; color: #9E9E9E">
-  <img src="https://posttrack.email/images/read.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
-  <%= gettext "Read on" %> <%= @read_date %>
-	<%= if !is_nil(@read_user) do %>
-    <%= gettext "by user" %>
-    <a href="mailto:<%= @read_user %>" style="color: #005CFF;"><%= @read_user %></a>
-  <% end %>
-</div>
-<!-- #endregion -->
-</div>
-<!-- #endregion -->
+    <!-- #region simple paragraph -->
+    <p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;">
+      <%= cond do %>
+        <% is_nil(@read_user) -> %>
+          <%= gettext "Somebody read your email with subject " %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
+        <% !is_nil(@read_user) -> %>
+          <%= gettext "User" %> <a href="mailto:<%= @read_user %>" style="color: #005CFF"><%= @read_user %></a> <%= gettext "just read your email with subject" %> <span style="font-weight: bold">&laquo;<%= @subject %>&raquo;</span>.
+      <% end %>
+    </p>
+    <!-- #endregion -->
 
-<!-- #region last part -->
-<div style="padding: 30px; border-top: 1px solid #F0ECFB;">
-<p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;"><%= gettext "Recepients" %></p>
-<!-- #region iconic items -->
-<%= for recipient <- @recipients do %>
-  <div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
-    <img src="https://posttrack.email/images/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
-    <a href="mailto:<%= recipient %>" style="color: #005CFF;"><%= recipient %></a>
+    <!-- #region iconic items -->
+      <div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
+        <img src="https://posttrack.email/images/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+        <%= gettext "Sent on" %> <%= @sent_date %>
+      </div>
+    <!-- last item has no margin-bottom -->
+      <div style="font-size: 12px; line-height: 20px; color: #9E9E9E">
+        <img src="https://posttrack.email/images/read.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+        <%= gettext "Read on" %> <%= @read_date %>
+        <%= if !is_nil(@read_user) do %>
+          <%= gettext "by user" %>
+          <a href="mailto:<%= @read_user %>" style="color: #005CFF;"><%= @read_user %></a>
+        <% end %>
+      </div>
+    <!-- #endregion -->
   </div>
-<% end %>
+  <!-- #region -->
+
+  <!-- #region last part -->
+  <div style="padding: 30px; border-top: 1px solid #F0ECFB;">
+    <p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;"><%= gettext "Recepients" %></p>
+    <!-- #region iconic items -->
+    <%= for recipient <- @recipients do %>
+      <div style="font-size: 12px; line-height: 20px; color: #9E9E9E; margin-bottom: 10px;">
+        <img src="https://posttrack.email/images/sent.png" alt="sent" style="width: 20px; height: 20px; margin-right: 10px; display: block; float: left">
+        <a href="mailto:<%= recipient %>" style="color: #005CFF;"><%= recipient %></a>
+      </div>
+    <% end %>
+  </div>
+</div>
+<!-- #endregion -->

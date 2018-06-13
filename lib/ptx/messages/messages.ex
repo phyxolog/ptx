@@ -13,14 +13,18 @@ defmodule Ptx.Messages do
   use Ptx.Messages.Context.Read
   use Ptx.Messages.Context.Link
 
+  defp show_push?(:first_time, user), do: user.notification_settings.push_email_read
+  defp show_push?(:once_again, user), do: user.notification_settings.push_email_read_again
+
   ## Send message to frontend about needed refresh markers on Gmail.
-  defp send_refresh_markers(message) do
+  defp send_refresh_markers(message, user, step) do
     params = %{
       subject: message.subject,
       readed_by: get_message_recipient(message),
       when: message.first_readed_at,
       sent_on: message.inserted_at,
-      recipients: message.recipients
+      recipients: message.recipients,
+      show_push: show_push?(step, user)
     }
 
     PtxWeb.Endpoint.broadcast("room:#{message.sender_id}", "refresh_markers", params)
@@ -28,13 +32,15 @@ defmodule Ptx.Messages do
 
   ## Send email notify of read emails
   defp send_email_when_read(user, message) do
-    Ptx.MailNotifier.read_email_notify(user, [
-      subject: message.subject,
-      sent_date: Timex.format!(message.inserted_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
-      read_date: Timex.format!(message.first_readed_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
-      read_user: get_message_recipient(message),
-      recipients: message.recipients
-    ])
+    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
+      Ptx.MailNotifier.read_email_notify(user, [
+        subject: message.subject,
+        sent_date: Timex.format!(message.inserted_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+        read_date: Timex.format!(message.first_readed_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+        read_user: get_message_recipient(message),
+        recipients: message.recipients
+      ])
+    end)
   end
 
   @doc """
@@ -50,13 +56,13 @@ defmodule Ptx.Messages do
 
         read_message(message, fn
           {:first_time, message} ->
-            send_refresh_markers(message)
+            send_refresh_markers(message, user, :first_time)
 
             if user.notification_settings.email_read do
               send_email_when_read(user, message)
             end
           {:once_again, message} ->
-            send_refresh_markers(message)
+            send_refresh_markers(message, user, :once_again)
 
             if user.plan in ["trial", "pro"] &&
               user.notification_settings.email_opened_again do
@@ -310,5 +316,17 @@ defmodule Ptx.Messages do
 
     Repo.one(query)
     |> Repo.preload(User.preloaded())
+  end
+
+  @doc """
+  Gets a single message by uuid.
+  """
+  def get_message_by_uuid(uuid) do
+    query = from m in Message,
+      where: m.uuid == ^uuid,
+      limit: 1
+
+    Repo.one(query)
+    |> OK.required()
   end
 end
