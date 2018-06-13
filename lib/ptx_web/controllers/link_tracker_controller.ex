@@ -6,8 +6,8 @@ defmodule PtxWeb.LinkTrackerController do
 
   defp notify?(user, link, field) do
     cond do
-      link.clicks_count < 1 && Map.get(user.notification_settings, field) -> true
-      link.clicks_count >= 1 && Map.get(user.notification_settings, String.to_existing_atom("#{field}_again")) -> true
+      link.clicks_count <= 1 && Map.get(user.notification_settings, field) -> true
+      link.clicks_count > 1 && Map.get(user.notification_settings, String.to_existing_atom("#{field}_again")) -> true
       true -> false
     end
   end
