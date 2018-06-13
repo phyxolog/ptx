@@ -1,18 +1,28 @@
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= gettext "You successfully added a \"%{plan}\" pricing plan for your email. We wish you a convenient and resulable usage! :)", [
-    plan: @user.plan,
-    email: @user.id
-  ] %>
-</p>
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+  <!-- #region firstpart -->
+  <div style="padding: 30px">
+    <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
 
-<%= render(PtxWeb.EmailModules, "hr.html", []) %>
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= gettext "You successfully added a \"%{plan}\" pricing plan for your email. We wish you a convenient and resulable usage! :)", [
+        plan: @user.plan,
+        email: @user.id
+      ] %>
+    </p>
 
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Pricing plan"]) %>
-	<b><%= String.capitalize(@user.plan) %></b>
-</p>
+    <%= render(PtxWeb.EmailModules, "hr.html", []) %>
 
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Valid until"]) %>
-	<%= Timex.format!(@user.valid_until, gettext("%F at %k:%M"), :strftime) %>
-</p>
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Pricing plan"]) %>
+      <b><%= String.capitalize(@user.plan) %></b>
+    </p>
+
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Valid until"]) %>
+      <%= Timex.format!(@user.valid_until, gettext("%F at %k:%M"), :strftime) %>
+    </p>
+  </div>
+  <!-- #region -->
+</div>
+<!-- #endregion -->

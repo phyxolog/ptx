@@ -1,3 +1,13 @@
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= gettext "You successfully unsubscribed. PostTrack doesn't work with this email anymore - %{email}", email: @user.id %>
-</p>
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+  <!-- #region firstpart -->
+  <div style="padding: 30px">
+    <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
+
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= gettext "You successfully unsubscribed. PostTrack doesn't work with this email anymore - %{email}", email: @user.id %>
+    </p>
+  </div>
+  <!-- #region -->
+</div>
+<!-- #endregion -->
