@@ -1,8 +1,18 @@
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= gettext "Perfect, now you have a profile in the " %>
-  <%= render(PtxWeb.EmailModules, "link_office.html", []) %>
-</p>
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+  <!-- #region firstpart -->
+  <div style="padding: 30px">
+    <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
+    
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= gettext "Perfect, now you have a profile in the " %>
+      <%= render(PtxWeb.EmailModules, "link_office.html", []) %>
+    </p>
 
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= gettext "We are always developing our product and trying to make it better, that you can use it with convenience. Please, tell us about any bugs and disadvantages via our feedback email. We are also will be happy to consider your propositions about PostTrack improvement." %>
-</p>
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= gettext "We are always developing our product and trying to make it better, that you can use it with convenience. Please, tell us about any bugs and disadvantages via our feedback email. We are also will be happy to consider your propositions about PostTrack improvement." %>
+    </p>
+  </div>
+  <!-- #region -->
+</div>
+<!-- #endregion -->

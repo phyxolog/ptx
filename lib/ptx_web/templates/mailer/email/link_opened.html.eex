@@ -1,17 +1,27 @@
-<!-- #region simple paragraph -->
-<p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;">
-  <%= case @recipient do %>
-  <% nil -> %>
-    <%= gettext "Somebody just clicked «‎%{link}» inside your mail with subject «‎%{subject}» .", [
-      link: @link.text,
-      subject: @subject
-    ] %>
-  <% recipient -> %>
-    <%= gettext "User %{email} just clicked «‎%{link}» inside your mail with subject «‎%{subject}» .", [
-      email: recipient,
-      link: @link.text,
-      subject: @subject
-    ] %>
-  <% end %>
-</p>
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+  <!-- #region firstpart -->
+  <div style="padding: 30px">
+    <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
+
+    <!-- #region simple paragraph -->
+    <p style="margin: 0; margin-bottom: 10px; font-size: 16px; line-height: 25px; color: #494949;">
+      <%= case @recipient do %>
+      <% nil -> %>
+        <%= gettext "Somebody just clicked «‎%{link}» inside your mail with subject «‎%{subject}» .", [
+          link: @link.text,
+          subject: @subject
+        ] %>
+      <% recipient -> %>
+        <%= gettext "User %{email} just clicked «‎%{link}» inside your mail with subject «‎%{subject}» .", [
+          email: recipient,
+          link: @link.text,
+          subject: @subject
+        ] %>
+      <% end %>
+    </p>
+    <!-- #endregion -->
+  </div>
+  <!-- #region -->
+</div>
 <!-- #endregion -->

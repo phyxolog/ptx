@@ -1,9 +1,19 @@
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= gettext "For your email %{email} you are using the \"%{plan}\" pricing plan, a validity period of which has just expired, but scheduled payment was denied by payment system, because of what PostTrack cannot extend the validity period of used pricing plan. If the problem will not solved during closest 24 hours, a work of extension will stop for this email.", email: @user.id, plan: @user.plan %>
-</p>
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+  <!-- #region firstpart -->
+  <div style="padding: 30px">
+    <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
 
-<p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-	<%= gettext "More detailed problem description you can find in the" %>
-	<%= render(PtxWeb.EmailModules, "link_office.html", []) %>
-	<%= gettext "at \"Details\" section for this email." %>
-</p>
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= gettext "For your email %{email} you are using the \"%{plan}\" pricing plan, a validity period of which has just expired, but scheduled payment was denied by payment system, because of what PostTrack cannot extend the validity period of used pricing plan. If the problem will not solved during closest 24 hours, a work of extension will stop for this email.", email: @user.id, plan: @user.plan %>
+    </p>
+
+    <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+      <%= gettext "More detailed problem description you can find in the" %>
+      <%= render(PtxWeb.EmailModules, "link_office.html", []) %>
+      <%= gettext "at \"Details\" section for this email." %>
+    </p>
+  </div>
+  <!-- #region -->
+</div>
+<!-- #endregion -->
