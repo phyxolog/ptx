@@ -388,54 +388,54 @@ msgstr "Ошибка генерирования ссылки для оплаты
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "Parameters of receiving email-notifications you can set up at"
-msgstr ""
+msgstr "Параметры получения email-уведомлений можно настроить на"
 
 #, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:44
 msgid "Paying error!"
-msgstr ""
+msgstr "Ошибка оплаты!"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
 msgid "PostTrack Pricing"
-msgstr ""
+msgstr "PostTrack Тарифы"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "PostTrack contacts page"
-msgstr ""
+msgstr "PostTrack Контакты"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/link_opened.html.eex:11
 msgid "Somebody just clicked «‎%{link}» inside your mail with subject «‎%{subject}» ."
-msgstr ""
+msgstr "Кто-то только что нажал на ссылку «‎%{link}» в вашем письме с темой «‎%{subject}»."
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
 msgid "The PostTrack will restore its work as soon as there will be a successfull subscription payment. You also can move to another pricing plan or make resubscription using other requisites at"
-msgstr ""
+msgstr "PostTrack возобновит свою работу, как только будет совершена успешная оплата подписки. Вы также можете перейти на другой тарифный план или совершить переподписку с использованием других реквизитов в"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "The ways to contact us you can find at"
-msgstr ""
+msgstr "Контакты для связи с нами Вы можете найти на"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/pay_error.html.eex:8
 msgid "There was a refuse of payment system during automatical subscription renew. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
-msgstr ""
+msgstr "Во время автоматического продления Вашей подписки произошла ошибка платежной системы. Возможно, на счету Вашей банковской карты недостаточно средств для продления подписки, либо произошла ошибка со стороны Вашего банка. Более подробную информацию об отказе вы можете получить у менеджера Вашего банка. "
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/link_opened.html.eex:16
 msgid "User %{email} just clicked «‎%{link}» inside your mail with subject «‎%{subject}» ."
-msgstr ""
+msgstr "Пользователь %{email} только что нажал на ссылку «‎%{link}» в Вашем письме с темой «‎%{subject}»."
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
 msgid "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
-msgstr ""
+msgstr "Нам не удалось автоматически продлить Вашу подписку из-за отказа платежной системы. Возможно, на счету Вашей банковской карты недостаточно средств для продления подписки, либо произошла ошибка со стороны Вашего банка. Более подробную информацию об отказе вы можете получить у менеджера Вашего банка."
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
@@ -461,15 +461,15 @@ msgstr "Ваш аккаунт был заморожен!"
 #: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
 msgid "page."
-msgstr ""
+msgstr "странице."
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
 #: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
 msgid "your PostTrack account"
-msgstr ""
+msgstr "Ваш PostTrack аккаунт"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/layout/email.html.eex:20
 msgid "your PostTrack account settings page"
-msgstr ""
+msgstr "Вашей странице настроек аккаунта"

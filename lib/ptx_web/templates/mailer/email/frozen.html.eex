@@ -5,8 +5,6 @@
     <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
 
     <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-      <%= gettext "You had used the \"Pro\" pricing plan (monthly subscription) for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email." %>
-
       <%= gettext "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager." %>
 
       <%= gettext "The PostTrack will restore its work as soon as there will be a successfull subscription payment. You also can move to another pricing plan or make resubscription using other requisites at" %> <a href="https://posttrack.email/office/details"><%= gettext "your PostTrack account" %></a>

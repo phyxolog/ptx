@@ -5,7 +5,7 @@
     <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
 
     <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
-      <%= gettext "You are using the \"Trial\" pricing plan for your email levitatormailer@gmail.com, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at " %> <a href="https://posttrack.email/pricing"><%= gettext "PostTrack Pricing" %></a> <%= gettext "page." %>
+      <%= gettext "You are using the \"%{plan}\" pricing plan for your email %{email}, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at ", [plan: String.capitalize(@user.plan), email: @user.id] %> <a href="https://posttrack.email/pricing"><%= gettext "PostTrack Pricing" %></a> <%= gettext "page." %>
 
       <%= gettext "The PostTrack will restore its work as soon as there will be a successfull subscription payment. You also can move to another pricing plan or make resubscription using other requisites at" %> <a href="https://posttrack.email/office/details"><%= gettext "your PostTrack account" %></a>
     </p>
