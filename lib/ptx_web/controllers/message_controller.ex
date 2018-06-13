@@ -39,7 +39,6 @@ defmodule PtxWeb.MessageController do
           |> put_status(:created)
           |> res_json(%{status: :created})
         end
-        |> IO.inspect
     end
   end
 

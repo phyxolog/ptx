@@ -11,7 +11,7 @@ defmodule Ptx.Accounts.Context.User do
       @trial_period Application.get_env(:ptx, :trial_period, 14)
 
       @doc """
-      Freeze expired user.
+      Freeze expired user and notify about this (on email).
       Call every hour.
       """
       def freeze_and_list_expired_users do
@@ -19,22 +19,36 @@ defmodule Ptx.Accounts.Context.User do
           where: u.frozen == false,
           where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '0 days'", u.valid_until)
 
-        {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: true)
-        list
+        {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: [:id, :plan])
+
+        Enum.each(list, fn user ->
+          Task.start(fn ->
+            case user.plan do
+              "trial" -> Ptx.MailNotifier.frozen_trial_notify(user)
+              _ -> Ptx.MailNotifier.frozen_notify(user)
+            end
+          end)
+        end)
       end
 
       @doc """
-      Get a list of email that expire tomorrow.
+      Gets a list of email that expire tomorrow and notify about this (on email).
       Call every hour.
       """
       def list_expiring_tomorrow_users do
         query = from u in User,
           where: u.frozen == false,
           where: u.expiring_tomorrow == false,
+          where: u.plan == "trial",
           where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '1 days'", u.valid_until)
 
-        {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: true)          
-        list
+        {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: [:id])
+
+        Enum.each(list, fn user ->
+          Task.start(fn ->
+            Ptx.MailNotifier.outdated_trial_notify(user)
+          end)
+        end)
       end
 
       @doc """
@@ -185,13 +199,8 @@ defmodule Ptx.Accounts.Context.User do
         end
 
         ## Plan changed
-        if !is_nil(old_user.plan) && (old_user.plan != user.plan) do
+        if !is_nil(old_user.plan) && !is_nil(user.plan) && (old_user.plan != user.plan) do
           Ptx.MailNotifier.change_plan_notify(user, old_user.plan, user.plan)
-        end
-
-        ## Frozen
-        if !old_user.frozen && user.frozen do
-          Ptx.MailNotifier.frozen_notify(user)
         end
 
         ## Unsubscribe

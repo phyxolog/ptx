@@ -12,7 +12,7 @@ defmodule PtxWeb.PayController do
   def index(conn, %{"plan" => "trial"}, user) do
     case Accounts.activate_user_trial(user) do
       {:ok, :activated} ->
-        redirect(conn, to: "/office")
+        redirect(conn, to: "/office/details")
       _ ->
         conn
         |> put_view(PtxWeb.ErrorView)

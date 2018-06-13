@@ -55,18 +55,28 @@ defmodule Ptx.MailNotifier do
     MailSender.send(:new_plan, user)
   end
 
+  ## Ptx.MailNotifier.unsubscribed_notify(user)
+  def unsubscribed_notify(user) do
+    MailSender.send(:unsubscribed, user)
+  end
+
   ## Ptx.MailNotifier.frozen_notify(user)
   def frozen_notify(user) do
     MailSender.send(:frozen, user)
   end
 
-  ## Ptx.MailNotifier.outdated_notify(user)
-  def outdated_notify(user) do
-    MailSender.send(:outdated, user)
+  ## Ptx.MailNotifier.frozen_trial_notify(user)
+  def frozen_trial_notify(user) do
+    MailSender.send(:frozen_trial, user)
   end
 
-  ## Ptx.MailNotifier.unsubscribed_notify(user)
-  def unsubscribed_notify(user) do
-    MailSender.send(:unsubscribed, user)
+  ## Ptx.MailNotifier.outdated_trial_notify(user)
+  def outdated_trial_notify(user) do
+    MailSender.send(:outdated_trial, user)
+  end
+
+  ## Ptx.MailNotifier.pay_error_notify(user)
+  def pay_error_notify(user) do
+    MailSender.send(:pay_error, user)
   end
 end

@@ -3,11 +3,11 @@ defmodule Ptx.Accounts.Ticket do
   import Ecto.Changeset
   alias Ptx.Accounts.Transaction
 
-  @fields ~w(data transaction)a
+  @fields ~w(data transaction_id)a
 
   schema "tickets" do
     field :data, :map
-    belongs_to :transaction, Transaction
+    belongs_to :transaction, Transaction, type: :string
     timestamps()
   end
 
@@ -16,5 +16,6 @@ defmodule Ptx.Accounts.Ticket do
     ticket
     |> cast(attrs, @fields)
     |> validate_required(@fields)
+    |> foreign_key_constraint(:transaction_id)
   end
 end

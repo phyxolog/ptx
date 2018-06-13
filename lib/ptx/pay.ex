@@ -90,15 +90,16 @@ defmodule Ptx.Pay do
     Task.start(ExLiqpay, :ticket, [@ticket_email, transaction.id])
   end
 
-  defp process_transaction({:ok, transaction}, %{"status" => "subscribed"}, user) do
+  defp process_transaction({:ok, transaction}, %{"status" => "subscribed"} = params, user) do
     ## First off, send ticket to user email and our email
     send_ticket(user, transaction)
 
+    Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
+
     unsubscribe_old(user.id)
-    Accounts.update_user(user, %{plan: transaction.plan, periodicity: transaction.periodicity})
   end
 
-  defp process_transaction({:ok, transaction}, %{"status" => "success", "end_date" => end_date} = params, user) do
+  defp process_transaction({:ok, transaction}, %{"status" => "success"} = params, user) do
     send_ticket(user, transaction)
 
     Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
@@ -107,12 +108,18 @@ defmodule Ptx.Pay do
       Accounts.update_transaction(transaction, %{status: "success"})
 
     valid_until =
-      end_date
-      |> Timex.from_unix(:millisecond)
+      Timex.now()
       |> Timex.shift("#{transaction.periodicity}s": 1)
       |> Timex.to_naive_datetime()
 
-    Accounts.update_user(user, %{frozen: false, valid_until: valid_until})
+    Accounts.update_user(user, %{
+      plan: transaction.plan,
+      periodicity: transaction.periodicity,
+      valid_until: valid_until,
+      expiring_tomorrow: false,
+      in_unsubscribe_process: false,
+      frozen: false
+    })
   end
 
   defp process_transaction({:ok, transaction}, %{"status" => "unsubscribed"} = params, user) do
@@ -122,6 +129,8 @@ defmodule Ptx.Pay do
 
     if transaction.status != "wait_unsubscribe" do
       Accounts.update_user(user, %{
+        expiring_tomorrow: false,
+        in_unsubscribe_process: false,
         frozen: true,
         valid_until: nil,
         plan: nil,
@@ -133,7 +142,11 @@ defmodule Ptx.Pay do
   end
 
   ## Process all statuses except 'success', 'subscribed', 'unsubscribed'.
-  defp process_transaction({:ok, transaction}, %{"status" => status} = params, _user) do
+  defp process_transaction({:ok, transaction}, %{"status" => status} = params, user) do
+    if status in ["error", "failure"] do
+      Ptx.MailNotifier.pay_error_notify(user)
+    end
+
     Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
     Accounts.update_transaction(transaction, %{status: status})
   end

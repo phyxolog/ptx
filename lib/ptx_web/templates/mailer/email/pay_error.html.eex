@@ -1,0 +1,13 @@
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+<!-- #region firstpart -->
+<div style="padding: 30px">
+  <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
+
+  <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+    <%= gettext "There was a refuse of payment system during automatical subscription renew. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager." %>
+  </p>
+</div>
+<!-- #region -->
+</div>
+<!-- #endregion -->

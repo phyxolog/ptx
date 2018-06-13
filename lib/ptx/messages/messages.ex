@@ -16,6 +16,16 @@ defmodule Ptx.Messages do
   defp show_push?(:first_time, user), do: user.notification_settings.push_email_read
   defp show_push?(:once_again, user), do: user.notification_settings.push_email_read_again
 
+  @doc """
+  Delete all messages by sender id.
+  """
+  def delete_all_messages_by_user(user) do
+    query = from m in Message,
+      where: m.sender_id == ^user.id
+
+    Repo.delete_all(query)
+  end
+
   ## Send message to frontend about needed refresh markers on Gmail.
   defp send_refresh_markers(message, user, step) do
     params = %{

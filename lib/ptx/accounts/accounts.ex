@@ -48,4 +48,15 @@ defmodule Ptx.Accounts do
 
     Repo.all(query)
   end
+
+  @doc """
+  Mark user as deleted, clear all user messages
+  and unsubscribe user.
+  """
+  def mark_user_as_deleted(user) do
+    update_user(user, %{deleted: true})
+    Messages.delete_all_messages_by_user(user)
+
+    unsubscribe(user)
+  end
 end

@@ -12,8 +12,8 @@ msgstr ""
 "Plural-Forms: nplurals=3\n"
 
 #, elixir-format
-#: lib/ptx/helper.ex:95 lib/ptx/messages/messages.ex:33
-#: lib/ptx/messages/messages.ex:34
+#: lib/ptx/helper.ex:95 lib/ptx/messages/messages.ex:48
+#: lib/ptx/messages/messages.ex:49
 msgid "%Y-%m-%d at %H:%M"
 msgstr "%Y-%m-%d в %H:%M"
 
@@ -165,7 +165,7 @@ msgid "Video presentation of services in a Pro plan"
 msgstr "Видео-презентация услуг в Pro тарифе"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:33
+#: lib/ptx/mailer/mail_sender.ex:36
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
 
@@ -176,7 +176,7 @@ msgid "Without signature «Send with PostTrack»"
 msgstr "Нет подписи «Отправлено с PostTrack»"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:34
+#: lib/ptx/mailer/mail_sender.ex:37
 msgid "Your email has been read!"
 msgstr "Ваш Email был прочитан!"
 
@@ -208,135 +208,105 @@ msgid "Go Basic"
 msgstr "Выбрать тариф"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:19
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:17
+#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:25
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:23
 msgid "%F at %k:%M"
 msgstr "%F в %k:%M"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:3
-msgid "For your email %{email} you are using the \"%{plan}\" pricing plan, a validity period of which has expired. Work of extension was stopped for this email."
-msgstr "Для электронной почты %{email} вы использовали тарифный план \"%{plan}\", но срок действия плана истёк. Работа расширения будет приостановлена для данной электронной почты."
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/outdated.html.eex:2
-msgid "For your email %{email} you are using the \"%{plan}\" pricing plan, a validity period of which has just expired, but scheduled payment was denied by payment system, because of what PostTrack cannot extend the validity period of used pricing plan. If the problem will not solved during closest 24 hours, a work of extension will stop for this email."
-msgstr "Для вашей электронной почты %{email} вы используете тарифный план \"%{plan}\", срок действия которого истек, но платеж был отклонен платежной системой. Если проблема не будет решена в течение ближайших 24 часов, работа расширения будет приостановлена для данной электронной почты."
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/outdated.html.eex:6
-msgid "More detailed problem description you can find in the"
-msgstr "Более подробное описание проблемы вы можете найти в"
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/welcome.html.eex:2
+#: lib/ptx_web/templates/mailer/email/welcome.html.eex:8
 msgid "Perfect, now you have a profile in the "
 msgstr "Отлично, теперь у вас есть профиль в "
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:13
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:11
+#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:19
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:17
 msgid "Pricing plan"
 msgstr "Тарифы"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:20
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:26
 msgid "Read on"
 msgstr "Прочитано в"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:32
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:38
 msgid "Recepients"
 msgstr "Получатели"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:15
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:21
 msgid "Sent on"
 msgstr "Отправлено в"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:5
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:11
 msgid "Somebody read your email with subject "
 msgstr "Кто-то прочитал Ваше письмо с темой"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:37
+#: lib/ptx/mailer/mail_sender.ex:40
 msgid "The plan is fixed for you!"
 msgstr "Был выбран план!"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:7
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:13
 msgid "User"
 msgstr "Пользователь"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:18
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:16
+#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:24
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:22
 msgid "Valid until"
 msgstr "Годен до"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/welcome.html.eex:7
+#: lib/ptx_web/templates/mailer/email/welcome.html.eex:13
 msgid "We are always developing our product and trying to make it better, that you can use it with convenience. Please, tell us about any bugs and disadvantages via our feedback email. We are also will be happy to consider your propositions about PostTrack improvement."
 msgstr "Мы всегда стараемся сделать наш продукт лучше, чтобы Вам было удобно им пользоваться. Пожалуйста, расскажите нам о любых ошибках и проблемах на нашу электронную почту. Мы также будем рады рассмотреть ваши предложения по улучшению PostTrack."
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/frozen.html.eex:9
-msgid "Work of extension will resume as soon as the payment for used pricing plan is transferred. You can also switch to a different pricing plan."
-msgstr "Работа расширения возобновится, как только будет оплачен тарифный план. Вы также можете перейти на другой тарифный план."
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:3
+#: lib/ptx_web/templates/mailer/email/change_plan.html.eex:9
 msgid "You changed your pricing plan from \"%{plan_before}\" to \"%{plan_after}\" successfully!"
 msgstr "Вы успешно изменили Ваш тарифный план с \"%{plan_before}\" на \"%{plan_after}\"!"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:2
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:8
 msgid "You successfully added a \"%{plan}\" pricing plan for your email. We wish you a convenient and resulable usage! :)"
 msgstr "Вы успешно добавили тарифный план \"%{plan}\" для своей почты. Мы желаем вам удобного использования! :)"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:40
+#: lib/ptx/mailer/mail_sender.ex:45
 msgid "You successfully unsubscribed!"
 msgstr "Вы успешно отписались!"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/unsubscribed.html.eex:2
+#: lib/ptx_web/templates/mailer/email/unsubscribed.html.eex:8
 msgid "You successfully unsubscribed. PostTrack doesn't work with this email anymore - %{email}"
 msgstr "Вы успешно отписались. PostTrack больше не будет работать с этой почтой - %{email}"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:38
+#: lib/ptx/mailer/mail_sender.ex:41 lib/ptx/mailer/mail_sender.ex:42
 msgid "Your account has been frozen!"
 msgstr "Ваш аккаунт был заморожен!"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:39
-msgid "Your account has been outdated!"
-msgstr "Срок действия вашего тарифа истёк!"
-
-#, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:35
+#: lib/ptx/mailer/mail_sender.ex:38
 msgid "Your link has been clicked!"
 msgstr "Ваша ссылка была нажата!"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:36
+#: lib/ptx/mailer/mail_sender.ex:39
 msgid "Your plan has been changed!"
 msgstr "Ваш Email был прочитан!"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/outdated.html.eex:8
-msgid "at \"Details\" section for this email."
-msgstr "в разделе \"Подробности\"."
-
-#, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:22
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:28
 msgid "by user"
 msgstr "пользователем"
 
 #, elixir-format
-#: lib/ptx_web/templates/mailer/email/read_email.html.eex:7
+#: lib/ptx_web/templates/mailer/email/read_email.html.eex:13
 msgid "just read your email with subject"
 msgstr "прочитал ваше письмо с темой"
 
@@ -410,7 +380,96 @@ msgstr "Вы можете ограничить доступ для своей у
 msgid "terms of use"
 msgstr "условия использования"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:8
 msgid "Error generate LiqPay link"
 msgstr "Ошибка генерирования ссылки для оплаты (LiqPay)"
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/layout/email.html.eex:20
+msgid "Parameters of receiving email-notifications you can set up at"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx/mailer/mail_sender.ex:44
+msgid "Paying error!"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
+msgid "PostTrack Pricing"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/layout/email.html.eex:20
+msgid "PostTrack contacts page"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/link_opened.html.eex:11
+msgid "Somebody just clicked «‎%{link}» inside your mail with subject «‎%{subject}» ."
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
+msgid "The PostTrack will restore its work as soon as there will be a successfull subscription payment. You also can move to another pricing plan or make resubscription using other requisites at"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/layout/email.html.eex:20
+msgid "The ways to contact us you can find at"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/pay_error.html.eex:8
+msgid "There was a refuse of payment system during automatical subscription renew. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/link_opened.html.eex:16
+msgid "User %{email} just clicked «‎%{link}» inside your mail with subject «‎%{subject}» ."
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:10
+msgid "We are unable to renew your subscription automatically due to payment system refuse. Probably, there is not enough funds on your bank card, or there was an error at the bank side. More details about this error you can get from your personal bank manager."
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
+msgid "You are using the \"Trial\" pricing plan for your email levitatormailer@gmail.com, and this plan will expire tomorrow. To allow the PostTrack to continue its work you should choose another pricing plan at "
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:8
+msgid "You had used the \"Pro\" pricing plan (monthly subscription) for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email."
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
+msgid "You had used the \"Trial\" pricing plan for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email. To allow the PostTrack to restore its work you should select another pricing plan at"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/ptx/mailer/mail_sender.ex:43
+msgid "Your account has been frozen after 24 hours!"
+msgstr "Ваш аккаунт был заморожен!"
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen_trial.html.eex:8
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:8
+msgid "page."
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/email/frozen.html.eex:12
+#: lib/ptx_web/templates/mailer/email/outdated_trial.html.eex:10
+msgid "your PostTrack account"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/mailer/layout/email.html.eex:20
+msgid "your PostTrack account settings page"
+msgstr ""

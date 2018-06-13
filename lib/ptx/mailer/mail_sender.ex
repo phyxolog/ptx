@@ -39,7 +39,9 @@ defmodule Ptx.MailSender do
         change_plan: gettext("Your plan has been changed!"),
         new_plan: gettext("The plan is fixed for you!"),
         frozen: gettext("Your account has been frozen!"),
-        outdated: gettext("Your account has been outdated!"),
+        frozen_trial: gettext("Your account has been frozen!"),
+        outdated_trial: gettext("Your account has been frozen after 24 hours!"),
+        pay_error: gettext("Paying error!"),
         unsubscribed: gettext("You successfully unsubscribed!")
       ]
 

@@ -1,4 +1,8 @@
 defmodule Ptx.Accounts.User do
+  @moduledoc """
+  Primary key of user - his email. Name of field - :id (default).
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   alias Ptx.Accounts.NotificationSettings
@@ -17,7 +21,6 @@ defmodule Ptx.Accounts.User do
   @periodicities ~w(month year)
 
   schema "users" do
-    ## field :id - user email
     field :first_name, :string
     field :last_name, :string
     field :full_name, :string
@@ -30,7 +33,7 @@ defmodule Ptx.Accounts.User do
     field :in_unsubscribe_process, :boolean, default: false
     field :plan, :string, default: nil
     field :frozen, :boolean, default: true
-    field :expiring_tomorrow, :boolean, default: true
+    field :expiring_tomorrow, :boolean, default: false
     field :valid_until, :naive_datetime, default: nil
     field :periodicity, :string, default: nil
     field :previous_plan, :string, default: nil ## Only for read. Changing by sql trigger.
@@ -56,7 +59,7 @@ defmodule Ptx.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, @optional_fields ++ @required_fields)
-    |> cast_assoc(:notification_settings, required: true)
+    |> cast_assoc(:notification_settings, required: false)
     |> validate_required(@required_fields)
     |> validate_inclusion(:plan, Enum.map(@plans, &to_string/1))
     |> validate_inclusion(:periodicity, @periodicities)

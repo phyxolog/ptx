@@ -1,0 +1,13 @@
+<!-- #region main content -->
+<div style="margin: 0 auto; max-width: 600px; border-radius: 6px; background: white;" bgcolor="white">
+<!-- #region firstpart -->
+<div style="padding: 30px">
+  <h1 style="margin: 0; color: #8461DD; font-size: 24px; margin-bottom: 30px"><%= @title %></h1>
+
+  <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
+    <%= gettext "You had used the \"Trial\" pricing plan for your email levitatormailer@gmail.com. This pricing plan had just expired, and the PostTrack stopped working for this email. To allow the PostTrack to restore its work you should select another pricing plan at" %> <a href="https://posttrack.email/pricing"><%= gettext "PostTrack Pricing" %></a> <%= gettext "page." %>
+  </p>
+</div>
+<!-- #region -->
+</div>
+<!-- #endregion -->
