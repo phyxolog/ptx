@@ -222,7 +222,7 @@ msgstr "Дуже добре, тепер у вас є профіль в "
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:19
 #: lib/ptx_web/templates/mailer/email/new_plan.html.eex:17
 msgid "Pricing plan"
-msgstr "Тарифи"
+msgstr "Тариф"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/read_email.html.eex:26
@@ -298,7 +298,7 @@ msgstr "Ваше посилання було натиснуте!"
 #, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:39
 msgid "Your plan has been changed!"
-msgstr "Ваш Email був прочитаний!"
+msgstr "Ваш тарифний план був змінений!"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/read_email.html.eex:28

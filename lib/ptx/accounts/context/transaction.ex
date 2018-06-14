@@ -9,15 +9,6 @@ defmodule Ptx.Accounts.Context.Transaction do
       alias Ptx.Accounts.Transaction
 
       @doc """
-      Deteting old transaction by user.
-      """
-      def delete_old_user_transactions(user_id) do
-        Transaction
-        |> where(user_id: ^user_id)
-        |> Repo.delete_all()
-      end
-
-      @doc """
       Fetch transaction with given filters.
       """
       def fetch_transaction(opts \\ []) do
