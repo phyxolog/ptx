@@ -40,7 +40,7 @@ msgid "Analysis of the time and count of links in email"
 msgstr "Анализ времени и количества переходов по ссылкам в email"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:129
+#: lib/ptx.ex:40 lib/ptx_web/templates/page/pricing.html.eex:129
 msgid "Basic"
 msgstr "Базовый"
 
@@ -209,7 +209,7 @@ msgstr "Выбрать тариф"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:25
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:23
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:22
 msgid "%F at %k:%M"
 msgstr "%F в %k:%M"
 
@@ -220,7 +220,7 @@ msgstr "Отлично, теперь у вас есть профиль в "
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:19
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:17
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:16
 msgid "Pricing plan"
 msgstr "Тариф"
 
@@ -256,7 +256,7 @@ msgstr "Пользователь"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:24
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:22
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:21
 msgid "Valid until"
 msgstr "Годен до"
 
@@ -473,3 +473,13 @@ msgstr "Вы использовали тарифный план \"%{plan}\"  д�
 #: lib/ptx_web/templates/page/pricing.html.eex:15
 msgid "Login to CRM"
 msgstr "Войти в CRM"
+
+#, elixir-format
+#: lib/ptx.ex:41
+msgid "Pro"
+msgstr "Профессиональный"
+
+#, elixir-format
+#: lib/ptx.ex:39
+msgid "Trial"
+msgstr "Бесплатный"

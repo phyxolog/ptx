@@ -40,7 +40,7 @@ msgid "Analysis of the time and count of links in email"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:129
+#: lib/ptx.ex:40 lib/ptx_web/templates/page/pricing.html.eex:129
 msgid "Basic"
 msgstr ""
 
@@ -209,7 +209,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:25
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:23
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:22
 msgid "%F at %k:%M"
 msgstr ""
 
@@ -220,7 +220,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:19
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:17
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:16
 msgid "Pricing plan"
 msgstr ""
 
@@ -256,7 +256,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:24
-#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:22
+#: lib/ptx_web/templates/mailer/email/new_plan.html.eex:21
 msgid "Valid until"
 msgstr ""
 
@@ -472,4 +472,14 @@ msgstr ""
 #, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:15
 msgid "Login to CRM"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx.ex:41
+msgid "Pro"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx.ex:39
+msgid "Trial"
 msgstr ""
