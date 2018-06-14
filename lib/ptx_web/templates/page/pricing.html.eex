@@ -2,7 +2,7 @@
 <nav class="g-main-menu" id="mainMenu">
   <div class="mm-inner-wrapper">
     <section class="logo">
-      <a href="/" class="item hoverable">
+      <a href="/<%= @conn.assigns.locale %>" class="item hoverable">
         <img src="<%= static_path(@conn, "/images/logo.svg") %>" alt="PostTrack">
         PostTrack
       </a>

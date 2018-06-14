@@ -13,6 +13,7 @@ defmodule Ptx.Plan do
 
   schema "plans" do
     i18n(@translation_fields)
+    field :order, :integer
   end
 
   @doc """
@@ -20,6 +21,7 @@ defmodule Ptx.Plan do
   """
   def list() do
     Plan
+    |> order_by([fc], fc.order)
     |> Ptx.Repo.all()
   end
 

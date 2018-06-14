@@ -16,6 +16,7 @@ defmodule Ptx.Faq do
   schema "faqs" do
     i18n(@translation_fields)
     belongs_to :category, FaqCategory
+    field :order, :integer
   end
 
   @doc """
@@ -24,6 +25,7 @@ defmodule Ptx.Faq do
   def show(id) do
     Faq
     |> where(id: ^id)
+    |> order_by([fc], fc.order)
     |> Ptx.Repo.one()
   end
 end

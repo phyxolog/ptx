@@ -16,12 +16,14 @@ defmodule Ptx.Faq.FaqCategory do
   schema "faq_categories" do
     i18n(@translation_fields)
     has_many :faqs, Faq, foreign_key: :category_id
+    field :order, :integer
   end
 
   @field_list Enum.reduce(@locales, [:id], &([String.to_existing_atom("title_#{&1}") | &2]))
 
   def faqs_preload_query do
     from q in Faq,
+      order_by: q.order,
       select: map(q, @field_list)
   end
 
@@ -33,6 +35,7 @@ defmodule Ptx.Faq.FaqCategory do
   """
   def list() do
     query = from fc in FaqCategory,
+      order_by: fc.order,
       preload: ^preloaded(),
       select: fc
 
