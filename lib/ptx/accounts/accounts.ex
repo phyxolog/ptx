@@ -13,13 +13,17 @@ defmodule Ptx.Accounts do
   use Ptx.Accounts.Context.Ticket
 
   def unsubscribe(user) do
-    fetch_transaction(user_id: user.id)
-    |> OK.bind(fn
-      transaction ->
-        update_user(user, %{in_unsubscribe_process: true})
-        ExLiqpay.cancel_subscription(transaction.id)
-        {:ok, :success}
-    end)
+    transaction = Transaction
+    |> where([t], t.user_id == ^user.id)
+    |> where([t], not t.status in ["unsubscribed", "wait_unsubscribe", "pending"])
+    |> Repo.one()
+
+    if !is_nil(transaction) do
+      update_user(user, %{in_unsubscribe_process: true})
+      ExLiqpay.cancel_subscription(transaction.id)
+    end
+
+    {:ok, :success}
   end
 
   @doc """
