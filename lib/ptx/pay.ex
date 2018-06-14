@@ -61,10 +61,12 @@ defmodule Ptx.Pay do
   Processing callback from LiqPay
   """
   def process_callback({:ok, params}) do
+    Logger.info("Start process_callback/1, params: #{inspect params}")
+
     params = %{params | "info" => Ptx.Helper.decode_term(params["info"])}
     {:ok, user} = Accounts.fetch_user(id: params["info"].user_id)
 
-    Logger.info("Start process_callback/1, params: #{inspect params}, user: #{inspect user}")
+    Logger.info("Start process_callback/1, params: #{inspect user}")
 
     params
     |> obtain_transaction()
