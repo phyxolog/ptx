@@ -6,7 +6,7 @@
 
     <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
       <%= gettext "You successfully added a \"%{plan}\" pricing plan for your email. We wish you a convenient and resulable usage! :)", [
-        plan: String.capitalize(@user.plan)
+        plan: Ptx.translate_plan(@user.plan, @user)
       ] %>
     </p>
 
@@ -14,7 +14,7 @@
 
     <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">
       <%= render(PtxWeb.EmailModules, "label.html", [text: gettext "Pricing plan"]) %>
-      <b><%= String.capitalize(@user.plan) %></b>
+      <b><%= Ptx.translate_plan(@user.plan, @user) %></b>
     </p>
 
     <p style="<%= render(PtxWeb.EmailModules, "p_style.html", []) %>">

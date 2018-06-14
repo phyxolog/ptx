@@ -7,6 +7,8 @@ defmodule Ptx do
   if it comes from the database, an external API or others.
   """
 
+  import PtxWeb.Gettext
+
   def get_timezone_offset_by_name(timezone) do
     Timex.Timezone.get(timezone)
     |> Timex.Timezone.total_offset()
@@ -29,5 +31,15 @@ defmodule Ptx do
       {i, _} -> i
       :error -> nil
     end
+  end
+
+  def translate_plan(plan, user) do
+    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
+      case String.downcase(to_string(plan)) do
+        "trial" -> gettext "Trial"
+        "basic" -> gettext "Basic"
+        "pro" -> gettext "Pro"
+      end
+    end)
   end
 end
