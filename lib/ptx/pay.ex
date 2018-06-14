@@ -60,20 +60,21 @@ defmodule Ptx.Pay do
   @doc """
   Processing callback from LiqPay
   """
-  def process_callback({:ok, %{"info" => info} = params}) do
-    Logger.info("Start process_callback/1, params: #{inspect params}")
+  def process_callback({:ok, %{"info" => _info} = params}) do
+    params = %{params | "info" => Ptx.Helper.decode_term(params["info"])}
+    {:ok, user} = Accounts.fetch_user(id: params["info"].user_id)
 
-    info = Ptx.Helper.decode_term(info)
+    params
+    |> obtain_transaction()
+    |> process_transaction(params, user)
+  end
 
-    case Accounts.fetch_user(id: info.user_id) do
-      {:ok, user} ->
-        Logger.info("Start process_callback/1, user: #{inspect user}")
-
-        params
-        |> obtain_transaction()
-        |> process_transaction(params, user)
-      {:error, reason} ->
-        Logger.error("Error in process_callback/1, reason: #{inspect reason}. Likely user not found.")
+  def process_callback({:ok, params}) do
+    case obtain_transaction(params) do
+      {:ok, transaction} ->
+        user = Accounts.fetch_user(id: transaction.user_id)
+        process_transaction({:ok, transaction}, params, user)
+      _ -> Logger.error("Not found transaction with, params: #{inspect params}")
     end
   end
 
@@ -168,7 +169,7 @@ defmodule Ptx.Pay do
     Logger.info("Status = #{status}, params: #{inspect params}, ticket: #{inspect ticket}, transaction: #{inspect transaction}")
   end
 
-  ## If transaction not found or `info` doesn't exists - ok.
+  ## If transaction not found - log and return ok.
   defp process_transaction({:error, reason}, params, user) do
     Logger.error("Error in process_transaction. Reason: #{inspect reason}.\nParams: #{inspect params}\nUser: #{inspect user}")
     :ok

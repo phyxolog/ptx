@@ -13,6 +13,16 @@ defmodule PtxWeb.AuthController do
     json conn, %{}
   end
 
+  ## Check, if user has plan - redirect to office.
+  ## In another case - to pricing page.
+  defp pricing_or_office?(conn, user) do
+    if !is_nil(user.plan) do
+      redirect(conn, to: "/office")
+    else
+      redirect(conn, to: "/pricing")
+    end
+  end
+
   @doc """
   Handle errors.
   """
@@ -25,7 +35,7 @@ defmodule PtxWeb.AuthController do
   @doc """
   Handler for requests from pricing page.
   """
-  def callback(conn, %{"state" => state}, _user) do
+  def callback(conn, %{"state" => state}, user) do
     state = Jason.decode!(URI.decode(state))
     |> Enum.map(fn {key, value} -> {String.to_existing_atom(key), value} end)
     |> Enum.into(%{})
@@ -33,27 +43,24 @@ defmodule PtxWeb.AuthController do
     conn
     |> assign(:timezone_offset, state[:timezone_offset])
     |> do_callback()
-    |> processign(state)
+    |> processign(state, user)
   end
 
   ## TODO: Where we must redirect user without pay state?
-  def callback(conn, _params, _user) do
+  def callback(conn, _params, user) do
     conn
     |> do_callback()
-    |> redirect(to: "/pricing")
+    |> pricing_or_office?(user)
   end
 
   ## Process pay state
-  defp processign(conn, %{plan: _plan} = state) do
+  defp processign(conn, %{plan: _plan} = state, _user) do
     query_string = URI.encode_query(state)
-
-    conn
-    |> redirect(to: "/pay?#{query_string}")
+    redirect(conn, to: "/pay?#{query_string}")
   end
 
-  defp processign(conn, _state) do
-    conn
-    |> redirect(to: "/pricing")
+  defp processign(conn, _state, user) do
+    pricing_or_office?(conn, user)
   end
 
   ## Get user attributes from Google response
