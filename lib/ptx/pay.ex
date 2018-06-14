@@ -115,7 +115,7 @@ defmodule Ptx.Pay do
 
     Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
 
-    transaction =
+    {:ok, transaction} =
       Accounts.update_transaction(transaction, %{status: "success"})
 
     valid_until =
