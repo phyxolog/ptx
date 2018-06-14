@@ -60,17 +60,21 @@ defmodule Ptx.Pay do
   @doc """
   Processing callback from LiqPay
   """
-  def process_callback({:ok, params}) do
+  def process_callback({:ok, %{"info" => info} = params}) do
     Logger.info("Start process_callback/1, params: #{inspect params}")
 
-    params = %{params | "info" => Ptx.Helper.decode_term(params["info"])}
-    {:ok, user} = Accounts.fetch_user(id: params["info"].user_id)
+    info = Ptx.Helper.decode_term(info)
 
-    Logger.info("Start process_callback/1, params: #{inspect user}")
+    case Accounts.fetch_user(id: info.user_id) do
+      {:ok, user} ->
+        Logger.info("Start process_callback/1, user: #{inspect user}")
 
-    params
-    |> obtain_transaction()
-    |> process_transaction(params, user)
+        params
+        |> obtain_transaction()
+        |> process_transaction(params, user)
+      {:error, reason} ->
+        Logger.error("Error in process_callback/1, reason: #{inspect reason}. Likely user not found.")
+    end
   end
 
   ## Unsubscribe old success transaction
