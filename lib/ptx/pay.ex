@@ -72,7 +72,7 @@ defmodule Ptx.Pay do
   def process_callback({:ok, params}) do
     case obtain_transaction(params) do
       {:ok, transaction} ->
-        user = Accounts.fetch_user(id: transaction.user_id)
+        {:ok, user} = Accounts.fetch_user(id: transaction.user_id)
         process_transaction({:ok, transaction}, params, user)
       _ -> Logger.error("Not found transaction with, params: #{inspect params}")
     end
