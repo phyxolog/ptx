@@ -64,6 +64,8 @@ defmodule Ptx.Pay do
     params = %{params | "info" => Ptx.Helper.decode_term(params["info"])}
     {:ok, user} = Accounts.fetch_user(id: params["info"].user_id)
 
+    Logger.info("Start process_callback/1, params: #{inspect params}, user: #{inspect user}")
+
     params
     |> obtain_transaction()
     |> process_transaction(params, user)
@@ -77,8 +79,8 @@ defmodule Ptx.Pay do
     |> Repo.one()
 
     if transaction != nil do
-      ExLiqpay.cancel_subscription(transaction.id)
       Accounts.update_transaction(transaction, %{status: "wait_unsubscribe"})
+      ExLiqpay.cancel_subscription(transaction.id)
     end
 
     :ok
@@ -94,9 +96,11 @@ defmodule Ptx.Pay do
     ## First off, send ticket to user email and our email
     send_ticket(user, transaction)
 
-    Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
+    ticket = Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
 
     unsubscribe_old(user.id)
+
+    Logger.info("Status = subscribed, params: #{inspect params}, ticket: #{inspect ticket}")
   end
 
   defp process_transaction({:ok, transaction}, %{"status" => "success"} = params, user) do
@@ -112,7 +116,7 @@ defmodule Ptx.Pay do
       |> Timex.shift("#{transaction.periodicity}s": 1)
       |> Timex.to_naive_datetime()
 
-    Accounts.update_user(user, %{
+    user = Accounts.update_user(user, %{
       plan: transaction.plan,
       periodicity: transaction.periodicity,
       valid_until: valid_until,
@@ -120,12 +124,14 @@ defmodule Ptx.Pay do
       in_unsubscribe_process: false,
       frozen: false
     })
+
+    Logger.info("Status = success, params: #{inspect params}, valid_until: #{inspect valid_until}, new user: #{inspect user}")
   end
 
   defp process_transaction({:ok, transaction}, %{"status" => "unsubscribed"} = params, user) do
     send_ticket(user, transaction)
 
-    Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
+    ticket = Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
 
     if transaction.status != "wait_unsubscribe" do
       Accounts.update_user(user, %{
@@ -138,7 +144,10 @@ defmodule Ptx.Pay do
       })
     end
 
-    Accounts.update_transaction(transaction, %{status: "unsubscribed"})
+    transaction =
+      Accounts.update_transaction(transaction, %{status: "unsubscribed"})
+
+    Logger.info("Status = unsubscribed, params: #{inspect params}, ticket: #{inspect ticket}, transaction: #{inspect transaction}")
   end
 
   ## Process all statuses except 'success', 'subscribed', 'unsubscribed'.
@@ -147,8 +156,10 @@ defmodule Ptx.Pay do
       Ptx.MailNotifier.pay_error_notify(user)
     end
 
-    Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
-    Accounts.update_transaction(transaction, %{status: status})
+    ticket = Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
+    transaction = Accounts.update_transaction(transaction, %{status: status})
+
+    Logger.info("Status = #{status}, params: #{inspect params}, ticket: #{inspect ticket}, transaction: #{inspect transaction}")
   end
 
   ## If transaction not found or `info` doesn't exists - ok.

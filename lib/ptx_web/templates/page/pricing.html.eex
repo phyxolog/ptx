@@ -12,6 +12,7 @@
     </section>
 
     <section class="navigation">
+      <a href="/office" class="item hoverable"><%= gettext "Login to CRM" %></a>
       <div class="item hoverable"><%= gettext "Pricing" %></div>
       <a href="/<%= @conn.assigns.locale %>/faq" class="item hoverable"><%= gettext "Faq" %></a>
       <a href="/<%= @conn.assigns.locale %>/license-agreement" class="item hoverable"><%= gettext "License" %></a>

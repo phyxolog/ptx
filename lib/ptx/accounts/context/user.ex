@@ -21,6 +21,7 @@ defmodule Ptx.Accounts.Context.User do
 
         {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: [:id, :plan])
 
+        ## TODO: Fixme
         Enum.each(list, fn user ->
           Task.start(fn ->
             case user.plan do
@@ -44,6 +45,7 @@ defmodule Ptx.Accounts.Context.User do
 
         {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: [:id])
 
+        ## TODO: Fixme
         Enum.each(list, fn user ->
           Task.start(fn ->
             Ptx.MailNotifier.outdated_trial_notify(user)
