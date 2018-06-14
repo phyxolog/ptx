@@ -82,7 +82,7 @@ defmodule Ptx.Pay do
   def unsubscribe_old(user_id) do
     transaction = Transaction
     |> where([t], t.user_id == ^user_id)
-    |> where([t], t.status == "success")
+    |> where([t], not t.status in ["wait_unsubscribe", "pending"])
     |> Repo.one()
 
     if transaction != nil do
