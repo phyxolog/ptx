@@ -42,7 +42,7 @@ defmodule Ptx.Pay do
     |> Map.get("info")
     |> OK.required()
     |> OK.bind(fn info ->
-      Accounts.delete_old_user_transactions(info.user_id)
+      unsubscribe_old(info.user_id)
 
       Accounts.create_transaction(%{
         id: order_id,
@@ -82,7 +82,7 @@ defmodule Ptx.Pay do
   def unsubscribe_old(user_id) do
     transaction = Transaction
     |> where([t], t.user_id == ^user_id)
-    |> where([t], not t.status in ["wait_unsubscribe", "pending"])
+    |> where([t], not t.status in ["unsubscribed", "wait_unsubscribe", "pending"])
     |> Repo.one()
 
     if transaction != nil do
@@ -104,8 +104,6 @@ defmodule Ptx.Pay do
     send_ticket(user, transaction)
 
     ticket = Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
-
-    unsubscribe_old(user.id)
 
     Logger.info("Status = subscribed, params: #{inspect params}, ticket: #{inspect ticket}")
   end
