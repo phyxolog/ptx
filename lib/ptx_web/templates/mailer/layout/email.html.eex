@@ -17,7 +17,7 @@
 
 		<!-- #region footer -->
 		<p style="max-width: 540px; margin: 0 auto; color: #DAD0F5; padding: 30px; font-size: 12px; line-height: 15px">
-      <%= gettext "Parameters of receiving email-notifications you can set up at" %> <a href="https://posttrack.email/office/settings" style="color: white"><%= gettext "your PostTrack account settings page" %></a>. <%= gettext "The ways to contact us you can find at" %> <a href="https://posttrack.email/contacts" style="color: white"><%= gettext "PostTrack contacts page" %></a>.
+      <%= gettext "Parameters of receiving email-notifications you can set up at" %> <a href="https://posttrack.email/office/settings" style="color: white"><%= gettext "your PostTrack account settings page" %></a>. <%= gettext "The ways to contact us you can find at" %> <a href="https://posttrack.email/other/contacts" style="color: white"><%= gettext "PostTrack contacts page" %></a>.
 		</p>
 		<!-- #endregion -->
 	</div>
