@@ -20,7 +20,9 @@ function click(e) {
   var a = document.createElement("a");
   var plan = target.getAttribute("data-plan") === "trial" ? "trial" : target.getAttribute("data-plan") + "_" + (switchValue ? "year" : "month");
   a.href = "/auth/google?state=" + window.pricingStates[plan];
+  document.body.appendChild(a);
   a.click();
+  a.remove();
 }
 
 Array.from(document.querySelectorAll(".main-action")).forEach(el => el.addEventListener("click", click));
