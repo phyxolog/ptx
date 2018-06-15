@@ -37,4 +37,11 @@ defmodule PtxWeb.PageController do
     |> put_layout(false)
     |> render("office.html")
   end
+
+  def to_mail(conn, params, _user) do
+    case Map.get(params, "authuser") do
+      nil -> redirect(conn, external: "https://mail.google.com/")
+      mail -> redirect(conn, external: "https://mail.google.com/mail?authuser=#{mail}")
+    end
+  end
 end

@@ -9,12 +9,12 @@
 	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/pcbjphhbjgjgghohlhdmngogmcegljid">
   <title>PostTrack Office</title>
 
-  <link href="/assets_office/242cd5b467527c24ab38.css" rel="stylesheet">
+  <link href="/assets_office/0779acf70a91d53427ce.css" rel="stylesheet">
 </head>
 <body>
   <div id="__root"></div>
 
-  <script type="text/javascript" src="/assets_office/commons.bundle.242cd5b467527c24ab38.js"></script>
-  <script type="text/javascript" src="/assets_office/app.bundle.242cd5b467527c24ab38.js"></script>
+  <script type="text/javascript" src="/assets_office/commons.bundle.0779acf70a91d53427ce.js"></script>
+  <script type="text/javascript" src="/assets_office/app.bundle.0779acf70a91d53427ce.js"></script>
 </body>
 </html>

@@ -54,6 +54,7 @@ defmodule PtxWeb.Router do
     get "/office", PageController, :office
     get "/office/*url", PageController, :office
     get "/pay", PayController, :index
+    get "/to-mail", PageController, :to_mail
   end
 
   scope "/auth", PtxWeb do
