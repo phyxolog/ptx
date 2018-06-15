@@ -16,7 +16,7 @@ defmodule PtxWeb.AuthController do
   ## Check, if user has plan - redirect to office.
   ## In another case - to pricing page.
   defp pricing_or_office?(conn, user) do
-    if !is_nil(user.plan) do
+    if !is_nil(user) && !is_nil(user.plan) do
       redirect(conn, to: "/office")
     else
       redirect(conn, to: "/pricing")
