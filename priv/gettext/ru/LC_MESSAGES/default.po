@@ -335,6 +335,7 @@ msgstr "Для отслеживания ваших писем PostTrack необ
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:20
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:19
+#: lib/ptx_web/templates/error/same_plan.html.eex:22
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:19
 msgid "Google permissions settings"
 msgstr "Настройки доступа к аккаунту Google"
@@ -352,6 +353,7 @@ msgstr "Нам нужно, чтобы Вы вошли в свой аккаунт
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:19
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:18
+#: lib/ptx_web/templates/error/same_plan.html.eex:21
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:18
 msgid "We also do not read or store content of your emails and share your personal data to third-party software."
 msgstr "Мы также не читаем и не храним содержимое ваших писем и не передаем ваши личные данные третьим лицам."
@@ -359,6 +361,7 @@ msgstr "Мы также не читаем и не храним содержим�
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:18
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:17
+#: lib/ptx_web/templates/error/same_plan.html.eex:20
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:17
 msgid "We do not have an access to your email account password."
 msgstr "Мы не знаем и не храним пароль от Вашего аккаунта."
@@ -371,6 +374,7 @@ msgstr "Произошла ошибка при авторизации"
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:20
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:19
+#: lib/ptx_web/templates/error/same_plan.html.eex:22
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:19
 msgid "You will be able to restrict permissions for PostTrack to your account via"
 msgstr "Вы можете ограничить доступ для своей учетной записи через"
@@ -483,3 +487,18 @@ msgstr "Профессиональный"
 #: lib/ptx.ex:39
 msgid "Trial"
 msgstr "Бесплатный"
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/error/same_plan.html.eex:11
+msgid "Go to CRM"
+msgstr "Войти в CRM"
+
+#, elixir-format
+#: lib/ptx_web/templates/error/same_plan.html.eex:8
+msgid "You selected a \"%{plan}\" pricing plan, but your current plan is same"
+msgstr "Вы выбрали \"%{plan}\" план, но Ваш текущий план такой же"
+
+#, elixir-format
+#: lib/ptx_web/templates/error/same_plan.html.eex:14
+msgid "Select another pricing plan"
+msgstr "Выбрать другой тарифный план"

@@ -104,6 +104,7 @@ defmodule Ptx.Pay do
     send_ticket(user, transaction)
 
     ticket = Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
+    Accounts.update_user(user, %{in_subscription: to_string(params["info"].plan)})
 
     Logger.info("Status = subscribed, params: #{inspect params}, ticket: #{inspect ticket}")
   end
@@ -125,6 +126,7 @@ defmodule Ptx.Pay do
       plan: transaction.plan,
       periodicity: transaction.periodicity,
       valid_until: valid_until,
+      in_subscription: nil,
       expiring_tomorrow: false,
       in_unsubscribe_process: false,
       frozen: false
@@ -145,6 +147,7 @@ defmodule Ptx.Pay do
         frozen: true,
         valid_until: nil,
         plan: nil,
+        in_subscription: nil,
         periodicity: nil
       })
     end

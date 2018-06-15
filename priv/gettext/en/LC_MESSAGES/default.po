@@ -335,6 +335,7 @@ msgstr ""
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:20
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:19
+#: lib/ptx_web/templates/error/same_plan.html.eex:22
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:19
 msgid "Google permissions settings"
 msgstr ""
@@ -352,6 +353,7 @@ msgstr ""
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:19
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:18
+#: lib/ptx_web/templates/error/same_plan.html.eex:21
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:18
 msgid "We also do not read or store content of your emails and share your personal data to third-party software."
 msgstr ""
@@ -359,6 +361,7 @@ msgstr ""
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:18
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:17
+#: lib/ptx_web/templates/error/same_plan.html.eex:20
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:17
 msgid "We do not have an access to your email account password."
 msgstr ""
@@ -371,6 +374,7 @@ msgstr ""
 #, elixir-format
 #: lib/ptx_web/templates/error/auth_failure.html.eex:20
 #: lib/ptx_web/templates/error/liqpay_link_generate_error.html.eex:19
+#: lib/ptx_web/templates/error/same_plan.html.eex:22
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:19
 msgid "You will be able to restrict permissions for PostTrack to your account via"
 msgstr ""
@@ -482,4 +486,19 @@ msgstr ""
 #, elixir-format
 #: lib/ptx.ex:39
 msgid "Trial"
+msgstr ""
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/error/same_plan.html.eex:11
+msgid "Go to CRM"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/error/same_plan.html.eex:8
+msgid "You selected a \"%{plan}\" pricing plan, but your current plan is same"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/error/same_plan.html.eex:14
+msgid "Select another pricing plan"
 msgstr ""

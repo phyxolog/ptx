@@ -19,7 +19,7 @@ defmodule Ptx.Accounts.Context.User do
           where: u.frozen == false,
           where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '0 days'", u.valid_until)
 
-        {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: [:id, :plan, :language])
+        {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: [:id, :plan, :locale])
 
         ## TODO: Fixme
         Enum.each(list, fn user ->
@@ -43,7 +43,7 @@ defmodule Ptx.Accounts.Context.User do
           where: u.plan == "trial",
           where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '1 days'", u.valid_until)
 
-        {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: [:id, :plan, :language])
+        {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: [:id, :plan, :locale])
 
         ## TODO: Fixme
         Enum.each(list, fn user ->

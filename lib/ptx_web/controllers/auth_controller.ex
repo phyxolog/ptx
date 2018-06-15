@@ -35,28 +35,38 @@ defmodule PtxWeb.AuthController do
   @doc """
   Handler for requests from pricing page.
   """
-  def callback(conn, %{"state" => state}, user) do
+  def callback(conn, %{"state" => state}, _user) do
     state = Jason.decode!(URI.decode(state))
     |> Enum.map(fn {key, value} -> {String.to_existing_atom(key), value} end)
     |> Enum.into(%{})
 
-    conn
+    conn = conn
     |> assign(:timezone_offset, state[:timezone_offset])
     |> do_callback()
-    |> processign(state, user)
+
+    processign(conn, state, conn.assigns.user)
   end
 
   ## TODO: Where we must redirect user without pay state?
-  def callback(conn, _params, user) do
-    conn
+  def callback(conn, _params, _user) do
+    conn = conn
     |> do_callback()
-    |> pricing_or_office?(user)
+
+    pricing_or_office?(conn, conn.assigns.user)
   end
 
   ## Process pay state
-  defp processign(conn, %{plan: _plan} = state, _user) do
-    query_string = URI.encode_query(state)
-    redirect(conn, to: "/pay?#{query_string}")
+  defp processign(conn, %{plan: plan} = state, user) do
+    if user.plan == plan do
+      conn
+      |> assign(:plan, plan)
+      |> assign(:user, user)
+      |> put_view(PtxWeb.ErrorView)
+      |> render("same_plan.html")
+    else
+      query_string = URI.encode_query(state)
+      redirect(conn, to: "/pay?#{query_string}")
+    end
   end
 
   defp processign(conn, _state, user) do
@@ -77,6 +87,7 @@ defmodule PtxWeb.AuthController do
       |> reestablish_user()
 
     conn
+    |> assign(:user, elem(user, 1))
     |> revoke_current_token()
     |> put_token_cookie(user)
   end

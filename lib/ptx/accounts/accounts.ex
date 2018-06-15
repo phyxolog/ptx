@@ -37,7 +37,7 @@ defmodule Ptx.Accounts do
       send_count: send_count,
       read_count: read_count,
       avg_time_sec: Messages.get_avg_open_time(user_id, params),
-      opens_percent: (if send_count == 0, do: 0, else: Float.ceil((100 / send_count) * read_count))
+      opens_percent: (if send_count == 0, do: 0, else: Float.round((100 / send_count) * read_count))
     }
   end
 

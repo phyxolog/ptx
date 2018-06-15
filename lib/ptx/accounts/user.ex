@@ -11,7 +11,7 @@ defmodule Ptx.Accounts.User do
   @primary_key {:id, :string, [autogenerate: false]}
   @derive {Poison.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at, :deleted]}
   @derive {Jason.Encoder, except: [:__meta__, :refresh_token, :access_token, :expires_at, :deleted]}
-  @optional_fields ~w(gender picture locale access_token refresh_token plan full_name deleted
+  @optional_fields ~w(gender picture locale access_token refresh_token plan full_name deleted in_subscription
                       token_type expires_at timezone valid_until frozen periodicity in_unsubscribe_process expiring_tomorrow)a
   @required_fields ~w(id first_name last_name)a
   @unupdated_fields ~w(notification_settings refresh_token)
@@ -37,6 +37,7 @@ defmodule Ptx.Accounts.User do
     field :valid_until, :naive_datetime, default: nil
     field :periodicity, :string, default: nil
     field :previous_plan, :string, default: nil ## Only for read. Changing by sql trigger.
+    field :in_subscription, :string, default: nil
 
     ## Google OAuth2
     field :token_type, :string
