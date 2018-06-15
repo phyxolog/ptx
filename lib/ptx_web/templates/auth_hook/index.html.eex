@@ -16,9 +16,9 @@
       state = JSON.parse(state);
       state["timezone_offset"] = timezoneOffset;
 
-      location.href = "/auth/google/request?state=" + encodeURIComponent(JSON.stringify(state));
+      window.location.replace("/auth/google/request?state=" + encodeURIComponent(JSON.stringify(state)));
     } else {
-      location.href = "/auth/google/request?state=" + encodeURIComponent(JSON.stringify({ timezone_offset: timezoneOffset }));
+      window.location.replace("/auth/google/request?state=" + encodeURIComponent(JSON.stringify({ timezone_offset: timezoneOffset })));
     }
   </script>
 </body>

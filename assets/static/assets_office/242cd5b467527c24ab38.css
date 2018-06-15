@@ -807,7 +807,7 @@ main.v-details {
       max-width: 600px;
       padding: 20px; }
       main.v-details section.details div.details-wrapper .row {
-        height: 50px;
+        min-height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -847,6 +847,17 @@ main.v-details {
               main.v-details section.details div.details-wrapper .row div.content span.u-pricing-badge {
                 margin-left: 10px;
                 margin-right: 0; } }
+          main.v-details section.details div.details-wrapper .row div.content div.subwrapper {
+            text-align: right;
+            padding-top: 10px; }
+            main.v-details section.details div.details-wrapper .row div.content div.subwrapper span.u-pricing-badge {
+              margin-left: 10px;
+              margin-right: 0;
+              vertical-align: middle; }
+            main.v-details section.details div.details-wrapper .row div.content div.subwrapper p.small {
+              line-height: 30px;
+              font-size: 14px;
+              color: rgba(116, 87, 213, 0.54); }
       main.v-details section.details div.details-wrapper div.actions {
         text-align: center;
         margin-top: 20px; }
