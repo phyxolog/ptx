@@ -60,7 +60,6 @@ defmodule Ptx.Accounts do
   def mark_user_as_deleted(user) do
     update_user(user, %{deleted: true})
     Messages.delete_all_messages_by_user(user)
-
     unsubscribe(user)
   end
 end
