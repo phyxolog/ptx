@@ -15,17 +15,6 @@ config :ptx,
   ticket_email: "posttrack@sloenka.com",
   ecto_repos: [Ptx.Repo],
   plans: ~w(trial basic pro)a,
-  # prices: %{
-  #   basic: %{
-  #     month: 1,
-  #     year: 1
-  #   },
-
-  #   pro: %{
-  #     month: 1,
-  #     year: 1
-  #   }
-  # }
   prices: %{
     basic: %{
       month: 4.99,
