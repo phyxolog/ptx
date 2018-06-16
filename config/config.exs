@@ -17,26 +17,15 @@ config :ptx,
   plans: ~w(trial basic pro)a,
   prices: %{
     basic: %{
-      month: 1,
-      year: 1
+      month: 5,
+      year: 12
     },
 
     pro: %{
-      month: 1,
-      year: 1
+      month: 8,
+      year: 20
     }
   }
-  # prices: %{
-  #   basic: %{
-  #     month: 5,
-  #     year: 12
-  #   },
-
-  #   pro: %{
-  #     month: 8,
-  #     year: 20
-  #   }
-  # }
 
 config :ptx, PtxWeb.Gettext,
   default_locale: "ru",
