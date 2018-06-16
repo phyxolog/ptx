@@ -10,33 +10,33 @@ config :ptx,
   from_email_string: "PostTrack Alerts <noreply@posttrack.com>",
   env: Mix.env(),
   url: "https://posttrack.email",
-  currency: "RUB",
+  currency: "USD",
   trial_period: 14,
   ticket_email: "posttrack@sloenka.com",
   ecto_repos: [Ptx.Repo],
   plans: ~w(trial basic pro)a,
-  prices: %{
-    basic: %{
-      month: 1,
-      year: 1
-    },
-
-    pro: %{
-      month: 1,
-      year: 1
-    }
-  }
   # prices: %{
   #   basic: %{
-  #     month: 5,
-  #     year: 12
+  #     month: 1,
+  #     year: 1
   #   },
 
   #   pro: %{
-  #     month: 8,
-  #     year: 20
+  #     month: 1,
+  #     year: 1
   #   }
   # }
+  prices: %{
+    basic: %{
+      month: 4.99,
+      year: 11.99
+    },
+
+    pro: %{
+      month: 7.99,
+      year: 19.99
+    }
+  }
 
 config :ptx, PtxWeb.Gettext,
   default_locale: "ru",
