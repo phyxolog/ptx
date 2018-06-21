@@ -31,7 +31,7 @@ defmodule Ptx.Messages do
     params = %{
       subject: message.subject,
       readed_by: get_message_recipient(message),
-      when: message.first_readed_at,
+      when: NaiveDateTime.utc_now(),
       sent_on: message.inserted_at,
       recipients: message.recipients,
       show_push: show_push?(step, user)
@@ -46,7 +46,7 @@ defmodule Ptx.Messages do
       Ptx.MailNotifier.read_email_notify(user, [
         subject: message.subject,
         sent_date: Timex.format!(message.inserted_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
-        read_date: Timex.format!(message.first_readed_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
+        read_date: Timex.format!(NaiveDateTime.utc_now(), gettext("%Y-%m-%d at %H:%M"), :strftime),
         read_user: get_message_recipient(message),
         recipients: message.recipients
       ])
