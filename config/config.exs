@@ -58,7 +58,7 @@ config :ueberauth, Ueberauth,
   providers: [
     google: {Ueberauth.Strategy.Google, [
       request_path: "/auth/google/request",
-      default_scope: ~s(email profile https://mail.google.com/),
+      default_scope: ~s(email profile),
       access_type: "offline",
       prompt: "force"
     ]}
