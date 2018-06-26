@@ -195,20 +195,20 @@ defmodule Ptx.Accounts.Context.User do
 
       defp notify_users_about_changes({:error, user}, _old_user), do: {:error, user}
       defp notify_users_about_changes({:ok, user}, old_user) do
-        ## If new plan
-        if is_nil(old_user.plan) && !is_nil(user.plan) do
-          Ptx.MailNotifier.new_plan_notify(user)
-        end
+        # ## If new plan
+        # if is_nil(old_user.plan) && !is_nil(user.plan) do
+        #   Ptx.MailNotifier.new_plan_notify(user)
+        # end
 
-        ## Plan changed
-        if !is_nil(old_user.plan) && !is_nil(user.plan) && (old_user.plan != user.plan) do
-          Ptx.MailNotifier.change_plan_notify(user, old_user.plan, user.plan)
-        end
+        # ## Plan changed
+        # if !is_nil(old_user.plan) && !is_nil(user.plan) && (old_user.plan != user.plan) do
+        #   Ptx.MailNotifier.change_plan_notify(user, old_user.plan, user.plan)
+        # end
 
-        ## Unsubscribe
-        if !is_nil(old_user.plan) && is_nil(user.plan) do
-          Ptx.MailNotifier.unsubscribed_notify(user)
-        end
+        # ## Unsubscribe
+        # if !is_nil(old_user.plan) && is_nil(user.plan) do
+        #   Ptx.MailNotifier.unsubscribed_notify(user)
+        # end
 
         ## Refresh all tabs which user opened
         PtxWeb.Endpoint.broadcast("room:#{user.id}", "refresh_tabs", %{})

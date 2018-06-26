@@ -84,12 +84,12 @@ config :ptx, Ptx.Mailer,
   domain: "mg.posttrack.sloenka.com",
   api_key: "key-a6a3629f652448644d04d1c4aefe43bc"
 
-config :ptx, Ptx.Scheduler,
-  timezone: "Europe/Kiev",
-  jobs: [
-    {"@hourly", {Ptx.Accounts, :freeze_and_list_expired_users, []}},
-    {"@hourly", {Ptx.Accounts, :list_expiring_tomorrow_users, []}}
-  ]
+# config :ptx, Ptx.Scheduler,
+#   timezone: "Europe/Kiev",
+#   jobs: [
+#     {"@hourly", {Ptx.Accounts, :freeze_and_list_expired_users, []}},
+#     {"@hourly", {Ptx.Accounts, :list_expiring_tomorrow_users, []}}
+#   ]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

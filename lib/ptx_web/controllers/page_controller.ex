@@ -7,23 +7,24 @@ defmodule PtxWeb.PageController do
   @locales Application.get_env(:ptx, PtxWeb.Gettext)[:locales]
 
   def pricing(conn, _params, user) do
-    current_locale = conn.assigns.locale
+    # current_locale = conn.assigns.locale
 
-    meta_locales = @locales -- [current_locale]
-    |> Enum.map(fn locale -> [property: "og:locale:alternate", content: locale] end)
+    # meta_locales = @locales -- [current_locale]
+    # |> Enum.map(fn locale -> [property: "og:locale:alternate", content: locale] end)
 
-    meta = [
-      [property: "og:locale", content: current_locale],
-      [property: "og:og:url", content: "#{@url}#{conn.request_path}"],
-      [property: "og:type", content: "website"],
-      [property: "og:og:image", content: PtxWeb.Endpoint.static_path("/images/og/pricing_#{current_locale}.png")]
-    ]
+    # meta = [
+    #   [property: "og:locale", content: current_locale],
+    #   [property: "og:og:url", content: "#{@url}#{conn.request_path}"],
+    #   [property: "og:type", content: "website"],
+    #   [property: "og:og:image", content: PtxWeb.Endpoint.static_path("/images/og/pricing_#{current_locale}.png")]
+    # ]
 
-    conn
-    |> assign(:user, user)
-    |> assign(:title, gettext("Pricing"))
-    |> assign(:og_meta, meta ++ meta_locales)
-    |> render("pricing.html")
+    # conn
+    # |> assign(:user, user)
+    # |> assign(:title, gettext("Pricing"))
+    # |> assign(:og_meta, meta ++ meta_locales)
+    # |> render("pricing.html")
+    redirect(conn, to: "/office")
   end
 
   def getting_started(conn, _params, _user) do

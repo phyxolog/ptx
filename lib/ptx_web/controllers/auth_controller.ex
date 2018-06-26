@@ -16,11 +16,12 @@ defmodule PtxWeb.AuthController do
   ## Check, if user has plan - redirect to office.
   ## In another case - to pricing page.
   defp pricing_or_office?(conn, user) do
-    if !is_nil(user) && !is_nil(user.plan) do
-      redirect(conn, to: "/office")
-    else
-      redirect(conn, to: "/pricing")
-    end
+    redirect(conn, to: "/office")
+    # if !is_nil(user) && !is_nil(user.plan) do
+    #   redirect(conn, to: "/office")
+    # else
+    #   redirect(conn, to: "/pricing")
+    # end
   end
 
   @doc """
@@ -57,16 +58,17 @@ defmodule PtxWeb.AuthController do
 
   ## Process pay state
   defp processign(conn, %{plan: plan} = state, user) do
-    if user.plan == plan do
-      conn
-      |> assign(:plan, plan)
-      |> assign(:user, user)
-      |> put_view(PtxWeb.ErrorView)
-      |> render("same_plan.html")
-    else
-      query_string = URI.encode_query(state)
-      redirect(conn, to: "/pay?#{query_string}")
-    end
+    pricing_or_office?(conn, user)
+    # if user.plan == plan do
+    #   conn
+    #   |> assign(:plan, plan)
+    #   |> assign(:user, user)
+    #   |> put_view(PtxWeb.ErrorView)
+    #   |> render("same_plan.html")
+    # else
+    #   query_string = URI.encode_query(state)
+    #   redirect(conn, to: "/pay?#{query_string}")
+    # end
   end
 
   defp processign(conn, _state, user) do
