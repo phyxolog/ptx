@@ -58,7 +58,7 @@ config :ueberauth, Ueberauth,
   providers: [
     google: {Ueberauth.Strategy.Google, [
       request_path: "/auth/google/request",
-      default_scope: ~s(email profile),
+      default_scope: ~s(email profile https://www.googleapis.com/auth/gmail.send),
       access_type: "offline",
       prompt: "force"
     ]}
