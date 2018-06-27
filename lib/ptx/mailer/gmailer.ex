@@ -22,9 +22,10 @@ defmodule Ptx.Mailer.Gmailer do
   end
 
   defp headers(user) do
+    {:ok, token} = OAuth.get_user_token(user)
     [
       "Content-Type": "message/rfc822",
-      "Authorization": "Bearer #{OAuth.get_user_token(user)}"
+      "Authorization": "Bearer #{token}"
     ]
   end
 end
