@@ -21,10 +21,21 @@ defmodule Ptx.MailSender do
   defp deliver(user, subject, layout, assigns) do
     assigns = Keyword.put(assigns, :title, subject)
 
-    base_email()
-    |> render(layout, assigns)
-    |> Map.get(:html_body)
-    |> Gmailer.send_me(subject, user)
+    case user.id in ["forewor@gmail.com", "artmartfrontend@gmail.com"] do
+      true -> 
+        base_email()
+        |> render(layout, assigns)
+        |> Map.get(:html_body)
+        |> Gmailer.send_me(subject, user)
+
+      false ->
+        base_email()
+        |> to(user.id)
+        |> subject(subject)
+        |> render(layout, assigns)
+        |> Mailer.deliver_later()
+    end
+
   # rescue
   #   error -> Logger.error("Error when email was send. #{inspect error}")
   end
