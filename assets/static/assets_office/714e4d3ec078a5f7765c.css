@@ -99,7 +99,9 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 36px;
   line-height: 40px;
-  margin-bottom: 40px; }
+  margin-bottom: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden; }
   @media (max-width: 729px) {
     h1 {
       font-size: 24px;
@@ -526,9 +528,14 @@ nav.g-navbar {
   nav.g-navbar p.welcome {
     font-size: 16px;
     text-align: center;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis; }
     nav.g-navbar p.welcome strong {
-      display: block; }
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%; }
     nav.g-navbar p.welcome span.translation-placeholder {
       max-width: 120px; }
     @media (max-width: 1199px) {
@@ -537,7 +544,8 @@ nav.g-navbar {
         margin-bottom: 0; } }
     @media (max-width: 729px) {
       nav.g-navbar p.welcome {
-        font-size: 14px; } }
+        font-size: 14px;
+        max-width: 100px; } }
   @media (max-width: 1199px) {
     nav.g-navbar section.main-menu {
       position: fixed;
@@ -877,7 +885,8 @@ main.v-details {
             margin-left: 10px; }
 main.v-not-found h1 {
   font-size: 120px;
-  margin-bottom: 80px; }
+  margin-bottom: 80px;
+  overflow: visible; }
   @media (max-width: 729px) {
     main.v-not-found h1 {
       font-size: 60px;
