@@ -4,6 +4,7 @@ defmodule Ptx.MailSender do
   import PtxWeb.Gettext, only: [gettext: 1]
   require Logger
   alias Ptx.Mailer
+  alias Ptx.Mailer.Gmailer
 
   @from_string Application.get_env(:ptx, :from_email_string)
 
@@ -17,21 +18,27 @@ defmodule Ptx.MailSender do
   end
 
   ## Deliver mail. Async.
-  defp deliver(to, subject, layout, assigns) do
+  defp deliver(user, subject, layout, assigns) do
     assigns = Keyword.put(assigns, :title, subject)
 
     base_email()
-    |> to(to)
-    |> subject(subject)
     |> render(layout, assigns)
-    |> Mailer.deliver_later()
+    |> Map.get(:html_body)
+    |> Gmailer.send_me(subject, user)
+
+    # base_email()
+    # |> to(user.id)
+    # |> subject(subject)
+    # |> render(layout, assigns)
+    # |> Mailer.deliver_later()
+
   # rescue
   #   error -> Logger.error("Error when email was send. #{inspect error}")
   end
 
   def send(method, user, opts \\ [])
   def send(method, user, opts) do
-    Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
+    Gettext.with_locale(PtxWeb.EmailView, user.locale, fn ->
       conformity_table = [
         welcome: gettext("Welcome!"),
         read_email: gettext("Your email has been read!"),
@@ -47,10 +54,12 @@ defmodule Ptx.MailSender do
 
       if conformity_table[method] != nil do
         subject = conformity_table[method]
-        deliver(user.id, subject, Atom.to_string(method) <> ".html", Keyword.put(opts, :user, user))
+        deliver(user, subject, Atom.to_string(method) <> ".html", Keyword.put(opts, :user, user))
       else
         Logger.error("Not found handler for Ptx.MailSender.send/3.\nMethod: #{inspect method}")
       end
     end)
   end
 end
+
+# Ptx.MailSender.send(:welcome, %{id: "artmartfrontend@gmail.com", locale: "en", access_token: "ya29.GlzmBcHQ4MyixyOiuPcLq3Vs0UT_5mMNfv0p8mSAGkumv_iIH1ET619BGw9upK5ypfZgJIIE6Pvf32s3VCqeiqWMKp_MQncVhNR48MxlqtocCYjPBtmYcklen26pFg", refresh_token: "1/Q3HCAUfVscSIThLbyo_lyEtlLU2k8T-M3NmXn90KIVo", expires_at: 1530016514})
