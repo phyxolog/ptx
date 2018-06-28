@@ -62,4 +62,4 @@ defmodule Ptx.MailSender do
   end
 end
 
-# Ptx.MailSender.send(:welcome, %{id: "artmartfrontend@gmail.com", locale: "en", access_token: "ya29.GlzmBcHQ4MyixyOiuPcLq3Vs0UT_5mMNfv0p8mSAGkumv_iIH1ET619BGw9upK5ypfZgJIIE6Pvf32s3VCqeiqWMKp_MQncVhNR48MxlqtocCYjPBtmYcklen26pFg", refresh_token: "1/Q3HCAUfVscSIThLbyo_lyEtlLU2k8T-M3NmXn90KIVo", expires_at: 1530016514})
+# Ptx.MailSender.send(:welcome, %{id: "forewor@gmail.com", locale: "en", access_token: "ya29.GlvoBasrOxGV8iAFdiiAG2o4GWZPWB-6uiZHWfDMzgaAj7jytxSV4cKkD2fbmZzhKWflyGrpRVhIgObaBZd6KGhUoP777rGo2ND-eLeICGts3tCpDvMm1wnUfeuT", refresh_token: "1/-f-OZCIhjrag_QXe_rqYKcpzklQaBTiriXVRqA34iFrbbbj8HvfmA1Tr-DKPHJwy", expires_at: 1530016514}, [subject: "Ваш email был почитан", email: nil, sent_date: nil, read_date: nil, read_user: "forewor@gmail.com", recipients: ["artmartfrontend@gmail.com"]])

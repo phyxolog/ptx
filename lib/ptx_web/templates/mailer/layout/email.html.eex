@@ -13,7 +13,7 @@
 		<img src="https://posttrack.email/images/logo.gif" alt="PostTrack" style="width: 100%; max-width: 600px; display: block; margin: 0 auto">
 		<!-- #endregion -->
     
-    <%= render IO.inspect(@view_module), IO.inspect(@view_template), IO.inspect(assigns) %>
+    <%= render @view_module, @view_template, assigns %>
 
 		<!-- #region footer -->
 		<p style="max-width: 540px; margin: 0 auto; color: #DAD0F5; padding: 30px; font-size: 12px; line-height: 15px">

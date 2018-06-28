@@ -7,14 +7,16 @@ defmodule Ptx.Mailer.Gmailer do
       headers = headers(user)
 
       HTTPoison.post("https://www.googleapis.com/upload/gmail/v1/users/me/messages/send", message, headers)
+      |> IO.inspect
     end)
   end
 
   defp message(body, subject, user) do
     """
+    MIME-Version: 1.0
     To: #{user.id}
     From: #{user.id}
-    Subject: =?utf-8?B?#{subject}?=
+    Subject: =?utf-8?B?#{Base.encode64(subject)}?=
     Content-Type: text/html; charset="UTF-8"
 
     #{body}
