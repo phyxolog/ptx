@@ -2,7 +2,7 @@ defmodule Ptx.Mailer.Gmailer do
   alias Ptx.Google.OAuth
 
   def send_me(body, subject, user) do
-    Task.start(fn -> 
+    Task.start(fn ->
       message = message(body, subject, user)
       headers = headers(user)
 
@@ -14,7 +14,7 @@ defmodule Ptx.Mailer.Gmailer do
     """
     To: #{user.id}
     From: #{user.id}
-    Subject: #{subject}
+    Subject: =?utf-8?B?#{subject}?=
     Content-Type: text/html; charset="UTF-8"
 
     #{body}

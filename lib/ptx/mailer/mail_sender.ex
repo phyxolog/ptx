@@ -21,20 +21,16 @@ defmodule Ptx.MailSender do
   defp deliver(user, subject, layout, assigns) do
     assigns = Keyword.put(assigns, :title, subject)
 
-    case user.id in ["forewor@gmail.com", "artmartfrontend@gmail.com"] do
-      true -> 
-        base_email()
-        |> render(layout, assigns)
-        |> Map.get(:html_body)
-        |> Gmailer.send_me(subject, user)
+    base_email()
+    |> render(layout, assigns)
+    |> Map.get(:html_body)
+    |> Gmailer.send_me(subject, user)
 
-      false ->
-        base_email()
-        |> to(user.id)
-        |> subject(subject)
-        |> render(layout, assigns)
-        |> Mailer.deliver_later()
-    end
+    # base_email()
+    # |> to(user.id)
+    # |> subject(subject)
+    # |> render(layout, assigns)
+    # |> Mailer.deliver_later()
 
   # rescue
   #   error -> Logger.error("Error when email was send. #{inspect error}")
@@ -55,7 +51,7 @@ defmodule Ptx.MailSender do
         pay_error: gettext("Paying error!"),
         unsubscribed: gettext("You successfully unsubscribed!")
       ]
-      
+
       if conformity_table[method] != nil do
         subject = conformity_table[method]
         deliver(user, subject, Atom.to_string(method) <> ".html", Keyword.put(opts, :user, user))
