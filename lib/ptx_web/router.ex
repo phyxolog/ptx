@@ -55,6 +55,8 @@ defmodule PtxWeb.Router do
     get "/office/*url", PageController, :office
     get "/pay", PayController, :index
     get "/to-mail", PageController, :to_mail
+
+    get "/googlec042edc14b2ed5ae.html", ApiController, :google_verificate
   end
 
   scope "/auth", PtxWeb do

@@ -30,4 +30,8 @@ defmodule PtxWeb.ApiController do
   def timezones(conn, _params, _user) do
     json conn, Ptx.Helper.format_canonical_zone_list(Tzdata.canonical_zone_list())
   end
+
+  def google_verificate(conn, _params, _user) do
+    html conn, "google-site-verification: googlec042edc14b2ed5ae.html"
+  end
 end
