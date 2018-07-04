@@ -114,6 +114,15 @@ defmodule Ptx.Messages do
     |> Repo.preload([reads: preload_reads()])
   end
 
+  @doc false
+  def list_messages_by_sender_id(params, sender_id) do
+    query = from m in Message,
+      where: m.sender_id == ^sender_id
+
+    pagin = Repo.paginate(query, params)
+    %{pagin | entries: Repo.preload(pagin.entries, [reads: preload_reads()])}
+  end
+
   ## Parse date
   defp parse_date(date) do
     case Timex.parse(date, "{0D}.{0M}.{YYYY}") do
