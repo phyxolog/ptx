@@ -25,12 +25,12 @@ defmodule PtxWeb.MessageController do
     list_messages(conn, params, user, message_ids, :list_messages_by_message_ids)
   end
 
-  # def index(conn, params, user) do
-  #   res_json(conn, Messages.list_messages_by_sender_id(params, user.id))
-  # end
+  def index(conn, params, user) do
+    res_json(conn, Messages.list_messages_by_sender_id(params, user.id))
+  end
 
-  def index(conn, _params, _user), do:
-    res_json(conn, %{messages: []})
+  # def index(conn, _params, _user), do:
+  #   res_json(conn, %{messages: []})
 
   def create(conn, params, user) do
     case get_user(user, params["token"]) do

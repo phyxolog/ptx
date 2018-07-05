@@ -117,7 +117,8 @@ defmodule Ptx.Messages do
   @doc false
   def list_messages_by_sender_id(params, sender_id) do
     query = from m in Message,
-      where: m.sender_id == ^sender_id
+      where: m.sender_id == ^sender_id,
+      order_by: [desc: m.inserted_at]
 
     pagin = Repo.paginate(query, params)
     %{pagin | entries: Repo.preload(pagin.entries, [reads: preload_reads()])}
