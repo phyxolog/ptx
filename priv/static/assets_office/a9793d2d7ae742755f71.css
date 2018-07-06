@@ -1,32 +1,17 @@
 @font-face {
   font-family: 'Gotham Pro';
-  font-weight: 400;
-  src: local("Gotham Pro Regular"), local("GothamPro"), url(/assets_office/e13724d3e4828f9b40d2f4d0e182374e.woff) format("woff"); }
-
-@font-face {
-  font-family: 'Gotham Pro';
-  font-weight: 500;
-  src: local("Gotham Pro Medium"), local("GothamProMedium"), url(/assets_office/e26f778af2931744b9b1bfe7b58ed632.woff) format("woff"); }
-
-@font-face {
-  font-family: 'Gotham Pro';
   font-weight: 700;
   src: local("Gotham Pro Bold"), local("GothamProBold"), url(/assets_office/fa49a77f251f2faa237cf90628f35baa.woff) format("woff"); }
 
 @font-face {
-  font-family: 'Avenir Next Cyr';
+  font-family: 'Noto Sans';
   font-weight: 400;
-  src: local("Avenir Next Cyr"), local("AvenirNextCyrRegular"), url(/assets_office/a81229c89f968c0b8eb6544e2a90d17a.woff) format("woff"); }
+  src: local("Noto Sans"), local("NotoSansRegular"), url(/assets_office/61c3431e4e0ac62b136bc26b427ee05f.ttf) format("truetype"); }
 
 @font-face {
-  font-family: 'Avenir Next Cyr';
-  font-weight: 500;
-  src: local("Avenir Next Cyr Medium"), local("AvenirNextCyrMedium"), url(/assets_office/241293dd350f84881201063e58f13109.woff) format("woff"); }
-
-@font-face {
-  font-family: 'Avenir Next Cyr';
+  font-family: 'Noto Sans';
   font-weight: 700;
-  src: local("Avenir Next Cyr Bold"), local("AvenirNextCyrBold"), url(/assets_office/2dcf2324d8c5365339b70433bcd952e4.woff) format("woff"); }
+  src: local("Noto Sans Bold"), local("NotoSansBold"), url(/assets_office/781171b269d6b31469f12789b8ba525a.ttf) format("truetype"); }
 html, body {
   position: relative;
   width: 100%;
@@ -37,7 +22,7 @@ body {
   padding: 0;
   padding-left: 240px;
   color: rgba(0, 0, 0, 0.87);
-  font-family: "Avenir Next Cyr";
+  font-family: "Noto Sans";
   font-size: 14px;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -81,7 +66,7 @@ ul {
   padding: 0; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Gotham Pro";
+  font-family: "Noto Sans";
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -193,7 +178,7 @@ span.translation-placeholder {
   line-height: 30px;
   padding: 0 10px;
   border-radius: 3px;
-  font-family: "Gotham Pro";
+  font-family: "Noto Sans";
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
@@ -274,7 +259,7 @@ span.translation-placeholder {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Gotham Pro";
+  font-family: "Noto Sans";
   font-size: 14px;
   font-weight: 700;
   text-decoration: none; }
@@ -312,7 +297,7 @@ span.translation-placeholder {
   font-size: 12px;
   line-height: 25px;
   border-radius: 3px;
-  font-family: "Gotham Pro";
+  font-family: "Noto Sans";
   font-weight: 700;
   text-transform: uppercase;
   display: inline-block;
@@ -631,7 +616,7 @@ nav.g-navbar {
       flex-grow: 1;
       flex-shrink: 1;
       text-align: left;
-      font-family: "Gotham Pro";
+      font-family: "Noto Sans";
       padding: 0 10px; }
       nav.g-navbar section.main-menu a span.route-label span:not(.u-pricing-badge) {
         margin-right: 5px; }
@@ -674,11 +659,11 @@ main.v-dashboard {
       main.v-dashboard section.main-routing {
         margin-top: 20px; } }
     main.v-dashboard section.main-routing div.links-wrapper {
+      width: 100%;
       margin-bottom: -40px; }
       @media (max-width: 729px) {
         main.v-dashboard section.main-routing div.links-wrapper {
-          margin-bottom: -20px;
-          width: 100%; } }
+          margin-bottom: -20px; } }
       main.v-dashboard section.main-routing div.links-wrapper a:nth-child(1) {
         animation-delay: 120ms; }
       main.v-dashboard section.main-routing div.links-wrapper a:nth-child(2) {
@@ -769,7 +754,7 @@ main.v-dashboard {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: "Gotham Pro";
+          font-family: "Noto Sans";
           font-size: 20px;
           line-height: 27px;
           color: #7457d5;
@@ -838,7 +823,7 @@ main.v-details {
               font-size: 14px; } }
         main.v-details section.details div.details-wrapper .row div.content {
           color: #7457d5;
-          font-family: "Gotham Pro";
+          font-family: "Noto Sans";
           font-size: 20px;
           font-weight: 700;
           display: flex;
