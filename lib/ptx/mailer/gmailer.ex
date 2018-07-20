@@ -1,33 +1,33 @@
 defmodule Ptx.Mailer.Gmailer do
-  alias Ptx.Google.OAuth
+  # alias Ptx.Google.OAuth
 
-  def send_me(body, subject, user) do
-    Task.start(fn ->
-      message = message(body, subject, user)
-      headers = headers(user)
+  # def send_me(body, subject, user) do
+  #   Task.start(fn ->
+  #     message = message(body, subject, user)
+  #     headers = headers(user)
 
-      HTTPoison.post("https://www.googleapis.com/upload/gmail/v1/users/me/messages/send", message, headers)
-      |> IO.inspect
-    end)
-  end
+  #     HTTPoison.post("https://www.googleapis.com/upload/gmail/v1/users/me/messages/send", message, headers)
+  #     |> IO.inspect
+  #   end)
+  # end
 
-  defp message(body, subject, user) do
-    """
-    MIME-Version: 1.0
-    To: #{user.id}
-    From: #{user.id}
-    Subject: =?utf-8?B?#{Base.encode64(subject)}?=
-    Content-Type: text/html; charset="UTF-8"
+  # defp message(body, subject, user) do
+  #   """
+  #   MIME-Version: 1.0
+  #   To: #{user.id}
+  #   From: #{user.id}
+  #   Subject: =?utf-8?B?#{Base.encode64(subject)}?=
+  #   Content-Type: text/html; charset="UTF-8"
 
-    #{body}
-    """
-  end
+  #   #{body}
+  #   """
+  # end
 
-  defp headers(user) do
-    {:ok, token} = OAuth.get_user_token(user)
-    [
-      "Content-Type": "message/rfc822",
-      "Authorization": "Bearer #{token}"
-    ]
-  end
+  # defp headers(user) do
+  #   {:ok, token} = OAuth.get_user_token(user)
+  #   [
+  #     "Content-Type": "message/rfc822",
+  #     "Authorization": "Bearer #{token}"
+  #   ]
+  # end
 end

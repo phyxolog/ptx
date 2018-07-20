@@ -4,7 +4,7 @@ defmodule Ptx.MailSender do
   import PtxWeb.Gettext, only: [gettext: 1]
   require Logger
   alias Ptx.Mailer
-  alias Ptx.Mailer.Gmailer
+  # alias Ptx.Mailer.Gmailer
 
   @from_string Application.get_env(:ptx, :from_email_string)
 
@@ -21,19 +21,19 @@ defmodule Ptx.MailSender do
   defp deliver(user, subject, layout, assigns) do
     assigns = Keyword.put(assigns, :title, subject)
 
-    base_email()
-    |> render(layout, assigns)
-    |> Map.get(:html_body)
-    |> Gmailer.send_me(subject, user)
-
     # base_email()
-    # |> to(user.id)
-    # |> subject(subject)
     # |> render(layout, assigns)
-    # |> Mailer.deliver_later()
+    # |> Map.get(:html_body)
+    # |> Gmailer.send_me(subject, user)
 
-  # rescue
-  #   error -> Logger.error("Error when email was send. #{inspect error}")
+    base_email()
+    |> to(user.id)
+    |> subject(subject)
+    |> render(layout, assigns)
+    |> Mailer.deliver_later()
+
+  rescue
+    error -> Logger.error("Error when email was send. #{inspect error}")
   end
 
   def send(method, user, opts \\ [])
