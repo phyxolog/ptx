@@ -45,8 +45,8 @@ defmodule Ptx.Messages do
     Gettext.with_locale(PtxWeb.Gettext, user.locale, fn ->
       Ptx.MailNotifier.read_email_notify(user, [
         subject: message.subject,
-        sent_date: Timex.format!(message.inserted_at, gettext("%Y-%m-%d at %H:%M"), :strftime),
-        read_date: Timex.format!(NaiveDateTime.utc_now(), gettext("%Y-%m-%d at %H:%M"), :strftime),
+        sent_date: Timex.format!(Timex.Timezone.convert(message.inserted_at, user.timezone), gettext("%Y-%m-%d at %H:%M"), :strftime),
+        read_date: Timex.format!(Timex.Timezone.convert(NaiveDateTime.utc_now(), user.timezone), gettext("%Y-%m-%d at %H:%M"), :strftime),
         read_user: get_message_recipient(message),
         recipients: message.recipients
       ])
