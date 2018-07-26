@@ -4,7 +4,7 @@ defmodule Ptx.Mixfile do
   def project do
     [
       app: :ptx,
-      version: "0.0.84",
+      version: "0.0.85",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
