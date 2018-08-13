@@ -87,41 +87,10 @@ defmodule Ptx.Accounts.Context.User do
       end
 
       @doc """
-      Activate user trial period (if available)
-      """
-      def activate_user_trial(user) do
-        case trial_available?(user) do
-          true ->
-            update_user(user, %{
-              plan: "trial",
-              frozen: false,
-              valid_until: Timex.shift(Timex.now(), days: @trial_period)
-            })
-
-            {:ok, :activated}
-          false ->
-            {:error, :unavailable}
-        end
-      end
-
-      @doc """
       Check valid user by `valid_until` field.
       If now() > `valid_until` return false.
       """
       def valid_now?(user), do: Timex.before?(user.valid_until, Timex.now())
-
-      @doc """
-      Check available for trial plan.
-      """
-      def trial_available?(%{
-        inserted_at: inserted_at,
-        plan: plan,
-        previous_plan: previous_plan
-      }) do
-        plan == nil
-          && previous_plan == nil
-          && Timex.diff(Timex.now(), inserted_at, :days) < @trial_period
-      end
 
       @doc """
       Find or create user with given params.

@@ -106,17 +106,15 @@
             </div>
           </div>
           <div class="actions">
-            <a class="main-action" href="#" data-plan="trial"><%= gettext "Try Free" %></a>
+            <a class="main-action" href="#" data-plan="trial"><%= gettext "Go Free" %></a>
             <div class="subaction" data-type="trial" target="_BLANK">
               <span><%= gettext "Video presentation of services in a Free plan" %></span>
               <img src="<%= static_path(@conn, "/images/tables/video_trial.svg") %>" alt="video_trial">
             </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "14 days of free test period" %></li>
-            <li>
-              <%= gettext "All features of the «Pro» plan, but all messages will be sent with the signature «Send with PostTrack»" %>
-            </li>
+            <li><%= gettext "All functionality" %></li>
+            <li><%= gettext "With signature «Send with PostTrack»" %></li>
           </ul>
         </div>
       </div>
@@ -126,7 +124,7 @@
       <img src="<%= static_path(@conn, "/images/tables/bg_basic.png") %>" alt="basic" draggable="false">
       <div class="content-wrapper">
         <div class="content">
-          <h2><%= gettext "Basic" %></h2>
+          <h2><%= gettext "Paid" %></h2>
           <div class="price-wrapper">
             <div class="main-price">
               <span class="before">$</span>
@@ -147,45 +145,8 @@
             </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "Unlimited emails" %></li>
-            <li><%= gettext "Obtaining the status and statistics of message views" %></li>
-            <li><%= gettext "Email and desktop notifications after reading email" %></li>
+            <li><%= gettext "All functionality" %></li>
             <li><%= gettext "Without signature «Send with PostTrack»" %></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="pricing-table pro">
-      <img src="<%= static_path(@conn, "/images/tables/bg_pro.png") %>" alt="pro" draggable="false">
-      <div class="content-wrapper">
-        <div class="content">
-          <h2><%= gettext "Professional" %></h2>
-          <div class="price-wrapper">
-            <div class="main-price">
-              <span class="before">$</span>
-              <span class="value" data-yearly="0.055" data-monthly="0.26"></span>
-              <span class="after"><%= gettext "/ day" %></span>
-            </div>
-            <div class="subprice">
-              <%= gettext "Total: $" %>
-              <span class="value" data-yearly="19.99" data-monthly="7.99"></span> / 
-              <span class="value" data-yearly='<%= gettext "year" %>' data-monthly='<%= gettext "month" %>'></span>
-            </div>
-          </div>
-          <div class="actions">
-            <a class="main-action" href="#" data-plan="pro"><%= gettext "Go Pro" %></a>
-            <div class="subaction" data-type="pro" target="_BLANK">
-              <span><%= gettext "Video presentation of services in a Pro plan" %></span>
-              <img src="<%= static_path(@conn, "/images/tables/video_pro.svg") %>" alt="video_pro">
-            </div>
-          </div>
-          <ul class="benefits">
-            <li><%= gettext "Unlimited emails" %></li>
-            <li><%= gettext "Obtaining the status and statistics of message views" %></li>
-            <li><%= gettext "Email and desktop notifications after reading email" %></li>
-            <li><%= gettext "Without signature «Send with PostTrack»" %></li>
-            <li><%= gettext "Analysis of the time and count of links in email" %></li>
           </ul>
         </div>
       </div>

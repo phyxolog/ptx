@@ -12,6 +12,28 @@ defmodule Ptx.Accounts do
   use Ptx.Accounts.Context.Transaction
   use Ptx.Accounts.Context.Ticket
 
+  @doc """
+  Activate user trial period (if available)
+  """
+  def activate_user_trial(user) do
+    case user do
+      %{plan: nil} -> :ok
+      %{plan: "trial"} -> :ok
+      %{plan: plan} -> unsubscribe(user)
+    end
+
+    update_user(user, %{
+      plan: "trial",
+      frozen: false,
+      valid_until: nil
+    })
+      
+    {:ok, :activate}
+  end
+
+  @doc """
+  Unsubscribe.
+  """
   def unsubscribe(user) do
     transaction = Transaction
     |> where([t], t.user_id == ^user.id)

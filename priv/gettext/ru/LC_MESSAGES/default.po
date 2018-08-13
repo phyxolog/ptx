@@ -87,12 +87,7 @@ msgid "Obtaining the status and statistics of message views"
 msgstr "Получение статуса и статистики просмотров письма"
 
 #, elixir-format
-#: lib/ptx/pay.ex:32
-msgid "Payment of the «%{plan}» for %{email}"
-msgstr "Оплата тарифа «%{plan}» для %{email}"
-
-#, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:15
+#: lib/ptx/mailer/mail_sender.ex:16
 msgid "PostTrack Alerts <noreply@posttrack.com>"
 msgstr "PostTrack Уведомления <noreply@posttrack.com>"
 
@@ -165,7 +160,7 @@ msgid "Video presentation of services in a Pro plan"
 msgstr "Видео-презентация услуг в Pro тарифе"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:36
+#: lib/ptx/mailer/mail_sender.ex:43
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
 
@@ -176,7 +171,7 @@ msgid "Without signature «Send with PostTrack»"
 msgstr "Нет подписи «Отправлено с PostTrack»"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:37
+#: lib/ptx/mailer/mail_sender.ex:44
 msgid "Your email has been read!"
 msgstr "Ваш Email был прочитан!"
 
@@ -245,7 +240,7 @@ msgid "Somebody read your email with subject "
 msgstr "Кто-то прочитал Ваше письмо с темой"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:40
+#: lib/ptx/mailer/mail_sender.ex:47
 msgid "The plan is fixed for you!"
 msgstr "Был выбран план!"
 
@@ -276,7 +271,7 @@ msgid "You successfully added a \"%{plan}\" pricing plan for your email. We wish
 msgstr "Вы успешно добавили тарифный план \"%{plan}\" для своей почты. Мы желаем вам удобного использования! :)"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:45
+#: lib/ptx/mailer/mail_sender.ex:52
 msgid "You successfully unsubscribed!"
 msgstr "Вы успешно отписались!"
 
@@ -286,17 +281,17 @@ msgid "You successfully unsubscribed. PostTrack doesn't work with this email any
 msgstr "Вы успешно отписались. PostTrack больше не будет работать с этой почтой - %{email}"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:41 lib/ptx/mailer/mail_sender.ex:42
+#: lib/ptx/mailer/mail_sender.ex:48 lib/ptx/mailer/mail_sender.ex:49
 msgid "Your account has been frozen!"
 msgstr "Ваш аккаунт был заморожен!"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:38
+#: lib/ptx/mailer/mail_sender.ex:45
 msgid "Your link has been clicked!"
 msgstr "Ваша ссылка была нажата!"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:39
+#: lib/ptx/mailer/mail_sender.ex:46
 msgid "Your plan has been changed!"
 msgstr "Был изменён Ваш тарифный план!"
 
@@ -395,7 +390,7 @@ msgid "Parameters of receiving email-notifications you can set up at"
 msgstr "Параметры получения email-уведомлений можно настроить на"
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:44
+#: lib/ptx/mailer/mail_sender.ex:51
 msgid "Paying error!"
 msgstr "Ошибка оплаты!"
 
@@ -442,7 +437,7 @@ msgid "We are unable to renew your subscription automatically due to payment sys
 msgstr "Нам не удалось автоматически продлить Вашу подписку из-за отказа платежной системы. Возможно, на счету Вашей банковской карты недостаточно средств для продления подписки, либо произошла ошибка со стороны Вашего банка. Более подробную информацию об отказе вы можете получить у менеджера Вашего банка."
 
 #, elixir-format
-#: lib/ptx/mailer/mail_sender.ex:43
+#: lib/ptx/mailer/mail_sender.ex:50
 msgid "Your account has been frozen after 24 hours!"
 msgstr "Ваш аккаунт был заморожен!"
 
@@ -488,7 +483,7 @@ msgstr "Профессиональный"
 msgid "Trial"
 msgstr "Бесплатный"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/ptx_web/templates/error/same_plan.html.eex:11
 msgid "Go to CRM"
 msgstr "Войти в CRM"
@@ -502,3 +497,8 @@ msgstr "Вы выбрали \"%{plan}\" план, но Ваш текущий п�
 #: lib/ptx_web/templates/error/same_plan.html.eex:14
 msgid "Select another pricing plan"
 msgstr "Выбрать другой тарифный план"
+
+#, elixir-format
+#: lib/ptx/pay.ex:47
+msgid "Paid plan for %{email}"
+msgstr "Платный тарифный план для %{email}"

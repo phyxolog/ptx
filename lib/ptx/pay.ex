@@ -17,19 +17,34 @@ defmodule Ptx.Pay do
   @doc """
   Generate LiqPay pay-link with given params.
   """
-  def generate_link(%{"plan" => plan, "periodicity" => periodicity, "locale" => locale}, user) do
-    plan = String.to_existing_atom(plan)
+  # def generate_link(%{"plan" => plan, "periodicity" => periodicity, "locale" => locale}, user) do
+  #   plan = String.to_existing_atom(plan)
+  #   periodicity = String.to_existing_atom(periodicity)
+  #   amount = @prices[plan][periodicity]
+
+  #   generate_pay_link([
+  #     locale: locale,
+  #     amount: amount,
+  #     periodicity: periodicity,
+  #     currency: @currency,
+  #     info: Ptx.Helper.encode_term(%{user_id: user.id, plan: plan, periodicity: periodicity}),
+  #     description: Gettext.with_locale(locale, fn ->
+  #       gettext("Payment of the «%{plan}» for %{email}", plan: String.capitalize(to_string(plan)), email: user.id)
+  #     end)
+  #   ])
+  # end
+  def generate_link(%{"periodicity" => periodicity, "locale" => locale}, user) do
     periodicity = String.to_existing_atom(periodicity)
-    amount = @prices[plan][periodicity]
+    amount = @prices[periodicity]
 
     generate_pay_link([
       locale: locale,
       amount: amount,
       periodicity: periodicity,
       currency: @currency,
-      info: Ptx.Helper.encode_term(%{user_id: user.id, plan: plan, periodicity: periodicity}),
+      info: Ptx.Helper.encode_term(%{user_id: user.id, periodicity: periodicity}),
       description: Gettext.with_locale(locale, fn ->
-        gettext("Payment of the «%{plan}» for %{email}", plan: String.capitalize(to_string(plan)), email: user.id)
+        gettext("Paid plan for %{email}", email: user.id)
       end)
     ])
   end

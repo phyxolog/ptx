@@ -16,16 +16,20 @@ config :ptx,
   ecto_repos: [Ptx.Repo],
   plans: ~w(trial basic pro)a,
   prices: %{
-    basic: %{
-      month: 4.99,
-      year: 11.99
-    },
-
-    pro: %{
-      month: 7.99,
-      year: 19.99
-    }
+    month: 4.99,
+    year: 11.99
   }
+  # prices: %{
+  #   basic: %{
+  #     month: 4.99,
+  #     year: 11.99
+  #   },
+
+  #   pro: %{
+  #     month: 7.99,
+  #     year: 19.99
+  #   }
+  # }
 
 config :ptx, PtxWeb.Gettext,
   default_locale: "ru",
