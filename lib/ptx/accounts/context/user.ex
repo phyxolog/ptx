@@ -17,41 +17,41 @@ defmodule Ptx.Accounts.Context.User do
       def freeze_and_list_expired_users do
         query = from u in User,
           where: u.frozen == false,
+          where: u.plan != "trial",
           where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '0 days'", u.valid_until)
 
         {_, list} = Repo.update_all(query, [set: [frozen: true, expiring_tomorrow: false]], returning: [:id, :plan, :locale])
 
         ## TODO: Fixme
-        Enum.each(list, fn user ->
-          Task.start(fn ->
-            case user.plan do
-              "trial" -> Ptx.MailNotifier.frozen_trial_notify(user)
-              _ -> Ptx.MailNotifier.frozen_notify(user)
-            end
+        if list do
+          Enum.each(list, fn user ->
+            Task.start(fn ->
+              Ptx.MailNotifier.frozen_notify(user)
+            end)
           end)
-        end)
+        end
       end
 
-      @doc """
-      Gets a list of email that expire tomorrow and notify about this (on email).
-      Call every hour.
-      """
-      def list_expiring_tomorrow_users do
-        query = from u in User,
-          where: u.frozen == false,
-          where: u.expiring_tomorrow == false,
-          where: u.plan == "trial",
-          where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '1 days'", u.valid_until)
+      # @doc """
+      # Gets a list of email that expire tomorrow and notify about this (on email).
+      # Call every hour.
+      # """
+      # def list_expiring_tomorrow_users do
+      #   query = from u in User,
+      #     where: u.frozen == false,
+      #     where: u.expiring_tomorrow == false,
+      #     where: u.plan == "trial",
+      #     where: fragment("(? - CURRENT_TIMESTAMP AT TIME ZONE 'UTC')::interval < interval '1 days'", u.valid_until)
 
-        {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: [:id, :plan, :locale])
+      #   {_, list} = Repo.update_all(query, [set: [expiring_tomorrow: true]], returning: [:id, :plan, :locale])
 
-        ## TODO: Fixme
-        Enum.each(list, fn user ->
-          Task.start(fn ->
-            Ptx.MailNotifier.outdated_trial_notify(user)
-          end)
-        end)
-      end
+      #   ## TODO: Fixme
+      #   Enum.each(list, fn user ->
+      #     Task.start(fn ->
+      #       Ptx.MailNotifier.outdated_trial_notify(user)
+      #     end)
+      #   end)
+      # end
 
       @doc """
       Get user by token.
