@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :ptx, PtxWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: 4002],
   https: [port: 4001, keyfile: "priv/server.key", certfile: "priv/server.pem"],
   debug_errors: true,
   code_reloader: true,

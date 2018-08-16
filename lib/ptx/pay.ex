@@ -36,18 +36,23 @@ defmodule Ptx.Pay do
   def generate_link(%{"periodicity" => periodicity, "locale" => locale}, user) do
     periodicity = String.to_existing_atom(periodicity)
     # amount = @prices[periodicity]
-    amount = if user.id == "artmartfrontend@gmail.com" do
-      1
-    else
-      @prices[periodicity]
-    end
+    amount = 
+      if user.id == "artmartfrontend@gmail.com",
+        do: 1,
+        else: @prices[periodicity]
+
+    currency = 
+      if user.id == "artmartfrontend@gmail.com",
+        do: "RUB",
+        else: @currency
 
     generate_pay_link([
       locale: locale,
       amount: amount,
       periodicity: periodicity,
-      currency: @currency,
-      info: Ptx.Helper.encode_term(%{user_id: user.id, periodicity: periodicity}),
+      currency: currency,
+      # currency: @currency,
+      info: Ptx.Helper.encode_term(%{user_id: user.id, plan: "pro", periodicity: periodicity}),
       description: Gettext.with_locale(locale, fn ->
         gettext("Paid plan for %{email}", email: user.id)
       end)
