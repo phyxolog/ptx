@@ -117,7 +117,7 @@
             <li><%= gettext "With signature «Send with PostTrack»" %></li>
           </ul>
           <div class="sign">
-            <img src="/static/images/sign.png" alt="Sign">
+            <img src="<%= static_path(@conn, "/images/sign.png") %>" alt="Sign">
           </div>
         </div>
       </div>

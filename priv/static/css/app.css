@@ -521,6 +521,19 @@ main.v-pricing-tables {
       main.v-pricing-tables div.pricing-tables section.pricing-table.basic .subaction {
         color: #7fa720;
         border-color: #7fa720 !important; }
+      main.v-pricing-tables div.pricing-tables section.pricing-table.basic div.sign {
+        position: relative;
+        overflow: hidden; }
+        main.v-pricing-tables div.pricing-tables section.pricing-table.basic div.sign:after {
+          content: " ";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          bottom: auto;
+          background: red;
+          height: 1px;
+          transform: rotate(-5deg); }
       @media (min-width: 1300px) {
         main.v-pricing-tables div.pricing-tables section.pricing-table.pro > img {
           min-width: 590px;
@@ -660,6 +673,10 @@ main.v-pricing-tables {
                 main.v-pricing-tables div.pricing-tables section.pricing-table div.content-wrapper div.content ul.benefits li {
                   font-size: 14px;
                   line-height: 20px; } }
+          main.v-pricing-tables div.pricing-tables section.pricing-table div.content-wrapper div.content div.sign {
+            text-align: center; }
+            main.v-pricing-tables div.pricing-tables section.pricing-table div.content-wrapper div.content div.sign img {
+              max-width: 100%; }
       @media (max-width: 1600px) {
         main.v-pricing-tables div.pricing-tables section.pricing-table {
           flex-grow: 0;
