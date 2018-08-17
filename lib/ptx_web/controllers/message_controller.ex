@@ -17,6 +17,7 @@ defmodule PtxWeb.MessageController do
     end
   end
 
+  def index(conn, _params, nil), do: {:error, :not_auth}
   def index(conn, %{"thread_ids" => thread_ids} = params, user) do
     list_messages(conn, params, user, thread_ids, :list_messages_by_thread_ids)
   end
