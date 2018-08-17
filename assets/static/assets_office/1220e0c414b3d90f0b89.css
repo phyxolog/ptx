@@ -302,18 +302,18 @@ span.translation-placeholder {
   text-transform: uppercase;
   display: inline-block;
   color: white; }
-  .u-pricing-badge.pro {
-    background: linear-gradient(to top right, #be8bf9, #4032bc); }
-    .u-pricing-badge.pro:after {
-      content: "pro"; }
   .u-pricing-badge.basic {
-    background: linear-gradient(to top right, #a5c63b, #2ecc71); }
+    background: linear-gradient(to top right, #be8bf9, #4032bc); }
     .u-pricing-badge.basic:after {
-      content: "basic"; }
+      content: "pro"; }
+  .u-pricing-badge.pro {
+    background: linear-gradient(to top right, #a5c63b, #2ecc71); }
+    .u-pricing-badge.pro:after {
+      content: "paid"; }
   .u-pricing-badge.trial {
     background: linear-gradient(to top right, #fbbc05, #f38b18); }
     .u-pricing-badge.trial:after {
-      content: "trial"; }
+      content: "free"; }
 
 .u-paper {
   background: white;
@@ -626,6 +626,124 @@ nav.g-navbar {
       padding: 8px;
       opacity: .7;
       transition: opacity 450ms cubic-bezier(0.23, 1, 0.32, 1); }
+div.c-default-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  padding: 30px 10px;
+  align-items: center;
+  justify-content: center;
+  z-index: 123456;
+  transform: translateZ(0); }
+  div.c-default-modal div.dm-inner-wrapper {
+    width: 100%;
+    max-width: 480px;
+    padding: 20px;
+    background: white;
+    border-radius: 6px;
+    max-height: 100%;
+    overflow: auto; }
+    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar {
+      width: 10px;
+      height: 10px; }
+    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-track {
+      background: rgba(116, 87, 213, 0.38); }
+    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-thumb {
+      background: rgba(116, 87, 213, 0.38); }
+      div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-thumb:hover {
+        background: rgba(116, 87, 213, 0.54); }
+    @media (max-width: 729px) {
+      div.c-default-modal div.dm-inner-wrapper {
+        padding: 10px; } }
+    div.c-default-modal div.dm-inner-wrapper header {
+      position: relative;
+      margin-bottom: 20px; }
+      @media (max-width: 729px) {
+        div.c-default-modal div.dm-inner-wrapper header {
+          margin-bottom: 10px; } }
+      div.c-default-modal div.dm-inner-wrapper header h2 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 50px;
+        text-align: left; }
+        div.c-default-modal div.dm-inner-wrapper header h2 span.u-pricing-badge {
+          vertical-align: middle; }
+      div.c-default-modal div.dm-inner-wrapper header img.close-button {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: 0;
+        bottom: auto;
+        width: 40px;
+        height: 40px;
+        border-radius: 3px;
+        cursor: pointer;
+        padding: 8px;
+        transition: background 450ms cubic-bezier(0.23, 1, 0.32, 1); }
+        div.c-default-modal div.dm-inner-wrapper header img.close-button:hover {
+          background: rgba(116, 87, 213, 0.12); }
+        @media (max-width: 729px) {
+          div.c-default-modal div.dm-inner-wrapper header img.close-button {
+            width: 30px;
+            height: 30px;
+            padding: 3px;
+            top: -2px; } }
+div.c-main-preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  height: 60px; }
+  div.c-main-preloader.small {
+    height: 40px; }
+    div.c-main-preloader.small div.mp-item {
+      width: 12px;
+      height: 12px;
+      margin-right: -5px; }
+  div.c-main-preloader div.mp-item {
+    width: 24px;
+    height: 24px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.24);
+    background: linear-gradient(to top right, #be8bf9, #4032bc);
+    transform: rotateY(-30deg) rotateZ(-45deg) translateZ(0);
+    margin-right: -10px;
+    position: relative;
+    animation-name: preloader;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    animation-duration: 2400ms; }
+    div.c-main-preloader div.mp-item:last-child {
+      margin-right: 0; }
+    div.c-main-preloader div.mp-item:nth-child(1) {
+      z-index: 2;
+      animation-delay: 0ms; }
+    div.c-main-preloader div.mp-item:nth-child(2) {
+      z-index: 1;
+      animation-delay: 240ms; }
+    div.c-main-preloader div.mp-item:nth-child(3) {
+      z-index: 0;
+      animation-delay: 480ms; }
+
+@keyframes preloader {
+  0% {
+    transform: translateX(0) rotateY(-30deg) rotateZ(-450deg) translateZ(-180px);
+    opacity: 0; }
+  40% {
+    transform: translateX(0) rotateY(-15deg) rotateZ(-45deg) translateZ(0);
+    opacity: 1; }
+  60% {
+    transform: translateX(0) rotateY(-15deg) rotateZ(-45deg) translateZ(0);
+    opacity: 1; }
+  100% {
+    transform: translateX(0) rotateY(-30deg) rotateZ(-135deg) translateZ(180px);
+    opacity: 0; } }
 main.v-dashboard {
   display: flex;
   flex-direction: column;
@@ -968,121 +1086,3 @@ main.v-not-found p.u-description {
     color: #7457d5;
     text-shadow: 8px 12px 0 rgba(116, 87, 213, 0.24);
     transform: translateZ(0); } }
-div.c-main-preloader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  font-weight: 700;
-  height: 60px; }
-  div.c-main-preloader.small {
-    height: 40px; }
-    div.c-main-preloader.small div.mp-item {
-      width: 12px;
-      height: 12px;
-      margin-right: -5px; }
-  div.c-main-preloader div.mp-item {
-    width: 24px;
-    height: 24px;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.24);
-    background: linear-gradient(to top right, #be8bf9, #4032bc);
-    transform: rotateY(-30deg) rotateZ(-45deg) translateZ(0);
-    margin-right: -10px;
-    position: relative;
-    animation-name: preloader;
-    animation-timing-function: ease;
-    animation-iteration-count: infinite;
-    animation-fill-mode: both;
-    animation-duration: 2400ms; }
-    div.c-main-preloader div.mp-item:last-child {
-      margin-right: 0; }
-    div.c-main-preloader div.mp-item:nth-child(1) {
-      z-index: 2;
-      animation-delay: 0ms; }
-    div.c-main-preloader div.mp-item:nth-child(2) {
-      z-index: 1;
-      animation-delay: 240ms; }
-    div.c-main-preloader div.mp-item:nth-child(3) {
-      z-index: 0;
-      animation-delay: 480ms; }
-
-@keyframes preloader {
-  0% {
-    transform: translateX(0) rotateY(-30deg) rotateZ(-450deg) translateZ(-180px);
-    opacity: 0; }
-  40% {
-    transform: translateX(0) rotateY(-15deg) rotateZ(-45deg) translateZ(0);
-    opacity: 1; }
-  60% {
-    transform: translateX(0) rotateY(-15deg) rotateZ(-45deg) translateZ(0);
-    opacity: 1; }
-  100% {
-    transform: translateX(0) rotateY(-30deg) rotateZ(-135deg) translateZ(180px);
-    opacity: 0; } }
-div.c-default-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.72);
-  display: flex;
-  padding: 30px 10px;
-  align-items: center;
-  justify-content: center;
-  z-index: 123456;
-  transform: translateZ(0); }
-  div.c-default-modal div.dm-inner-wrapper {
-    width: 100%;
-    max-width: 480px;
-    padding: 20px;
-    background: white;
-    border-radius: 6px;
-    max-height: 100%;
-    overflow: auto; }
-    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar {
-      width: 10px;
-      height: 10px; }
-    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-track {
-      background: rgba(116, 87, 213, 0.38); }
-    div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-thumb {
-      background: rgba(116, 87, 213, 0.38); }
-      div.c-default-modal div.dm-inner-wrapper::-webkit-scrollbar-thumb:hover {
-        background: rgba(116, 87, 213, 0.54); }
-    @media (max-width: 729px) {
-      div.c-default-modal div.dm-inner-wrapper {
-        padding: 10px; } }
-    div.c-default-modal div.dm-inner-wrapper header {
-      position: relative;
-      margin-bottom: 20px; }
-      @media (max-width: 729px) {
-        div.c-default-modal div.dm-inner-wrapper header {
-          margin-bottom: 10px; } }
-      div.c-default-modal div.dm-inner-wrapper header h2 {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        padding-right: 50px;
-        text-align: left; }
-        div.c-default-modal div.dm-inner-wrapper header h2 span.u-pricing-badge {
-          vertical-align: middle; }
-      div.c-default-modal div.dm-inner-wrapper header img.close-button {
-        position: absolute;
-        top: 0;
-        left: auto;
-        right: 0;
-        bottom: auto;
-        width: 40px;
-        height: 40px;
-        border-radius: 3px;
-        cursor: pointer;
-        padding: 8px;
-        transition: background 450ms cubic-bezier(0.23, 1, 0.32, 1); }
-        div.c-default-modal div.dm-inner-wrapper header img.close-button:hover {
-          background: rgba(116, 87, 213, 0.12); }
-        @media (max-width: 729px) {
-          div.c-default-modal div.dm-inner-wrapper header img.close-button {
-            width: 30px;
-            height: 30px;
-            padding: 3px;
-            top: -2px; } }

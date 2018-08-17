@@ -99,26 +99,26 @@
             <div class="main-price">
               <span class="before">$</span>
               <span class="value" data-yearly="0.00" data-monthly="0.00"></span>
-              <span class="after"><%= gettext "/ day" %></span>
             </div>
             <div class="subprice">
-              <%= gettext "Total: $ 0.00 / 14 days" %>
+              <%= gettext "Free forewer" %>
             </div>
           </div>
           <div class="actions">
             <a class="main-action" href="#" data-plan="trial"><%= gettext "Go Free" %></a>
-            <div class="subaction" data-type="trial" target="_BLANK">
-              <span><%= gettext "Video presentation of services in a Free plan" %></span>
-              <img src="<%= static_path(@conn, "/images/tables/video_trial.svg") %>" alt="video_trial">
-            </div>
           </div>
           <ul class="benefits">
-            <li><%= gettext "All functionality" %></li>
-            <li><%= gettext "With signature «Send with PostTrack»" %></li>
+            <li><%= gettext "Availability of advertising signatures" %></li>
           </ul>
           <div class="sign">
             <img src="<%= static_path(@conn, "/images/sign.png") %>" alt="Sign">
           </div>
+          <ul class="benefits">
+            <li><%= gettext "Unlimited amount of email" %></li>
+            <li><%= gettext "Receiving statuses and statistics of message views" %></li>
+            <li><%= gettext "Statistics of clicks on links in email" %></li>
+            <li><%= gettext "Notice of reading a message" %></li>
+          </ul>
         </div>
       </div>
     </section>
@@ -127,7 +127,7 @@
       <img src="<%= static_path(@conn, "/images/tables/bg_basic.png") %>" alt="basic" draggable="false">
       <div class="content-wrapper">
         <div class="content">
-          <h2><%= gettext "Paid" %></h2>
+          <h2><%= gettext "Without advertising" %></h2>
           <div class="price-wrapper">
             <div class="main-price">
               <span class="before">$</span>
@@ -141,15 +141,20 @@
             </div>
           </div>
           <div class="actions">
-            <a class="main-action" href="#" data-plan="basic"><%= gettext "Go Basic" %></a>
-            <div class="subaction" data-type="basic" target="_BLANK">
-              <span><%= gettext "Video presentation of services in a Basic plan" %></span>
-              <img src="<%= static_path(@conn, "/images/tables/video_basic.svg") %>" alt="video_basic">
-            </div>
+            <a class="main-action" href="#" data-plan="basic"><%= gettext "Go Without advertising" %></a>
           </div>
           <ul class="benefits">
-            <li><%= gettext "All functionality" %></li>
+            <li><%= gettext "Technical support" %></li>
             <li><%= gettext "Without signature «Send with PostTrack»" %></li>
+          </ul>
+           <div class="sign">
+            <img src="<%= static_path(@conn, "/images/sign.png") %>" alt="Sign">
+          </div>
+          <ul class="benefits">
+            <li><%= gettext "Unlimited amount of email" %></li>
+            <li><%= gettext "Receiving statuses and statistics of message views" %></li>
+            <li><%= gettext "Statistics of clicks on links in email" %></li>
+            <li><%= gettext "Notice of reading a message" %></li>
           </ul>
         </div>
       </div>
