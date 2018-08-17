@@ -90,7 +90,7 @@
   </script>
 
   <div class="pricing-tables">
-    <section class="pricing-table trial">
+    <section class="pricing-table trial <%= if @conn.assigns.user_plan == "trial", do: "disabled", else: "" %>">
       <img src="<%= static_path(@conn, "/images/tables/bg_trial.png") %>" alt="trial" draggable="false">
       <div class="content-wrapper">
         <div class="content">
@@ -116,6 +116,9 @@
             <li><%= gettext "All functionality" %></li>
             <li><%= gettext "With signature «Send with PostTrack»" %></li>
           </ul>
+          <div class="sign">
+            <img src="/static/images/sign.png" alt="Sign">
+          </div>
         </div>
       </div>
     </section>

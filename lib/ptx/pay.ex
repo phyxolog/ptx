@@ -169,9 +169,9 @@ defmodule Ptx.Pay do
       Accounts.update_user(user, %{
         expiring_tomorrow: false,
         in_unsubscribe_process: false,
-        frozen: true,
+        frozen: false,
         valid_until: nil,
-        plan: nil,
+        plan: "free",
         in_subscription: nil,
         periodicity: nil
       })
