@@ -31,7 +31,7 @@ defmodule Ptx.Accounts.User do
     field :timezone_offset, :integer, default: 0, virtual: true
 
     field :in_unsubscribe_process, :boolean, default: false
-    field :plan, :string, default: "pro"
+    field :plan, :string
     field :frozen, :boolean, default: false
     field :expiring_tomorrow, :boolean, default: false
     field :is_elite, :boolean, default: false

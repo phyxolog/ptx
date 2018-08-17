@@ -41,7 +41,7 @@ defmodule PtxWeb.PageController do
     ]
 
     conn
-    |> assign(:user_plan, user[:plan])
+    |> assign(:user_plan, Map.get(user, :plan))
     |> assign(:title, gettext("Pricing"))
     |> assign(:og_meta, meta ++ meta_locales)
     |> render("pricing.html")
