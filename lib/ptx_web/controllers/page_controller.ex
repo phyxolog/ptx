@@ -58,7 +58,6 @@ defmodule PtxWeb.PageController do
     |> render("getting_started.html")
   end
 
-  def office(conn, _params, nil), do: redirect conn, external: "#{@url}"
   def office(conn, _params, %{plan: nil}), do: redirect conn, external: "#{@url}/pricing"
   def office(conn, _params, _user) do
     conn
