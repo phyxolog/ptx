@@ -108,16 +108,16 @@
             <a class="main-action" href="#" data-plan="trial"><%= gettext "Go Free" %></a>
           </div>
           <ul class="benefits">
-            <li><%= gettext "Availability of advertising signatures" %></li>
+            <li><%= gettext "Advertising sign presence" %></li>
           </ul>
           <div class="sign">
             <img src="<%= static_path(@conn, "/images/sign.png") %>" alt="Sign">
           </div>
           <ul class="benefits">
-            <li><%= gettext "Unlimited amount of email" %></li>
-            <li><%= gettext "Receiving statuses and statistics of message views" %></li>
-            <li><%= gettext "Statistics of clicks on links in email" %></li>
-            <li><%= gettext "Notice of reading a message" %></li>
+            <li><%= gettext "Unlimited emails with tracking to send" %></li>
+            <li><%= gettext "Receiving status and count of views of the email" %></li>
+            <li><%= gettext "Full statistics on clicks on the links in the email" %></li>
+            <li><%= gettext "Notification about email opening" %></li>
           </ul>
         </div>
       </div>
@@ -145,16 +145,16 @@
           </div>
           <ul class="benefits">
             <li><%= gettext "Technical support" %></li>
-            <li><%= gettext "Without signature «Send with PostTrack»" %></li>
+            <li><%= gettext "No advertising sign \"Sent with PostTrack\"" %></li>
           </ul>
            <div class="sign">
             <img src="<%= static_path(@conn, "/images/sign.png") %>" alt="Sign">
           </div>
           <ul class="benefits">
-            <li><%= gettext "Unlimited amount of email" %></li>
-            <li><%= gettext "Receiving statuses and statistics of message views" %></li>
-            <li><%= gettext "Statistics of clicks on links in email" %></li>
-            <li><%= gettext "Notice of reading a message" %></li>
+            <li><%= gettext "Unlimited emails with tracking to send" %></li>
+            <li><%= gettext "Receiving status and count of views of the email" %></li>
+            <li><%= gettext "Full statistics on clicks on the links in the email" %></li>
+            <li><%= gettext "Notification about email opening" %></li>
           </ul>
         </div>
       </div>

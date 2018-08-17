@@ -17,36 +17,13 @@ msgid "%Y-%m-%d at %H:%M"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:102
-#: lib/ptx_web/templates/page/pricing.html.eex:134
-#: lib/ptx_web/templates/page/pricing.html.eex:168
+#: lib/ptx_web/templates/page/pricing.html.eex:135
 msgid "/ day"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:116
-msgid "14 days of free test period"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:118
-msgid "All features of the «Pro» plan, but all messages will be sent with the signature «Send with PostTrack»"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:188
-msgid "Analysis of the time and count of links in email"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx.ex:40 lib/ptx_web/templates/page/pricing.html.eex:129
+#: lib/ptx.ex:40
 msgid "Basic"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:152
-#: lib/ptx_web/templates/page/pricing.html.eex:186
-msgid "Email and desktop notifications after reading email"
 msgstr ""
 
 #, elixir-format
@@ -65,11 +42,6 @@ msgid "Free"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:177
-msgid "Go Pro"
-msgstr ""
-
-#, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:79
 msgid "Annually"
 msgstr ""
@@ -80,25 +52,14 @@ msgid "License"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:151
-#: lib/ptx_web/templates/page/pricing.html.eex:185
-msgid "Obtaining the status and statistics of message views"
-msgstr ""
-
-#, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:16
 msgid "PostTrack Alerts <noreply@posttrack.com>"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/controllers/page_controller.ex:24
+#: lib/ptx_web/controllers/page_controller.ex:49
 #: lib/ptx_web/templates/page/pricing.html.eex:16
 msgid "Pricing"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:163
-msgid "Professional"
 msgstr ""
 
 #, elixir-format
@@ -107,7 +68,7 @@ msgid "Sign in with Google"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:202
+#: lib/ptx_web/templates/page/pricing.html.eex:171
 msgid "Site built with Sloenka.com"
 msgstr ""
 
@@ -117,14 +78,8 @@ msgid "The best payment plans"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:137
-#: lib/ptx_web/templates/page/pricing.html.eex:171
+#: lib/ptx_web/templates/page/pricing.html.eex:138
 msgid "Total: $"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:105
-msgid "Total: $ 0.00 / 14 days"
 msgstr ""
 
 #, elixir-format
@@ -133,40 +88,8 @@ msgid "Trial unavailable"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:109
-msgid "Try Free"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:150
-#: lib/ptx_web/templates/page/pricing.html.eex:184
-msgid "Unlimited emails"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:145
-msgid "Video presentation of services in a Basic plan"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:111
-msgid "Video presentation of services in a Free plan"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:179
-msgid "Video presentation of services in a Pro plan"
-msgstr ""
-
-#, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:43
 msgid "Welcome!"
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:153
-#: lib/ptx_web/templates/page/pricing.html.eex:187
-msgid "Without signature «Send with PostTrack»"
 msgstr ""
 
 #, elixir-format
@@ -180,25 +103,18 @@ msgid "discount -80%"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:139
-#: lib/ptx_web/templates/page/pricing.html.eex:173
+#: lib/ptx_web/templates/page/pricing.html.eex:140
 msgid "month"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:139
-#: lib/ptx_web/templates/page/pricing.html.eex:173
+#: lib/ptx_web/templates/page/pricing.html.eex:140
 msgid "year"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:201
+#: lib/ptx_web/templates/page/pricing.html.eex:170
 msgid "© PostTrack Sloenka. All rights reserved."
-msgstr ""
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:143
-msgid "Go Basic"
 msgstr ""
 
 #, elixir-format
@@ -498,6 +414,65 @@ msgid "Select another pricing plan"
 msgstr ""
 
 #, elixir-format
-#: lib/ptx/pay.ex:47
+#: lib/ptx/pay.ex:57
 msgid "Paid plan for %{email}"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:111
+msgid "Advertising sign presence"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:104
+msgid "Free forewer"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:119
+#: lib/ptx_web/templates/page/pricing.html.eex:156
+msgid "Full statistics on clicks on the links in the email"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:108
+msgid "Go Free"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:144
+msgid "Go Without advertising"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:148
+msgid "No advertising sign \"Sent with PostTrack\""
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:120
+#: lib/ptx_web/templates/page/pricing.html.eex:157
+msgid "Notification about email opening"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:118
+#: lib/ptx_web/templates/page/pricing.html.eex:155
+msgid "Receiving status and count of views of the email"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:147
+msgid "Technical support"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:117
+#: lib/ptx_web/templates/page/pricing.html.eex:154
+msgid "Unlimited emails with tracking to send"
+msgstr ""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:130
+msgid "Without advertising"
 msgstr ""

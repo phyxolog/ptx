@@ -18,37 +18,14 @@ msgid "%Y-%m-%d at %H:%M"
 msgstr "%Y-%m-%d в %H:%M"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:102
-#: lib/ptx_web/templates/page/pricing.html.eex:134
-#: lib/ptx_web/templates/page/pricing.html.eex:168
+#: lib/ptx_web/templates/page/pricing.html.eex:135
 msgid "/ day"
 msgstr "/ день"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:116
-msgid "14 days of free test period"
-msgstr "14 днів безкоштовного тестового періоду"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:118
-msgid "All features of the «Pro» plan, but all messages will be sent with the signature «Send with PostTrack»"
-msgstr "Всі переваги «Професійного тарифу», тільки всі повідомлення будуть відправлятися з підписом «Відправлено за допомогою PostTrack»"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:188
-msgid "Analysis of the time and count of links in email"
-msgstr "Аналіз часу і кількості переходів по посиланнях в email"
-
-#, elixir-format
-#: lib/ptx.ex:40 lib/ptx_web/templates/page/pricing.html.eex:129
+#: lib/ptx.ex:40
 msgid "Basic"
 msgstr "Базовий"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:152
-#: lib/ptx_web/templates/page/pricing.html.eex:186
-msgid "Email and desktop notifications after reading email"
-msgstr "Email-повідомлення та повідомлення на робочому столі, після прочитання email"
 
 #, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:75
@@ -66,11 +43,6 @@ msgid "Free"
 msgstr "Безкоштовний"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:177
-msgid "Go Pro"
-msgstr "Вибрати тариф"
-
-#, elixir-format
 #: lib/ptx_web/templates/page/pricing.html.eex:79
 msgid "Annually"
 msgstr "Одразу за рік"
@@ -81,26 +53,15 @@ msgid "License"
 msgstr "Ліцензійна угода"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:151
-#: lib/ptx_web/templates/page/pricing.html.eex:185
-msgid "Obtaining the status and statistics of message views"
-msgstr "Отримання статусу і статистики переглядів листи"
-
-#, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:16
 msgid "PostTrack Alerts <noreply@posttrack.com>"
 msgstr "PostTrack Повідомлення <noreply@posttrack.com>"
 
 #, elixir-format
-#: lib/ptx_web/controllers/page_controller.ex:24
+#: lib/ptx_web/controllers/page_controller.ex:49
 #: lib/ptx_web/templates/page/pricing.html.eex:16
 msgid "Pricing"
 msgstr "Тарифи"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:163
-msgid "Professional"
-msgstr "Професіональний"
 
 #, elixir-format
 #: lib/ptx_web/templates/page/getting_started.html.eex:13
@@ -108,7 +69,7 @@ msgid "Sign in with Google"
 msgstr "Увійти за допомогою Google"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:202
+#: lib/ptx_web/templates/page/pricing.html.eex:171
 msgid "Site built with Sloenka.com"
 msgstr "Сайт створено за допомогою сервісу Sloenka.com"
 
@@ -118,15 +79,9 @@ msgid "The best payment plans"
 msgstr "Кращі тарифні плани"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:137
-#: lib/ptx_web/templates/page/pricing.html.eex:171
+#: lib/ptx_web/templates/page/pricing.html.eex:138
 msgid "Total: $"
 msgstr "Всього: $"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:105
-msgid "Total: $ 0.00 / 14 days"
-msgstr "Всього: $ 0.00 / 14 дней"
 
 #, elixir-format
 #: lib/ptx_web/templates/error/trial_unavailable.html.eex:8
@@ -134,41 +89,9 @@ msgid "Trial unavailable"
 msgstr "Безкоштовний тариф недоступний"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:109
-msgid "Try Free"
-msgstr "Протестувати Безкоштовно"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:150
-#: lib/ptx_web/templates/page/pricing.html.eex:184
-msgid "Unlimited emails"
-msgstr "Необмежена кількість email"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:145
-msgid "Video presentation of services in a Basic plan"
-msgstr "Відео-презентація послуг в Базовому тарифі"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:111
-msgid "Video presentation of services in a Free plan"
-msgstr "Відео-презентація послуг в Безкоштовному тарифі"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:179
-msgid "Video presentation of services in a Pro plan"
-msgstr "Відео-презентація послуг в Pro тарифі"
-
-#, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:43
 msgid "Welcome!"
 msgstr "Ласкаво просимо!"
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:153
-#: lib/ptx_web/templates/page/pricing.html.eex:187
-msgid "Without signature «Send with PostTrack»"
-msgstr "Немає підпису «Відправлено за допомогою PostTrack»"
 
 #, elixir-format
 #: lib/ptx/mailer/mail_sender.ex:44
@@ -181,26 +104,19 @@ msgid "discount -80%"
 msgstr "знижка -80%"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:139
-#: lib/ptx_web/templates/page/pricing.html.eex:173
+#: lib/ptx_web/templates/page/pricing.html.eex:140
 msgid "month"
 msgstr "місяць"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:139
-#: lib/ptx_web/templates/page/pricing.html.eex:173
+#: lib/ptx_web/templates/page/pricing.html.eex:140
 msgid "year"
 msgstr "рік"
 
 #, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:201
+#: lib/ptx_web/templates/page/pricing.html.eex:170
 msgid "© PostTrack Sloenka. All rights reserved."
 msgstr "© PostTrack Sloenka. Всі права захищені."
-
-#, elixir-format
-#: lib/ptx_web/templates/page/pricing.html.eex:143
-msgid "Go Basic"
-msgstr "Вибрати тариф"
 
 #, elixir-format
 #: lib/ptx_web/templates/mailer/email/change_plan.html.eex:25
@@ -499,6 +415,65 @@ msgid "Select another pricing plan"
 msgstr "Вибрати інший тарифний план"
 
 #, elixir-format
-#: lib/ptx/pay.ex:47
+#: lib/ptx/pay.ex:57
 msgid "Paid plan for %{email}"
 msgstr "Платний тарифний план для "
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:111
+msgid "Advertising sign presence"
+msgstr "Наявність рекламного підпису"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:104
+msgid "Free forewer"
+msgstr "Безкоштовно назавжди"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:119
+#: lib/ptx_web/templates/page/pricing.html.eex:156
+msgid "Full statistics on clicks on the links in the email"
+msgstr "Статистика за кількістю переходів за посиланнями у листі"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:108
+msgid "Go Free"
+msgstr "Выбрати"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:144
+msgid "Go Without advertising"
+msgstr "Выбрати"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:148
+msgid "No advertising sign \"Sent with PostTrack\""
+msgstr "Без рекламного підпису \"Відправлено за допомогою PostTrack\""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:120
+#: lib/ptx_web/templates/page/pricing.html.eex:157
+msgid "Notification about email opening"
+msgstr "Без рекламного підпису \"Відправлено за допомогою PostTrack\""
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:118
+#: lib/ptx_web/templates/page/pricing.html.eex:155
+msgid "Receiving status and count of views of the email"
+msgstr "Отримання статусу і статистики переглядів листа"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:147
+msgid "Technical support"
+msgstr "Технічна підтримка"
+
+#, elixir-format, fuzzy
+#: lib/ptx_web/templates/page/pricing.html.eex:117
+#: lib/ptx_web/templates/page/pricing.html.eex:154
+msgid "Unlimited emails with tracking to send"
+msgstr "Необмежена кількість email"
+
+#, elixir-format
+#: lib/ptx_web/templates/page/pricing.html.eex:130
+msgid "Without advertising"
+msgstr "Без реклами"

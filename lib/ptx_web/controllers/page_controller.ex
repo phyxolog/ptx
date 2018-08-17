@@ -40,8 +40,12 @@ defmodule PtxWeb.PageController do
       [property: "og:og:image", content: PtxWeb.Endpoint.static_path("/images/og/pricing_#{current_locale}.png")]
     ]
 
+    plan = if !is_nil(user),
+      do: Map.get(user, :plan), 
+      else: nil
+
     conn
-    |> assign(:user_plan, Map.get(user, :plan))
+    |> assign(:user_plan, plan)
     |> assign(:title, gettext("Pricing"))
     |> assign(:og_meta, meta ++ meta_locales)
     |> render("pricing.html")
@@ -54,6 +58,8 @@ defmodule PtxWeb.PageController do
     |> render("getting_started.html")
   end
 
+  def office(conn, _params, nil), do: {:error, :not_found}
+  def office(conn, _params, %{plan: nil}), do: redirect conn, external: "#{@url}/pricing"
   def office(conn, _params, _user) do
     conn
     |> put_layout(false)
