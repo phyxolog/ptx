@@ -135,7 +135,7 @@ defmodule Ptx.Pay do
   end
 
   defp process_transaction({:ok, transaction}, %{"status" => "success"} = params, user) do
-    send_ticket(user, transaction)
+    # send_ticket(user, transaction)
 
     Accounts.create_ticket(%{data: params, transaction_id: transaction.id})
 
@@ -171,7 +171,7 @@ defmodule Ptx.Pay do
         in_unsubscribe_process: false,
         frozen: false,
         valid_until: nil,
-        plan: "free",
+        plan: "trial",
         in_subscription: nil,
         periodicity: nil
       })
